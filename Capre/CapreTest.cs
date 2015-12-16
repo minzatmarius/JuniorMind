@@ -20,6 +20,14 @@ namespace Capre
 
         }
 
+        [TestMethod]
+        public void TwoGoatsInFiveDaysIfOneEatsTwoKgPerDay()
+        {
+            float Kg = GetKg(1, 1, 2, 5, 2);
+            Assert.AreEqual(20, Kg);
+
+        }
+
         float GetKg(int xDays, int yGoats, float zKg, int wDays, int qGoats)
         {
             float KgPerDay = zKg / xDays / yGoats;
