@@ -31,7 +31,8 @@ namespace Capre
         float GetKg(int xDays, int yGoats, float zKg, int wDays, int qGoats)
         {
             float KgPerDay = zKg / xDays / yGoats;
-            return KgPerDay * wDays * qGoats;
+            float TotalKg = KgPerDay * wDays * qGoats;
+            return TotalKg;
         }
 
     }
