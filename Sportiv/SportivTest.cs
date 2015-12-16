@@ -13,6 +13,13 @@ namespace Sportiv
             Assert.AreEqual(4, repetitions);
         }
 
+        [TestMethod]
+        public void RepetitionsInTenRounds()
+        {
+            int repetitions = GetRepetitions(10);
+            Assert.AreEqual(100, repetitions);
+        }
+
         int GetRepetitions(int n)
         {   
 
