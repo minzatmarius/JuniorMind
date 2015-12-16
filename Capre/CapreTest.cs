@@ -9,13 +9,14 @@ namespace Capre
         [TestMethod]
         public void OneGoatInOneDay()
         {
-            int Kg = GetKg(1, 1, 1, 1, 1);
+            float Kg = GetKg(1, 1, 1, 1, 1);
             Assert.AreEqual(1, Kg);
         }
 
-        int GetKg(int x, int y, int z, int w, int q)
+        float GetKg(int xDays, int yGoats, float zKg, int wDays, int qGoats)
         {
-            return 0;
+            float KgPerDay = zKg / xDays / yGoats;
+            return KgPerDay * wDays * qGoats;
         }
 
     }
