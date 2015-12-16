@@ -16,7 +16,11 @@ namespace Ciuperci
 
         int GetRedMushrooms(int n, int x)
         {
-            return n - (n / (x + 1));
+            int WhiteMushrooms;
+            int RedMushrooms;
+            WhiteMushrooms = (n / (x + 1));
+            RedMushrooms = n - WhiteMushrooms;
+            return RedMushrooms;
         }
 
     }
