@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ciuperci", "Ciuperci\Ciuper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capre", "Capre\Capre.csproj", "{1EDE8049-D2B8-40A7-8071-6C1B1E5261C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pavaj", "Pavaj\Pavaj.csproj", "{FAEF1D5A-37F7-418E-ADED-BE4CD3BB8408}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1EDE8049-D2B8-40A7-8071-6C1B1E5261C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EDE8049-D2B8-40A7-8071-6C1B1E5261C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EDE8049-D2B8-40A7-8071-6C1B1E5261C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAEF1D5A-37F7-418E-ADED-BE4CD3BB8408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAEF1D5A-37F7-418E-ADED-BE4CD3BB8408}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAEF1D5A-37F7-418E-ADED-BE4CD3BB8408}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAEF1D5A-37F7-418E-ADED-BE4CD3BB8408}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
