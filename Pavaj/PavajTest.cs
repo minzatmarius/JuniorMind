@@ -19,13 +19,21 @@ namespace Pavaj
             Assert.AreEqual(12, cubes);
         }
 
+        [TestMethod]
+        public void CubesNeededForASixBySix()
+        {
+            int cubes = GetNumberOfCubes(6, 6, 4);
+            Assert.AreEqual(4, cubes);
+        }
+
+
         int GetNumberOfCubes(int m, int n, int a) {
             if (m % a != 0)
                 { m += a; }
             if (n % a != 0)
                 { n += a; }
 
-            return (m * n) / a;
+            return ((m / a) * (n / a));
         }
     }
 }
