@@ -21,10 +21,10 @@ namespace Sportiv
         }
 
         int GetRepetitions(int n)
-        {   
+        {
+            int repetitions = n + ((n - 1) * n);
 
-
-            return n+((n-1)*n);
+            return repetitions;
         }
     }
 }
