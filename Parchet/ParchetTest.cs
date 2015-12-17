@@ -14,6 +14,14 @@ namespace Parchet
         }
 
 
+        [TestMethod]
+        public void NumberOfBoardsForAFiveByOneRoom()
+        {
+            float boards = GetNumberOfBoards(5, 1, 1, 1);
+            Assert.AreEqual(6, boards);
+        }
+
+
 
         float GetNumberOfBoards(int n,int m,int a,int b)
         {
