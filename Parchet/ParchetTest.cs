@@ -44,8 +44,13 @@ namespace Parchet
 
         float GetNumberOfBoards(int n,int m,int a,int b)
         {
-       
-            return (float) Math.Ceiling(((m / b) * (n / a)) + ((m / b) * (n / a))*0.15f);
+            float WholeBoards = ((m / b) * (n / a));
+            float Loss = WholeBoards * 0.15f;
+            float BoardsNeeded = (float) Math.Ceiling(WholeBoards + Loss);
+
+
+
+            return BoardsNeeded;
         }
     }
 }
