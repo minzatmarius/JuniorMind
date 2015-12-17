@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pavaj", "Pavaj\Pavaj.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sportiv", "Sportiv\Sportiv.csproj", "{510188CD-C57C-4B14-9DB2-9DEFF947B5B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parchet", "Parchet\Parchet.csproj", "{A6BC3FEE-65FE-444D-8A29-7551FCCC276B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{510188CD-C57C-4B14-9DB2-9DEFF947B5B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{510188CD-C57C-4B14-9DB2-9DEFF947B5B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{510188CD-C57C-4B14-9DB2-9DEFF947B5B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6BC3FEE-65FE-444D-8A29-7551FCCC276B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6BC3FEE-65FE-444D-8A29-7551FCCC276B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6BC3FEE-65FE-444D-8A29-7551FCCC276B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BC3FEE-65FE-444D-8A29-7551FCCC276B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
