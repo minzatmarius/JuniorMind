@@ -28,6 +28,18 @@ namespace Parchet
             Assert.AreEqual(12, boards);
         }
 
+        [TestMethod]
+        public void NumberOfBoardsForAFiveByTwoRoom()
+        {
+            float boards = GetNumberOfBoards(20, 1, 2, 1);
+            Assert.AreEqual(12, boards);
+        }
+        [TestMethod]
+        public void NumberOfBoardsForATwentyByOneRoom()
+        {
+            float boards = GetNumberOfBoards(20, 1, 2, 1);
+            Assert.AreEqual(12, boards);
+        }
 
 
         float GetNumberOfBoards(int n,int m,int a,int b)
