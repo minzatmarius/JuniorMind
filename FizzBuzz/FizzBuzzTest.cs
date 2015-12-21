@@ -14,6 +14,14 @@ namespace FizzBuzz
 
         }
 
+        [TestMethod]
+        public void TestBuzz()
+        {
+            string answer = GetType(10);
+            Assert.AreEqual("Buzz", answer);
+
+        }
+
         string GetType(int number)
         {
             if (number % 15 == 0)
