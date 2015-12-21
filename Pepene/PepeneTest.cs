@@ -12,6 +12,13 @@ namespace Pepene
             string answer = IsEven(6);
             Assert.AreEqual("Yes", answer);
         }
+        [TestMethod]
+        public void CheckIfSevenIsOk()
+        {
+            string answer = IsEven(7);
+            Assert.AreEqual("No", answer);
+        }
+
 
         string IsEven(int kilograms)
         {
