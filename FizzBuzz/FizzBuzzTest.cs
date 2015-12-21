@@ -30,6 +30,14 @@ namespace FizzBuzz
 
         }
 
+        [TestMethod]
+        public void TestNoType()
+        {
+            string answer = GetType(7);
+            Assert.AreEqual("NoType", answer);
+
+        }
+
         string GetType(int number)
         {
             if (number % 15 == 0)
@@ -44,7 +52,7 @@ namespace FizzBuzz
             {
                 return "Buzz";
             }
-            return "Not a multiple!";
+            return "NoType";
         }
     }
 }
