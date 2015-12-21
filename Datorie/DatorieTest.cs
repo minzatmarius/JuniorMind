@@ -38,6 +38,7 @@ namespace Datorie
         decimal GetTotalSum(int rent, int daysLate)
         {
             decimal penalty=0;
+            decimal totalSum;
 
             if (daysLate > 30)
             {
@@ -51,7 +52,8 @@ namespace Datorie
             {
                 penalty = rent * 0.02m;
             }
-            return rent + penalty;
+            totalSum = rent + penalty;
+            return totalSum;
         }
     }
 }
