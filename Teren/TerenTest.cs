@@ -12,6 +12,12 @@ namespace Teren
             float length = GetInitialSize(3, 70);
             Assert.AreEqual(7, length, 0.1);
         }
+        [TestMethod]
+        public void FindLengthForALargeField()
+        {
+            float length = GetInitialSize(230, 770000);
+            Assert.AreEqual(770, length, 0.1);
+        }
 
         float GetInitialSize(int newWidth, int area )
         {
