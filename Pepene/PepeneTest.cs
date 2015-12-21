@@ -24,7 +24,7 @@ namespace Pepene
         {
 
             string answer = IsEven(2);
-            Assert.AreEqual("Yes", answer);
+            Assert.AreEqual("No", answer);
         }
 
         string IsEven(int kilograms)
