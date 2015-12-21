@@ -13,6 +13,13 @@ namespace Datorie
             Assert.AreEqual(102, sum); 
         }
 
+        [TestMethod]
+        public void TwentyDaysLate()
+        {
+            decimal sum = GetTotalSum(100, 20);
+            Assert.AreEqual(105, sum);
+        }
+
         decimal GetTotalSum(int rent, int daysLate)
         {
             decimal penalty=0;
