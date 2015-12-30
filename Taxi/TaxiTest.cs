@@ -43,6 +43,14 @@ namespace Taxi
 
         }
 
+        [TestMethod]
+        public void LongDistanceNight()
+        {
+            decimal price = GetPrice(100, 23);
+            Assert.AreEqual(800, price);
+
+        }
+
         bool IsDay(int time)
         {
             if(time>=8 && time <= 21)
