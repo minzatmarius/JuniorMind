@@ -30,11 +30,19 @@ namespace Taxi
         [TestMethod]
         public void ShortDistanceNight()
         {
-            decimal price = GetPrice(10, 10);
+            decimal price = GetPrice(10, 23);
             Assert.AreEqual(70, price);
 
         }
 
+        bool IsDay(int time)
+        {
+            if(time>=8 && time <= 21)
+            {
+                return true;
+            }
+            return false;
+        }
 
         decimal GetPrice(int distance, int time)
         {
@@ -49,7 +57,10 @@ namespace Taxi
             {
                 pricePerKilometer = 6;
             }
-            
+            if(IsDay(time) == false)
+            {
+                pricePerKilometer += 2;
+            }            
             price = pricePerKilometer * distance;
             return price;
         }
