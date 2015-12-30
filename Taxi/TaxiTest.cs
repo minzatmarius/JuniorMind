@@ -20,6 +20,13 @@ namespace Taxi
             Assert.AreEqual(240, price);
         }
 
+        [TestMethod]
+        public void LongDistanceDay()
+        {
+            decimal price = GetPrice(100, 10);
+            Assert.AreEqual(600, price);
+        }
+
         decimal GetPrice(int distance, int time)
         {
             if (distance > 20)
