@@ -17,14 +17,14 @@ namespace Taxi
         public void MediumDistanceDay()
         {
             decimal price = GetPrice(30, 10);
-            Assert.AreEqual(120, price);
+            Assert.AreEqual(240, price);
         }
 
         decimal GetPrice(int distance, int time)
         {
             if (distance > 20)
             {
-                return 4 * distance;
+                return 8 * distance;
             }
             return 5 * distance;
         }
