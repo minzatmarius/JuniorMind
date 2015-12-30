@@ -27,6 +27,14 @@ namespace Taxi
             Assert.AreEqual(600, price);
         }
 
+        [TestMethod]
+        public void ShortDistanceNight()
+        {
+            decimal price = GetPrice(10, 10);
+            Assert.AreEqual(70, price);
+
+        }
+
         decimal GetPrice(int distance, int time)
         {
             if(distance > 60)
