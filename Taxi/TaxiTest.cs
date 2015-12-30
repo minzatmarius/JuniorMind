@@ -13,6 +13,12 @@ namespace Taxi
             Assert.AreEqual(50, price);
 
         }
+        [TestMethod]
+        public void MediumDistanceDay()
+        {
+            decimal price = GetPrice(30, 10);
+            Assert.AreEqual(120, price);
+        }
 
         decimal GetPrice(int distance, int time)
         {
