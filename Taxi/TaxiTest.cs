@@ -35,17 +35,23 @@ namespace Taxi
 
         }
 
+
         decimal GetPrice(int distance, int time)
         {
-            if(distance > 60)
-            {
-                return 6 * distance;
-            }
+            decimal price;
+            decimal pricePerKilometer = 5;
+
             if (distance > 20)
             {
-                return 8 * distance;
+                pricePerKilometer = 8;
             }
-            return 5 * distance;
+            if (distance > 60)
+            {
+                pricePerKilometer = 6;
+            }
+            
+            price = pricePerKilometer * distance;
+            return price;
         }
     }
 }
