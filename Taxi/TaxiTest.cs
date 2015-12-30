@@ -16,7 +16,7 @@ namespace Taxi
 
         decimal GetPrice(int distance, int time)
         {
-            return 0;
+            return 5 * distance;
         }
     }
 }
