@@ -9,6 +9,8 @@ namespace Taxi
         [TestMethod]
         public void ShortDistanceDay()
         {
+            decimal price = GetPrice(10, 10);
+            Assert.AreEqual(50, price);
 
         }
 
