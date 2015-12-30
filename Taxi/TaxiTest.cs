@@ -29,6 +29,10 @@ namespace Taxi
 
         decimal GetPrice(int distance, int time)
         {
+            if(distance > 60)
+            {
+                return 6 * distance;
+            }
             if (distance > 20)
             {
                 return 8 * distance;
