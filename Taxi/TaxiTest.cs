@@ -61,9 +61,8 @@ namespace Taxi
         }
 
         decimal GetPricePerKilometer(int distance,int time)
+        int GetPriceCategory(int distance)
         {
-            decimal[] pricePerKilometerDay = { 5, 8, 6 };
-            decimal[] pricePerKilometerNight = { 7, 10, 9 };
             int index = 0;
 
             if (distance > 20)
@@ -74,6 +73,15 @@ namespace Taxi
             {
                 index = 2;
             }
+            return index;
+        }
+
+        decimal GetPricePerKilometer(int distance,int time)
+        {
+            decimal[] pricePerKilometerDay = { 5, 8, 6 };
+            decimal[] pricePerKilometerNight = { 7, 10, 9 };
+            int index = GetPriceCategory(distance);
+          
             if (IsDay(time) == false)
             {
                 return pricePerKilometerNight[index];
