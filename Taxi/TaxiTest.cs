@@ -60,7 +60,6 @@ namespace Taxi
             return false;
         }
 
-        decimal GetPricePerKilometer(int distance,int time)
         int GetPriceCategory(int distance)
         {
             int index = 0;
