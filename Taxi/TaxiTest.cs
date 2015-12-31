@@ -47,7 +47,7 @@ namespace Taxi
         public void LongDistanceNight()
         {
             decimal price = GetPrice(100, 23);
-            Assert.AreEqual(800, price);
+            Assert.AreEqual(900, price);
 
         }
 
@@ -63,22 +63,28 @@ namespace Taxi
         decimal GetPrice(int distance, int time)
         {
             decimal price;
-            decimal pricePerKilometer = 5;
+            decimal[] pricePerKilometerDay = { 5, 8, 6 };
+            decimal[] pricePerKilometerNight = { 7, 10, 9 };
+            int index = 0;
 
             if (distance > 20)
             {
-                pricePerKilometer = 8;
+                index = 1;
             }
             if (distance > 60)
             {
-                pricePerKilometer = 6;
+                index = 2;
             }
             if(IsDay(time) == false)
             {
-                pricePerKilometer += 2;
-            }            
-            price = pricePerKilometer * distance;
+                price = pricePerKilometerNight[index] * distance;
+            }    
+            else
+            {
+                price = pricePerKilometerDay[index] * distance;
+            }       
             return price;
         }
+        
     }
 }
