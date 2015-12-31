@@ -62,17 +62,18 @@ namespace Taxi
 
         int GetPriceCategory(int distance)
         {
-            int index = 0;
 
-            if (distance > 20)
-            {
-                index = 1;
-            }
             if (distance > 60)
             {
-                index = 2;
+                return 2;
             }
-            return index;
+            if (distance > 20)
+            {
+                return 1;
+            }
+            
+           
+            return 0;
         }
 
         decimal GetPricePerKilometer(int distance,int time)
