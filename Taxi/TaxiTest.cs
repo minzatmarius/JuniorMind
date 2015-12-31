@@ -76,19 +76,27 @@ namespace Taxi
             return 0;
         }
 
-        decimal GetPricePerKilometer(int distance,int time)
+        decimal[] GetPriceTable(int time)
         {
             decimal[] pricePerKilometerDay = { 5, 8, 6 };
             decimal[] pricePerKilometerNight = { 7, 10, 9 };
-            int index = GetPriceCategory(distance);
-          
             if (IsDay(time) == false)
             {
-                return pricePerKilometerNight[index];
+                return pricePerKilometerNight;
             }
-           
-                return pricePerKilometerDay[index];
-            
+
+            return pricePerKilometerDay;
+
+        }
+
+
+
+        decimal GetPricePerKilometer(int distance,int time)
+        {
+            decimal[] priceTable = GetPriceTable(time);
+            int index = GetPriceCategory(distance);
+            decimal pricePerKilometer = priceTable[index];
+            return pricePerKilometer;
             
         }
 
