@@ -33,13 +33,42 @@ namespace Roman
             string result = ToRoman(10);
             Assert.AreEqual("x", result);
         }
+        [TestMethod]
+        public void CheckForTwentySeven()
 
+        {
+            string result = ToRoman(27);
+            Assert.AreEqual("xxvii", result);
+        }
+        [TestMethod]
+        public void CheckForFourtyNine()
+
+        {
+            string result = ToRoman(49);
+            Assert.AreEqual("xlix", result);
+        }
+
+        [TestMethod]
+        public void CheckForNinetyNine()
+
+        {
+            string result = ToRoman(99);
+            Assert.AreEqual("xcix", result);
+        }
+
+        [TestMethod]
+        public void CheckForOneHundred()
+
+        {
+            string result = ToRoman(100);
+            Assert.AreEqual("c", result);
+        }
 
 
         string ToRoman(int number)
         {
-            string[] RomanNumbers = { "i", "iv", "v","ix","x" };
-            int[] IntegerNumbers = { 1, 4, 5, 9, 10 };
+            string[] RomanNumbers = { "i", "iv", "v", "ix", "x", "xl", "l", "xc", "c" };
+            int[] IntegerNumbers = { 1, 4, 5, 9, 10, 40, 50, 90, 100 };
             string output = "";
             for(int i = RomanNumbers.Length - 1; i >= 0; i--)
             {
