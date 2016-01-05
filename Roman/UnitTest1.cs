@@ -12,6 +12,22 @@ namespace Roman
             string result = ToRoman(1);
             Assert.AreEqual("i", result); 
         }
+        [TestMethod]
+        public void CheckForTwo()
+
+        {
+            string result = ToRoman(2);
+            Assert.AreEqual("ii", result);
+        }
+        [TestMethod]
+        public void CheckForThree()
+
+        {
+            string result = ToRoman(3);
+            Assert.AreEqual("iii", result);
+        }
+
+
 
         string ToRoman(int number)
         {
@@ -20,9 +36,10 @@ namespace Roman
             string output = "";
             for(int i = RomanNumbers.Length - 1; i >= 0; i--)
             {
-                if(number - IntegerNumbers[i] >= 0)
+                while(number - IntegerNumbers[i] >= 0)
                 {
                     output += RomanNumbers[i];
+                    number -= IntegerNumbers[i];
                 }
             }
 
