@@ -26,13 +26,20 @@ namespace Roman
             string result = ToRoman(3);
             Assert.AreEqual("iii", result);
         }
+        [TestMethod]
+        public void CheckForTen()
+
+        {
+            string result = ToRoman(10);
+            Assert.AreEqual("x", result);
+        }
 
 
 
         string ToRoman(int number)
         {
-            string[] RomanNumbers = { "i", "iv", "v" };
-            int[] IntegerNumbers = { 1, 4, 5 };
+            string[] RomanNumbers = { "i", "iv", "v","ix","x" };
+            int[] IntegerNumbers = { 1, 4, 5, 9, 10 };
             string output = "";
             for(int i = RomanNumbers.Length - 1; i >= 0; i--)
             {
