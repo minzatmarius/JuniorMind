@@ -15,8 +15,18 @@ namespace Roman
 
         string ToRoman(int number)
         {
+            string[] RomanNumbers = { "i", "iv", "v" };
+            int[] IntegerNumbers = { 1, 4, 5 };
+            string output = "";
+            for(int i = RomanNumbers.Length - 1; i >= 0; i--)
+            {
+                if(number - IntegerNumbers[i] >= 0)
+                {
+                    output += RomanNumbers[i];
+                }
+            }
 
-            return "";
+            return output;
         }
     }
 }
