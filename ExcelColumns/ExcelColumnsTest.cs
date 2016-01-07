@@ -13,9 +13,15 @@ namespace ExcelColumns
             Assert.AreEqual("a", column);
         }
 
+        [TestMethod]
+        public void ColumnTwentySix()
+        {
+            string column = GetColumn(25);
+            Assert.AreEqual("z", column);
+        }
         string GetColumn(int columnNumber)
         {
-            string alphabet = "abcdefghijklmnopqrstuv";
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
             string column = "";
             column += alphabet[columnNumber];
 
