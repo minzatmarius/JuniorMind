@@ -15,8 +15,11 @@ namespace Panagram
 
         bool IsPanagram(string phrase)
         {
-
-
+            string alphabet = "a";
+            if(alphabet[0] == phrase[0])
+            {
+                return true;
+            }
             return false;
         }
     }
