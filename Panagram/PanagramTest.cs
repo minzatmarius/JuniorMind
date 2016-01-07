@@ -20,17 +20,32 @@ namespace Panagram
             Assert.AreEqual(true, result);
         }
 
+        [TestMethod]
+        public void FiveCharactersRandom()
+        {
+            bool result = IsPanagram("cbade");
+            Assert.AreEqual(true, result);
+        }
+
         bool IsPanagram(string phrase)
         {
             string alphabet = "abcde";
             int count = 0;
+            int ok = 0;
+
             for (int i = 0; i < 5; i++)
             {
-                if (alphabet[i] == phrase[i])
+                for(int j = 0; j < 5; j++)
                 {
-                    count++;
+                    if (phrase[i] == alphabet[j])
+                    {
+                        count++;
+                        break;
+                    }
                 }
             }
+
+
             if (count == 5) return true;
             return false;
 
