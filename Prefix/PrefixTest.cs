@@ -16,6 +16,7 @@ namespace Prefix
         string GetPrefix(string firstString, string secondString)
         {
             string prefix = "";
+            prefix += firstString[0];
             return prefix;
         }
     }
