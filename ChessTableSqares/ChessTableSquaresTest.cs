@@ -15,7 +15,7 @@ namespace ChessTableSqares
 
         int GetSquaresNeeded(int tableSize)
         {
-            return 0;
+            return 1;
         }
     }
    
