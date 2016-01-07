@@ -9,12 +9,22 @@ namespace ChessTableSqares
         [TestMethod]
         public void OneByOneTable()
         {
-            int squares = GetSquaresNeeded(1);
+            int squares = GetSquares(1);
             Assert.AreEqual(1, squares);
         }
-
-        int GetSquaresNeeded(int tableSize)
+        [TestMethod]
+        public void TwoByTwoTable()
         {
+            int squares = GetSquares(2);
+            Assert.AreEqual(5, squares);
+        }
+
+        int GetSquares(int tableSize)
+        {
+            if (tableSize > 1)
+            {
+                return tableSize * tableSize + 1;
+            }
             return 1;
         }
     }
