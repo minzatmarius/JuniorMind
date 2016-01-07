@@ -16,16 +16,17 @@ namespace Prefix
         [TestMethod]
         public void CheckForTwoCharacters()
         {
-            string prefix = GetPrefix("aaab" , "aaaabbaa");
-            Assert.AreEqual("aaa", prefix);
+            string prefix = GetPrefix("abc", "abx");
+            Assert.AreEqual("ab", prefix);
         }
 
         [TestMethod]
         public void CheckForMultipleCharacters()
         {
-            string prefix = GetPrefix("abc", "abx");
-            Assert.AreEqual("ab", prefix);
+            string prefix = GetPrefix("aaab", "aaaabbaa");
+            Assert.AreEqual("aaa", prefix);
         }
+
 
         string GetPrefix(string firstString, string secondString)
         {
