@@ -13,10 +13,27 @@ namespace Prefix
             Assert.AreEqual("a", prefix);
         }
 
+        [TestMethod]
+        public void CheckForTwoCharacters()
+        {
+            string prefix = GetPrefix("abc", "abx");
+            Assert.AreEqual("ab", prefix);
+        }
+
         string GetPrefix(string firstString, string secondString)
         {
             string prefix = "";
-            prefix += firstString[0];
+            for(int i = 0; i < firstString.Length; i++)
+            {                          
+                 if(firstString[i] == secondString[i])
+                {
+                    prefix += firstString[i];
+                }
+                else
+                {
+                    break;
+                }
+            }
             return prefix;
         }
     }
