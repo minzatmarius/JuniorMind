@@ -30,7 +30,7 @@ namespace Panagram
         [TestMethod]
         public void MultipleCharacters()
         {
-            bool result = IsPanagram("The quick brown fox jumps over the lazy dog");
+            bool result = IsPanagram("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             Assert.AreEqual(true, result);
         }
 
