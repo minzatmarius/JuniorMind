@@ -30,20 +30,20 @@ namespace Panagram
         [TestMethod]
         public void MultipleCharacters()
         {
-            bool result = IsPanagram("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            bool result = IsPanagram("The quick brown fox jumps over the lazy dog");
             Assert.AreEqual(true, result);
         }
 
         bool IsPanagram(string phrase)
         {
-            string alphabet = "abcde";
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
             int count = 0;
 
-            for (int i = 0; i < phrase.Length; i++)
+            for (int i = 0; i < alphabet.Length; i++)
             {
-                for(int j = 0; j < alphabet.Length; j++)
+                for(int j = 0; j < phrase.Length; j++)
                 {
-                    if (phrase[i] == alphabet[j])
+                    if (alphabet[i] == phrase[j])
                     {
                         count++;
                         break;
@@ -52,7 +52,7 @@ namespace Panagram
             }
 
 
-            if (count >= alphabet.Length) return true;
+            if (count == alphabet.Length) return true;
             return false;
 
         }
