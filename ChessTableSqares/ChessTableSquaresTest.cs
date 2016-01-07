@@ -12,6 +12,7 @@ namespace ChessTableSqares
             int squares = GetSquares(1);
             Assert.AreEqual(1, squares);
         }
+
         [TestMethod]
         public void TwoByTwoTable()
         {
@@ -19,13 +20,21 @@ namespace ChessTableSqares
             Assert.AreEqual(5, squares);
         }
 
+        [TestMethod]
+        public void ThreeByThreeTable()
+        {
+            int squares = GetSquares(3);
+            Assert.AreEqual(14, squares);
+        }
+
         int GetSquares(int tableSize)
         {
-            if (tableSize > 1)
+            int totalSquares = 0;
+            for(int i = tableSize; i > 0; i--)
             {
-                return tableSize * tableSize + 1;
+                totalSquares += i * i;
             }
-            return 1;
+            return totalSquares;
         }
     }
    
