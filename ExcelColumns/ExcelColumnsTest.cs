@@ -19,12 +19,25 @@ namespace ExcelColumns
             string column = GetColumn(25);
             Assert.AreEqual("z", column);
         }
+        [TestMethod]
+        public void ColumnTwentySeven()
+        {
+            string column = GetColumn(26);
+            Assert.AreEqual("aa", column);
+        }
+
         string GetColumn(int columnNumber)
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
             string column = "";
-            column += alphabet[columnNumber];
 
+            while (columnNumber >= alphabet.Length)
+            {
+                column += alphabet[(columnNumber / alphabet.Length)-1];
+                columnNumber -= alphabet.Length;
+            }
+
+            column += alphabet[columnNumber];
             return column;
         }
     }
