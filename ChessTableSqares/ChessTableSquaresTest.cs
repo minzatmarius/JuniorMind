@@ -27,6 +27,21 @@ namespace ChessTableSqares
             Assert.AreEqual(14, squares);
         }
 
+
+        [TestMethod]
+        public void FourByFourTable()
+        {
+            int squares = GetSquares(4);
+            Assert.AreEqual(30, squares);
+        }
+
+        [TestMethod]
+        public void EightByEightTable()
+        {
+            int squares = GetSquares(8);
+            Assert.AreEqual(204, squares);
+        }
+
         int GetSquares(int tableSize)
         {
             int totalSquares = 0;
