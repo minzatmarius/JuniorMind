@@ -34,6 +34,7 @@ namespace Panagram
             Assert.AreEqual(true, result);
         }
 
+        
         bool IsPanagram(string phrase)
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -51,9 +52,8 @@ namespace Panagram
                 }
             }
 
-
-            if (count == alphabet.Length) return true;
-            return false;
+            return (count == alphabet.Length) ? true : false;
+           
 
         }
     }
