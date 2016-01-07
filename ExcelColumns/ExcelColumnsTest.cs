@@ -37,6 +37,18 @@ namespace ExcelColumns
             string column = GetColumn(52);
             Assert.AreEqual("ba", column);
         }
+        [TestMethod]
+        public void ColumnSeventyEight()
+        {
+            string column = GetColumn(77);
+            Assert.AreEqual("bz", column);
+        }
+        [TestMethod]
+        public void ColumnSeventyNine()
+        {
+            string column = GetColumn(78);
+            Assert.AreEqual("ca", column);
+        }
 
         string GetColumn(int columnNumber)
         {
