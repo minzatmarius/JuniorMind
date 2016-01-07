@@ -25,6 +25,12 @@ namespace ExcelColumns
             string column = GetColumn(26);
             Assert.AreEqual("aa", column);
         }
+        [TestMethod]
+        public void ColumnFiftyTwo()
+        {
+            string column = GetColumn(51);
+            Assert.AreEqual("az", column);
+        }
 
         string GetColumn(int columnNumber)
         {
