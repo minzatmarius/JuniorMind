@@ -27,15 +27,21 @@ namespace Panagram
             Assert.AreEqual(true, result);
         }
 
+        [TestMethod]
+        public void MultipleCharacters()
+        {
+            bool result = IsPanagram("The quick brown fox jumps over the lazy dog");
+            Assert.AreEqual(true, result);
+        }
+
         bool IsPanagram(string phrase)
         {
             string alphabet = "abcde";
             int count = 0;
-            int ok = 0;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < phrase.Length; i++)
             {
-                for(int j = 0; j < 5; j++)
+                for(int j = 0; j < alphabet.Length; j++)
                 {
                     if (phrase[i] == alphabet[j])
                     {
@@ -46,7 +52,7 @@ namespace Panagram
             }
 
 
-            if (count == 5) return true;
+            if (count >= alphabet.Length) return true;
             return false;
 
         }
