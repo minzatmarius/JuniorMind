@@ -31,22 +31,16 @@ namespace ExcelColumns
             string column = GetColumn(51);
             Assert.AreEqual("az", column);
         }
-        [TestMethod]
-        public void ColumnFiftyThree()
-        {
-            string column = GetColumn(52);
-            Assert.AreEqual("ba", column);
-        }
 
         string GetColumn(int columnNumber)
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
             string column = "";
 
-            while (columnNumber + 1 > alphabet.Length)
+            while (columnNumber >= alphabet.Length)
             {
-                column += alphabet[(columnNumber / alphabet.Length) - 1];
-                columnNumber -= (alphabet.Length * (columnNumber / alphabet.Length));
+                column += alphabet[(columnNumber / alphabet.Length)-1];
+                columnNumber -= alphabet.Length;
             }
 
             column += alphabet[columnNumber];
