@@ -15,7 +15,7 @@ namespace Anagram
 
         int GetPossible(string word)
         {
-            return 0;
+            return word.Length;
         }
     }
 }
