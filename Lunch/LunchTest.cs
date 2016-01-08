@@ -7,13 +7,17 @@ namespace Lunch
     public class LunchTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void IfTheyGoEveryDay()
         {
+            int meetingDay = GetMeetingDay(1, 1);
+            Assert.AreEqual(2, meetingDay);
         }
 
-        int GetDay(int first, int second)
+        int GetMeetingDay(int first, int second)
         {
-            return 0;
+            int currentDay = 1;
+
+            return currentDay + first;
         }
     }
 }
