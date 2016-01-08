@@ -12,6 +12,12 @@ namespace Anagram
             int possible = GetPossible("a");
             Assert.AreEqual(1, possible);
         }
+        [TestMethod]
+        public void TwoLetterWord()
+        {
+            int possible = GetPossible("ab");
+            Assert.AreEqual(2, possible);
+        }
 
         int GetPossible(string word)
         {
