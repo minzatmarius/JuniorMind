@@ -18,10 +18,23 @@ namespace Anagram
             int possible = GetPossible("ab");
             Assert.AreEqual(2, possible);
         }
+        [TestMethod]
+        public void ThreeLetterWord()
+        {
+            int possible = GetPossible("abc");
+            Assert.AreEqual(6, possible);
+        }
 
         int GetPossible(string word)
         {
-            return word.Length;
+            int possible = 1;
+            int length = word.Length;
+            while (length > 0)
+            {
+                possible *= length;
+                length--;
+            }
+            return possible;
         }
     }
 }
