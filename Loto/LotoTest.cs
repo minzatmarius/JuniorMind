@@ -7,13 +7,15 @@ namespace Loto
     public class LotoTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ChancesToGetOneNumberRightOutOFFive()
         {
+            double chance = GetChance(1, 5);
+            Assert.AreEqual(0.2, chance);
         }
 
-        float GetChance()
+        double GetChance(int chosenNumbers, int totalNumbers)
         {
-            return 0;
+            return (chosenNumbers/1.0/totalNumbers);
         }
     }
 }
