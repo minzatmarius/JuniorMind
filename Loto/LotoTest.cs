@@ -31,15 +31,26 @@ namespace Loto
             Assert.AreEqual(1.0 / 2330636, chance);
         }
 
+        double Factorial(int number)
+        {
+            double result = 1;
+            while (number > 0)
+            {
+                result *= number;
+                number--;
+            }
+            return result;
+        }
+
+        double Combinations(int n, int k)
+        {
+            return Factorial(n) / (Factorial(k) * Factorial(n - k));
+        }
+
         double GetChance(int chosenNumbers, int totalNumbers)
         {
-            double chances = 1;
-            while(chosenNumbers > 0)
-            {
-                chances *= (chosenNumbers / 1.0 / totalNumbers);
-                chosenNumbers--;
-                totalNumbers--;
-            }
+            double chances = 1 / (Combinations(totalNumbers, chosenNumbers));
+           
             return chances; 
            
 
