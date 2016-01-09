@@ -9,59 +9,89 @@ namespace ExcelColumns
         [TestMethod]
         public void ColumnOne()
         {
-            string column = GetColumn(0);
+            string column = GetColumn(1);
             Assert.AreEqual("a", column);
         }
 
         [TestMethod]
         public void ColumnTwentySix()
         {
-            string column = GetColumn(25);
+            string column = GetColumn(26);
             Assert.AreEqual("z", column);
         }
         [TestMethod]
         public void ColumnTwentySeven()
         {
-            string column = GetColumn(26);
+            string column = GetColumn(27);
             Assert.AreEqual("aa", column);
         }
+
+         [TestMethod]
+         public void ColumnFiftyTwo()
+         {
+             string column = GetColumn(52);
+             Assert.AreEqual("az", column);
+         }
+         [TestMethod]
+         public void ColumnFiftyThree()
+         {
+             string column = GetColumn(53);
+             Assert.AreEqual("ba", column);
+         }
+         [TestMethod]
+         public void ColumnSeventyEight()
+         {
+             string column = GetColumn(78);
+             Assert.AreEqual("bz", column);
+         }
+         [TestMethod]
+         public void ColumnSeventyNine()
+         {
+             string column = GetColumn(79);
+             Assert.AreEqual("ca", column);
+         }
+         [TestMethod]
+         public void Column703()
+         {
+             string column = GetColumn(703);
+             Assert.AreEqual("aaa", column);
+         }
+         
         [TestMethod]
-        public void ColumnFiftyTwo()
+        public void OneMustReturnA()
         {
-            string column = GetColumn(51);
-            Assert.AreEqual("az", column);
+            Assert.AreEqual("a", GetPosition(1));
         }
         [TestMethod]
-        public void ColumnFiftyThree()
+        public void TwentySixMustReturnZ()
         {
-            string column = GetColumn(52);
-            Assert.AreEqual("ba", column);
+            Assert.AreEqual("z", GetPosition(26));
         }
-        [TestMethod]
-        public void ColumnSeventyEight()
+
+        public static string Reverse(string s)
         {
-            string column = GetColumn(77);
-            Assert.AreEqual("bz", column);
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
         }
-        [TestMethod]
-        public void ColumnSeventyNine()
+        string GetPosition(int number)
         {
-            string column = GetColumn(78);
-            Assert.AreEqual("ca", column);
+            if (number == 0) number = 26;
+            return ((char)('a' + number - 1)).ToString();
         }
 
         string GetColumn(int columnNumber)
         {
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
             string column = "";
 
-            while (columnNumber + 1 > alphabet.Length)
-            {
-                column += alphabet[(columnNumber / alphabet.Length) - 1];
-                columnNumber -= (alphabet.Length * (columnNumber / alphabet.Length));
-            }
 
-            column += alphabet[columnNumber];
+
+            while (columnNumber --  > 0 )
+            {
+                column = GetPosition((columnNumber +1) % 26) + column;
+                columnNumber/= 26;
+        
+            } 
             return column;
         }
     }
