@@ -18,22 +18,30 @@ namespace Lunch
             int meetingDay = GetMeetingDay(4, 6);
             Assert.AreEqual(13, meetingDay);
         }
+        int GreatestCommonDivider(int a, int b)
+        {
+            while(a != b)
+            {
+                if (a > b)
+                {
+                    a -= b;
+                }
+                else b -= a;
+            }
+            return a;
+        }
+
         int GetMeetingDay(int first, int second)
         {
-            int currentDay = 1;
-            
 
-            for (int i=1; ; i ++)
+            if (first > second)
             {
-                currentDay++;
-                if(i % first == 0 && i % second == 0)
-                {
-                    break;
-                }
-                
+                return GreatestCommonDivider(first, second) * first+1;
             }
 
-            return currentDay;
+
+            return GreatestCommonDivider(first, second) * second +1;
+
         }
     }
 }
