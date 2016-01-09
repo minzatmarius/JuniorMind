@@ -13,11 +13,18 @@ namespace Cube
             Assert.AreEqual(192, number);
         }
         [TestMethod]
+        public void SecondNumberShouldBe442()
+        {
+            int number = GetNumber(2);
+            Assert.AreEqual(442, number);
+        }
+        [TestMethod]
         public void Number888ShouldBeOK()
         {
             bool result = IsOK(888);
             Assert.AreEqual(result, true);
         }
+
 
         bool IsOK(int number)
         {
