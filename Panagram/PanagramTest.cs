@@ -49,17 +49,16 @@ namespace Panagram
 
         bool IsPanagram(string phrase)
         {
-            int count = 0;
 
             for (int i = 'a'; i <= 'z'; i++)
             {
-                if( GetNumberOfAppearances((char)i, phrase) > 0)
+                if( GetNumberOfAppearances((char)i, phrase) == 0)
                 {
-                    count++;
+                    return false;
                 }
             }
 
-            return (count == 26) ;
+            return true ;
            
 
         }
