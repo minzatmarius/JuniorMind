@@ -34,7 +34,19 @@ namespace Panagram
             Assert.AreEqual(true, result);
         }
 
-        
+        int GetNumberOfAppearances(char letter, string word)
+        {
+            int numberOfAppearances = 0;
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (letter == word[i])
+                {
+                    numberOfAppearances++;
+                }
+            }
+            return numberOfAppearances;
+        }
+
         bool IsPanagram(string phrase)
         {
             string alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -42,17 +54,10 @@ namespace Panagram
 
             for (int i = 0; i < alphabet.Length; i++)
             {
-                for(int j = 0; j < phrase.Length; j++)
-                {
-                    if (alphabet[i] == phrase[j])
-                    {
-                        count++;
-                        break;
-                    }
-                }
+                count = GetNumberOfAppearances(alphabet[i], phrase);
             }
 
-            return (count == alphabet.Length) ? true : false;
+            return (count == alphabet.Length) ;
            
 
         }

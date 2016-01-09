@@ -58,14 +58,14 @@ namespace ExcelColumns
          }
          
         [TestMethod]
-        public void OneMustReturnA()
+        public void ZeroMustReturnA()
         {
-            Assert.AreEqual("a", GetPosition(1));
+            Assert.AreEqual("a", GetPosition(0));
         }
         [TestMethod]
-        public void TwentySixMustReturnZ()
+        public void TwentyFiveMustReturnZ()
         {
-            Assert.AreEqual("z", GetPosition(26));
+            Assert.AreEqual("z", GetPosition(25));
         }
 
         public static string Reverse(string s)
