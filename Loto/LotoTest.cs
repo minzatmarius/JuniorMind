@@ -30,6 +30,18 @@ namespace Loto
             double chance = GetChance(5, 6, 49);
             Assert.AreEqual(0.0000184, chance, 0.0000001);
         }
+        [TestMethod]
+        public void ChancesToGet4NumbersRightOutOF49()
+        {
+            double chance = GetChance(4, 6, 49);
+            Assert.AreEqual(0.000969, chance, 0.000001);
+        }
+        [TestMethod]
+        public void ChancesToGet5NumbersRightOutOF40()
+        {
+            double chance = GetChance(5, 5, 40);
+            Assert.AreEqual(1.51973836e-6, chance, 0.000001);
+        }
 
         double Factorial(int number)
         {
@@ -50,8 +62,10 @@ namespace Loto
         double GetChance(int winnerNumbers, int chosenNumbers, int totalNumbers)
         {
 
-            //double chances = 1 / (Combinations(totalNumbers, chosenNumbers));
-            double chances = (Combinations(chosenNumbers, winnerNumbers) * Combinations(totalNumbers - chosenNumbers, chosenNumbers - winnerNumbers)) / Combinations(totalNumbers, chosenNumbers);
+            
+            double chances = (Combinations(chosenNumbers, winnerNumbers) * 
+                Combinations(totalNumbers - chosenNumbers, chosenNumbers - winnerNumbers)) /
+                Combinations(totalNumbers, chosenNumbers);
            
             return chances; 
            
