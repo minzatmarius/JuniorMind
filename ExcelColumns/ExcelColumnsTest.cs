@@ -76,8 +76,8 @@ namespace ExcelColumns
         }
         string GetPosition(int number)
         {
-            if (number == 0) number = 26;
-            return ((char)('a' + number - 1)).ToString();
+            
+            return ((char)('a' + number )).ToString();
         }
 
         string GetColumn(int columnNumber)
@@ -88,7 +88,7 @@ namespace ExcelColumns
 
             while (columnNumber --  > 0 )
             {
-                column = GetPosition((columnNumber +1) % 26) + column;
+                column = GetPosition(columnNumber % 26) + column;
                 columnNumber/= 26;
         
             } 
