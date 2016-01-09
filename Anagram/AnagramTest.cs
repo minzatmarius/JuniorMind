@@ -89,7 +89,7 @@ namespace Anagram
         int GetPossible(string word)
         {
             int denominator = 1;
-            for(int i = 'a'; i < 'z'; i++)
+            for(int i = 'a'; i <= 'z'; i++)
             {
                 denominator *= Factorial(GetNumberOfAppearances((char)i, word));
                 
