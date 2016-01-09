@@ -13,13 +13,13 @@ namespace Anagram
             Assert.AreEqual(1, possible);
         }
         [TestMethod]
-        public void TwoLetterWord()
+        public void TwoDifferentLettersWord()
         {
             int possible = GetPossible("ab");
             Assert.AreEqual(2, possible);
         }
         [TestMethod]
-        public void ThreeLetterWord()
+        public void ThreeDifferentLettersWord()
         {
             int possible = GetPossible("abc");
             Assert.AreEqual(6, possible);
@@ -31,22 +31,63 @@ namespace Anagram
             Assert.AreEqual(120, possible);
         }
         [TestMethod]
-        public void FiveLettersWord()
+        public void TwoLettersWord()
         {
-            int possible = GetPossible("abcab");
-            Assert.AreEqual(120, possible);
+            int possible = GetPossible("aa");
+            Assert.AreEqual(1, possible);
+        }
+        [TestMethod]
+        public void ThreeLetterWord()
+        {
+            int possible = GetPossible("aba");
+            Assert.AreEqual(3, possible);
+        }
+        [TestMethod]
+        public void LetterEInLetter()
+        {
+           
+            Assert.AreEqual(2, GetNumberOfAppearances('e',"letter"));
+        }
+        [TestMethod]
+        public void ThreeFactorial()
+        {
+
+            Assert.AreEqual(6, Factorial(3));
+        }
+
+        int GetNumberOfAppearances(char letter, string word)
+        {
+            int numberOfAppearances = 0;
+            for (int i = 0; i < word.Length; i++)
+            {
+                if(letter == word[i])
+                {
+                    numberOfAppearances++;
+                }
+            }
+            return numberOfAppearances;
+        }
+
+        int Factorial (int number)
+        {
+            int result = 1;
+            while (number > 0)
+            {
+                result *= number;
+                number--;
+            }
+            return result;
         }
 
         int GetPossible(string word)
         {
-            int possible = 1;
-            int length = word.Length;
-            while (length > 0)
+            int denominator = 1;
+            for(int i = 'a'; i < 'z'; i++)
             {
-                possible *= length;
-                length--;
+                denominator *= Factorial(GetNumberOfAppearances((char)i, word));
+                
             }
-            return possible;
+            return (Factorial(word.Length)) / denominator;
         }
     }
 }
