@@ -33,14 +33,12 @@ namespace Prefix
             string prefix = "";
             for(int i = 0; i < firstString.Length; i++)
             {                          
-                 if(firstString[i] == secondString[i])
-                {
-                    prefix += firstString[i];
-                }
-                else
+                 if(firstString[i] != secondString[i])
                 {
                     break;
+                   
                 }
+                prefix += firstString[i];
             }
             return prefix;
         }

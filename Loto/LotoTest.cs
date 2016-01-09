@@ -22,9 +22,15 @@ namespace Loto
         public void ChancesToGet6NumbersRightOutOF49()
         {
             double chance = GetChance(6, 49);
-            Assert.AreEqual(1.0/ 13983816, chance, 0.00000001);
+            Assert.AreEqual(1.0/ 13983816, chance, 0.000000000000000001);
         }
-       
+        [TestMethod]
+        public void ChancesToGet5NumbersRightOutOF49()
+        {
+            double chance = GetChance(5, 49);
+            Assert.AreEqual(1.0 / 2330636, chance);
+        }
+
         double GetChance(int chosenNumbers, int totalNumbers)
         {
             double chances = 1;
