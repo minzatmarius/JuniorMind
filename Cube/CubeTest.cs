@@ -26,7 +26,20 @@ namespace Cube
 
         int GetNumber(int k)
         {
-            return 0;
+            int i = 0;
+            int totalNumbers = 0;
+            while (totalNumbers < k)
+            {
+                i++;
+                if (IsOK(i * i * i))
+                {
+                    totalNumbers++;
+                }
+            }
+           
+            return i;
         }
+
+
     }
 }
