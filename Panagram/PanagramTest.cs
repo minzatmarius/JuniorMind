@@ -10,21 +10,21 @@ namespace Panagram
         public void ThePhraseHasOneCharacter()
         {
             bool result = IsPanagram("a");
-            Assert.AreEqual(true, result);
+            Assert.AreEqual(false, result);
         }
 
         [TestMethod]
         public void FiveCharacters()
         {
             bool result = IsPanagram("abcde");
-            Assert.AreEqual(true, result);
+            Assert.AreEqual(false, result);
         }
 
         [TestMethod]
         public void FiveCharactersRandom()
         {
             bool result = IsPanagram("cbade");
-            Assert.AreEqual(true, result);
+            Assert.AreEqual(false, result);
         }
 
         [TestMethod]
@@ -34,12 +34,12 @@ namespace Panagram
             Assert.AreEqual(true, result);
         }
 
-        int GetNumberOfAppearances(char letter, string word)
+        int GetNumberOfAppearances(char letter, string phrase)
         {
             int numberOfAppearances = 0;
-            for (int i = 0; i < word.Length; i++)
+            for (int i = 0; i < phrase.Length; i++)
             {
-                if (letter == word[i])
+                if (letter == phrase[i])
                 {
                     numberOfAppearances++;
                 }
@@ -49,15 +49,17 @@ namespace Panagram
 
         bool IsPanagram(string phrase)
         {
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
             int count = 0;
 
-            for (int i = 0; i < alphabet.Length; i++)
+            for (int i = 'a'; i <= 'z'; i++)
             {
-                count = GetNumberOfAppearances(alphabet[i], phrase);
+                if( GetNumberOfAppearances((char)i, phrase) > 0)
+                {
+                    count++;
+                }
             }
 
-            return (count == alphabet.Length) ;
+            return (count == 26) ;
            
 
         }
