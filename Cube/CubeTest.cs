@@ -28,7 +28,7 @@ namespace Cube
 
         bool IsOK(int number)
         {
-            return (number % 10 == 8 && number / 10 % 10 == 8 && number / 100 % 10 == 8);
+            return (number % 1000 == 888);
         }
 
         int GetNumber(int k)
