@@ -43,6 +43,12 @@ namespace Anagram
             Assert.AreEqual(3, possible);
         }
         [TestMethod]
+        public void FourLetterWord()
+        {
+            int possible = GetPossible("abab");
+            Assert.AreEqual(6, possible);
+        }
+        [TestMethod]
         public void LetterEInLetter()
         {
            
@@ -54,6 +60,7 @@ namespace Anagram
 
             Assert.AreEqual(6, Factorial(3));
         }
+
 
         int GetNumberOfAppearances(char letter, string word)
         {
