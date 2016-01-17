@@ -120,7 +120,21 @@ namespace Bytes
         {
             Assert.AreEqual(0, XORBit(0, 0));
         }
-
+        [TestMethod]
+        public void OneXOROneShouldBe0()
+        {
+            CollectionAssert.AreEqual(ToBinary(0), XOR(ToBinary(1), ToBinary(1)));
+        }
+        [TestMethod]
+        public void OneXORZeroShouldBe1()
+        {
+            CollectionAssert.AreEqual(ToBinary(1), XOR(ToBinary(1), ToBinary(0)));
+        }
+        [TestMethod]
+        public void OneXORThreeShouldBe2()
+        {
+            CollectionAssert.AreEqual(ToBinary(2), XOR(ToBinary(1), ToBinary(3)));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -169,6 +183,16 @@ namespace Bytes
             for (int i = 0; i < binaryNumber1.Length; i++)
             {
                 newBinaryNumber[i] = ORBit(binaryNumber1[i], binaryNumber2[i]);
+            }
+            return newBinaryNumber;
+        }
+
+        byte[] XOR(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            byte[] newBinaryNumber = new byte[binaryNumber1.Length];
+            for (int i = 0; i < binaryNumber1.Length; i++)
+            {
+                newBinaryNumber[i] = XORBit(binaryNumber1[i], binaryNumber2[i]);
             }
             return newBinaryNumber;
         }
