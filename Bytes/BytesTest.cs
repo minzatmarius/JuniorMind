@@ -66,6 +66,17 @@ namespace Bytes
         {
             Assert.AreEqual(0, ANDBit(1, 0));
         }
+        [TestMethod]
+        public void OneANDOneShouldBe1()
+        {
+            CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(1)));
+        }
+        [TestMethod]
+        public void OneANDThreeShouldBe1()
+        {
+            CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(3)));
+        }
+
 
         [TestMethod]
         public void ORBit1or1()
@@ -84,14 +95,14 @@ namespace Bytes
         }
 
         [TestMethod]
-        public void OneANDOneShouldBe1()
+        public void OneOROneShouldBe1()
         {
-            CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(1)));
+            CollectionAssert.AreEqual(ToBinary(1), OR(ToBinary(1), ToBinary(1)));
         }
         [TestMethod]
-        public void OneANDThreeShouldBe1()
+        public void OneORThreeShouldBe3()
         {
-            CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(3)));
+            CollectionAssert.AreEqual(ToBinary(3), OR(ToBinary(1), ToBinary(3)));
         }
 
 
@@ -130,7 +141,15 @@ namespace Bytes
             return newBinaryNumber;
         }
 
-  
+        byte[] OR(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            byte[] newBinaryNumber = new byte[binaryNumber1.Length];
+            for (int i = 0; i < binaryNumber1.Length; i++)
+            {
+                newBinaryNumber[i] = ORBit(binaryNumber1[i], binaryNumber2[i]);
+            }
+            return newBinaryNumber;
+        }
 
         byte[] ToBinary(int number)
         {
