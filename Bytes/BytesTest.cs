@@ -15,6 +15,14 @@ namespace Bytes
 
         }
         [TestMethod]
+        public void TwoHundredFiftyFourToBinaryShouldBe11111110()
+        {
+            byte[] binary = ToBinary(254);
+            byte[] expected = { 1, 1, 1, 1, 1, 1, 1, 0 };
+            CollectionAssert.AreEqual(expected, binary);
+
+        }
+        [TestMethod]
         public void TenToBinaryShouldBe1010()
         {
             byte[] binary = ToBinary(10);
@@ -41,10 +49,28 @@ namespace Bytes
         {
             Assert.AreEqual(0, NOTBit(1));
         }
+        [TestMethod]
+        public void NOT1ShouldBe254 ()
+        {
+
+            CollectionAssert.AreEqual(NOT(ToBinary(1)), ToBinary(254));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
         }
+
+        byte[] NOT(byte[] binaryNumber)
+        {
+            byte[] newBinaryNumber = new byte[binaryNumber.Length];
+            for(int i = 0; i< binaryNumber.Length; i++)
+            {
+                newBinaryNumber[i] = NOTBit(binaryNumber[i]);
+            }
+            return newBinaryNumber;
+        }
+
+  
 
         byte[] ToBinary(int number)
         {
