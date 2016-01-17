@@ -49,6 +49,7 @@ namespace Bytes
         {
             Assert.AreEqual(0, NOTBit(1));
         }
+
         [TestMethod]
         public void NOT1ShouldBe254 ()
         {
@@ -56,8 +57,26 @@ namespace Bytes
             CollectionAssert.AreEqual(NOT(ToBinary(1)), ToBinary(254));
         }
 
+        [TestMethod]
+        public void ANDBit1And1()
+        {
+            Assert.AreEqual(1, ANDBit(1, 1));
+        }
+        [TestMethod]
+        public void ANDBit1And0()
+        {
+            Assert.AreEqual(0, ANDBit(1, 0));
+        }
+
+
+
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
+        }
+
+        byte ANDBit(byte bit1, byte bit2)
+        {
+            return (byte)((bit1 == 1 && bit2 == 1) ? 1 : 0);
         }
 
         byte[] NOT(byte[] binaryNumber)
