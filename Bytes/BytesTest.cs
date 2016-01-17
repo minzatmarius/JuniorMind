@@ -68,9 +68,14 @@ namespace Bytes
             Assert.AreEqual(0, ANDBit(1, 0));
         }
         [TestMethod]
-        public void OneAndOneShouldBe1()
+        public void OneANDOneShouldBe1()
         {
             CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(1)));
+        }
+        [TestMethod]
+        public void OneANDThreeShouldBe1()
+        {
+            CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(3)));
         }
 
 
