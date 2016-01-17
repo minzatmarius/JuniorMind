@@ -22,6 +22,14 @@ namespace Bytes
             CollectionAssert.AreEqual(expected, binary);
 
         }
+        [TestMethod]
+        public void TwoHundredToBinaryShouldBe1010()
+        {
+            byte[] binary = ToBinary(200);
+            byte[] expected = { 1, 1, 0, 0, 1, 0, 0, 0 };
+            CollectionAssert.AreEqual(expected, binary);
+
+        }
 
         byte[] ToBinary(int number)
         {
