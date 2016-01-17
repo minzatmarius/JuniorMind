@@ -49,7 +49,6 @@ namespace Bytes
         {
             Assert.AreEqual(0, NOTBit(1));
         }
-
         [TestMethod]
         public void NOT1ShouldBe254 ()
         {
@@ -67,6 +66,23 @@ namespace Bytes
         {
             Assert.AreEqual(0, ANDBit(1, 0));
         }
+
+        [TestMethod]
+        public void ORBit1or1()
+        {
+            Assert.AreEqual(1, ORBit(1, 1));
+        }
+        [TestMethod]
+        public void ORBit1or0()
+        {
+            Assert.AreEqual(1, ORBit(1, 0));
+        }
+        [TestMethod]
+        public void ORBit0or0()
+        {
+            Assert.AreEqual(0, ORBit(0, 0));
+        }
+
         [TestMethod]
         public void OneANDOneShouldBe1()
         {
@@ -87,6 +103,11 @@ namespace Bytes
         byte ANDBit(byte bit1, byte bit2)
         {
             return (byte)((bit1 == 1 && bit2 == 1) ? 1 : 0);
+        }
+
+        byte ORBit(byte bit1, byte bit2)
+        {
+            return (byte)((bit1 == 1 || bit2 == 1) ? 1 : 0);
         }
 
         byte[] NOT(byte[] binaryNumber)
