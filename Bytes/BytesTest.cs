@@ -30,6 +30,21 @@ namespace Bytes
             CollectionAssert.AreEqual(expected, binary);
 
         }
+        [TestMethod]
+        public void NOTBitZero()
+        {
+            Assert.AreEqual(1,NOTBit(0));
+        }
+
+        [TestMethod]
+        public void NOTBitOne()
+        {
+            Assert.AreEqual(0, NOTBit(1));
+        }
+
+        byte NOTBit(byte bit) {
+            return (byte)((bit == 1) ? 0 : 1);
+        }
 
         byte[] ToBinary(int number)
         {
