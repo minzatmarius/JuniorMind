@@ -105,6 +105,21 @@ namespace Bytes
             CollectionAssert.AreEqual(ToBinary(3), OR(ToBinary(1), ToBinary(3)));
         }
 
+        [TestMethod]
+        public void XORBit1or1()
+        {
+            Assert.AreEqual(0, XORBit(1, 1));
+        }
+        [TestMethod]
+        public void XORBit1or0()
+        {
+            Assert.AreEqual(1, XORBit(1, 0));
+        }
+        [TestMethod]
+        public void XORBit0or0()
+        {
+            Assert.AreEqual(0, XORBit(0, 0));
+        }
 
 
         byte NOTBit(byte bit) {
@@ -120,6 +135,13 @@ namespace Bytes
         {
             return (byte)((bit1 == 1 || bit2 == 1) ? 1 : 0);
         }
+
+        byte XORBit(byte bit1, byte bit2)
+        {
+            return (byte)((bit1 != bit2) ? 1 : 0);
+        }
+
+
 
         byte[] NOT(byte[] binaryNumber)
         {
