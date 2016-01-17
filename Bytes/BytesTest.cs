@@ -14,15 +14,24 @@ namespace Bytes
             CollectionAssert.AreEqual(expected, binary);
 
         }
+        [TestMethod]
+        public void TenToBinaryShouldBe1010()
+        {
+            byte[] binary = ToBinary(10);
+            byte[] expected = { 0, 0, 0, 0, 1, 0, 1, 0 };
+            CollectionAssert.AreEqual(expected, binary);
+
+        }
 
         byte[] ToBinary(int number)
         {
             byte[] numberInBinary = new byte[8];
-
+            int position = numberInBinary.Length - 1;
             while (number != 0)
             {
-                numberInBinary[numberInBinary.Length - 1] = (byte)(number % 2);
+                numberInBinary[position] = (byte)(number % 2);
                 number /= 2;
+                position--;
             }
 
             return numberInBinary ;
