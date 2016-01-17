@@ -67,6 +67,11 @@ namespace Bytes
         {
             Assert.AreEqual(0, ANDBit(1, 0));
         }
+        [TestMethod]
+        public void OneAndOneShouldBe1()
+        {
+            CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(1)));
+        }
 
 
 
@@ -85,6 +90,16 @@ namespace Bytes
             for(int i = 0; i< binaryNumber.Length; i++)
             {
                 newBinaryNumber[i] = NOTBit(binaryNumber[i]);
+            }
+            return newBinaryNumber;
+        }
+
+        byte[] AND(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            byte[] newBinaryNumber = new byte[binaryNumber1.Length];
+            for(int i = 0; i < binaryNumber1.Length; i++)
+            {
+                newBinaryNumber[i] = ANDBit(binaryNumber1[i], binaryNumber2[i]);
             }
             return newBinaryNumber;
         }
