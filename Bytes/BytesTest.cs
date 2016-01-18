@@ -189,6 +189,11 @@ namespace Bytes
         {
             Assert.AreEqual(1, RightHandShift(8, 3));
         }
+        [TestMethod]
+        public void RightShifting50With2PositionsIs12()
+        {
+            Assert.AreEqual(12, RightHandShift(50, 2));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
