@@ -74,7 +74,8 @@ namespace Bytes
         [TestMethod]
         public void OneANDThreeShouldBe1()
         {
-            CollectionAssert.AreEqual(ToBinary(1), AND(ToBinary(1), ToBinary(3)));
+            byte[] expected = { 0, 1 };
+            CollectionAssert.AreEqual(expected, AND(ToBinary(1), ToBinary(3)));
         }
 
 
@@ -102,7 +103,8 @@ namespace Bytes
         [TestMethod]
         public void OneORThreeShouldBe3()
         {
-            CollectionAssert.AreEqual(ToBinary(3), OR(ToBinary(1), ToBinary(3)));
+            byte[] expected = { 1, 1 };
+            CollectionAssert.AreEqual(expected, OR(ToBinary(1), ToBinary(3)));
         }
 
         [TestMethod]
@@ -128,12 +130,14 @@ namespace Bytes
         [TestMethod]
         public void OneXORZeroShouldBe1()
         {
-            CollectionAssert.AreEqual(ToBinary(1), XOR(ToBinary(1), ToBinary(0)));
+            byte[] expected = { 1 };
+            CollectionAssert.AreEqual(expected, XOR(ToBinary(1), ToBinary(0)));
         }
         [TestMethod]
         public void OneXORThreeShouldBe2()
         {
-            CollectionAssert.AreEqual(ToBinary(2), XOR(ToBinary(1), ToBinary(3)));
+            byte[] expected = { 1, 0 };
+            CollectionAssert.AreEqual(expected, XOR(ToBinary(1), ToBinary(3)));
         }
         [TestMethod]
         public void ArraySizeOf1Is1()
@@ -215,38 +219,55 @@ namespace Bytes
             return newBinaryNumber;
         }
 
+
         byte[] AND(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            int length = (binaryNumber1.Length < binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
+            int length = GreatestOf(binaryNumber1, binaryNumber2).Length;
+            int delta = Math.Abs(binaryNumber1.Length - binaryNumber2.Length);
             byte[] newBinaryNumber = new byte[length];
-            for(int i = 0; i < length; i++)
+            for(int i = 0; i < delta; i++)
             {
-                newBinaryNumber[i] = ANDBit(binaryNumber1[i], binaryNumber2[i]);
+                newBinaryNumber[i] = ANDBit(GreatestOf(binaryNumber1,binaryNumber2)[i], 0);
             }
-
+            for(int i = delta; i < length; i++)
+            {
+                newBinaryNumber[i] = ANDBit(SmallestOf(binaryNumber1, binaryNumber2)[i - delta], GreatestOf(binaryNumber1, binaryNumber2)[i]);
+            }
 
             return newBinaryNumber;
         }
 
         byte[] OR(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            int length = (binaryNumber1.Length > binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
+            int length = GreatestOf(binaryNumber1, binaryNumber2).Length;
+            int delta = Math.Abs(binaryNumber1.Length - binaryNumber2.Length);
             byte[] newBinaryNumber = new byte[length];
-            for (int i = 0; i < binaryNumber1.Length; i++)
+            for (int i = 0; i < delta; i++)
             {
-                newBinaryNumber[i] = ORBit(binaryNumber1[i], binaryNumber2[i]);
+                newBinaryNumber[i] = ORBit(GreatestOf(binaryNumber1, binaryNumber2)[i], 0);
             }
+            for (int i = delta; i < length; i++)
+            {
+                newBinaryNumber[i] = ORBit(SmallestOf(binaryNumber1, binaryNumber2)[i - delta], GreatestOf(binaryNumber1, binaryNumber2)[i]);
+            }
+
             return newBinaryNumber;
         }
 
         byte[] XOR(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            int length = (binaryNumber1.Length > binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
+            int length = GreatestOf(binaryNumber1, binaryNumber2).Length;
+            int delta = Math.Abs(binaryNumber1.Length - binaryNumber2.Length);
             byte[] newBinaryNumber = new byte[length];
-            for (int i = 0; i < binaryNumber1.Length; i++)
+            for (int i = 0; i < delta; i++)
             {
-                newBinaryNumber[i] = XORBit(binaryNumber1[i], binaryNumber2[i]);
+                newBinaryNumber[i] = XORBit(GreatestOf(binaryNumber1, binaryNumber2)[i], 0);
             }
+            for (int i = delta; i < length; i++)
+            {
+                newBinaryNumber[i] = XORBit(SmallestOf(binaryNumber1, binaryNumber2)[i - delta], GreatestOf(binaryNumber1, binaryNumber2)[i]);
+            }
+
             return newBinaryNumber;
         }
 
