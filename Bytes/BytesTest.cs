@@ -194,6 +194,16 @@ namespace Bytes
         {
             Assert.AreEqual(12, RightHandShift(50, 2));
         }
+        [TestMethod]
+        public void LefttShifting1With3PositionsIs8()
+        {
+            Assert.AreEqual(8, LeftHandShift(1, 3));
+        }
+        [TestMethod]
+        public void LefttShifting5With2PositionsIs20()
+        {
+            Assert.AreEqual(20, LeftHandShift(5, 2));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -319,6 +329,20 @@ namespace Bytes
                 positions--;
             }
 
+            return ToDecimal(binaryNumber);
+        }
+
+        int LeftHandShift(int number, int positions)
+        {
+                 byte[] binaryNumber = ToBinary(number);
+                 while (positions > 0)
+                 {
+
+                    Array.Resize<byte>(ref binaryNumber, binaryNumber.Length + 1);
+                    binaryNumber[binaryNumber.Length - 1] = 0;
+
+                    positions--;
+                 }
             return ToDecimal(binaryNumber);
         }
 
