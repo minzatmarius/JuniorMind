@@ -50,10 +50,10 @@ namespace Bytes
             Assert.AreEqual(0, NOTBit(1));
         }
         [TestMethod]
-        public void NOT1ShouldBe254 ()
+        public void NOT1ShouldBe0 ()
         {
 
-            CollectionAssert.AreEqual(NOT(ToBinary(1)), ToBinary(254));
+            CollectionAssert.AreEqual(NOT(ToBinary(1)), ToBinary(0));
         }
 
         [TestMethod]
@@ -135,6 +135,21 @@ namespace Bytes
         {
             CollectionAssert.AreEqual(ToBinary(2), XOR(ToBinary(1), ToBinary(3)));
         }
+        [TestMethod]
+        public void ArraySizeOf1Is1()
+        {
+            Assert.AreEqual(1, GetArraySize(1));
+        }
+        [TestMethod]
+        public void ArraySizeOf2Is2()
+        {
+            Assert.AreEqual(2, GetArraySize(2));
+        }
+        [TestMethod]
+        public void ArraySizeOf8Is4()
+        {
+            Assert.AreEqual(3, GetArraySize(7));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -155,7 +170,16 @@ namespace Bytes
             return (byte)((bit1 != bit2) ? 1 : 0);
         }
 
-
+        int GetArraySize(int number)
+        {
+            int size = 1;
+            while (number / 2 != 0)
+            {
+                number /= 2;
+                size++;
+            }
+            return size;
+        }
 
         byte[] NOT(byte[] binaryNumber)
         {
@@ -202,15 +226,17 @@ namespace Bytes
 
         byte[] ToBinary(int number)
         {
-            byte[] numberInBinary = null; 
+            byte[] numberInBinary = new byte[GetArraySize(number)];
             int position = numberInBinary.Length - 1;
             while (number != 0)
             {
-                numberInBinary[position] = (byte)(number % 2);
+
+                numberInBinary[numberInBinary.Length - 1] = (byte)(number % 2);
                 number /= 2;
                 position--;
-            }
 
+            }
+           
             return numberInBinary ;
         }
     }
