@@ -186,6 +186,25 @@ namespace Bytes
             return size;
         }
 
+        byte[] GreatestOf(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+
+            if (binaryNumber1.Length > binaryNumber2.Length)
+            {
+                return binaryNumber1;
+            }
+            return binaryNumber2;
+        }
+        byte[] SmallestOf(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+
+            if (binaryNumber1.Length < binaryNumber2.Length)
+            {
+                return binaryNumber1;
+            }
+            return binaryNumber2;
+        }
+
         byte[] NOT(byte[] binaryNumber)
         {
             byte[] newBinaryNumber = new byte[binaryNumber.Length];
@@ -198,12 +217,14 @@ namespace Bytes
 
         byte[] AND(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            int length = (binaryNumber1.Length > binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
+            int length = (binaryNumber1.Length < binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
             byte[] newBinaryNumber = new byte[length];
             for(int i = 0; i < length; i++)
             {
                 newBinaryNumber[i] = ANDBit(binaryNumber1[i], binaryNumber2[i]);
             }
+
+
             return newBinaryNumber;
         }
 
