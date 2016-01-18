@@ -204,6 +204,21 @@ namespace Bytes
         {
             Assert.AreEqual(20, LeftHandShift(5, 2));
         }
+        [TestMethod]
+        public void SixIsLessThanSeven()
+        {
+            Assert.IsTrue(LessThan(6, 7));
+        }
+        [TestMethod]
+        public void SixIsNotLessThanOne()
+        {
+            Assert.IsFalse(LessThan(6, 1));
+        }
+        [TestMethod]
+        public void TenIsNotLessThanTen()
+        {
+            Assert.IsFalse(LessThan(10, 10));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -263,7 +278,6 @@ namespace Bytes
             }
             return newBinaryNumber;
         }
-
 
         byte[] AND(byte[] binaryNumber1, byte[] binaryNumber2)
         {
@@ -346,6 +360,29 @@ namespace Bytes
             return ToDecimal(binaryNumber);
         }
 
+        bool LessThan(int number1, int number2)
+        {
+            byte[] binaryNumber1 = ToBinary(number1);
+            byte[] binaryNumber2 = ToBinary(number2);
+            if(binaryNumber1.Length < binaryNumber2.Length)
+            {
+                return true;
+            }
+            if (binaryNumber1.Length == binaryNumber2.Length)
+            {
+                for(int i = 0; i < binaryNumber1.Length; i++)
+                {
+                    if(binaryNumber1[i] < binaryNumber2[i])
+                    {
+                        return true;
+                    }
+                }
+            }
+
+
+            return false;
+        }
+
         byte[] ToBinary(int number)
         {
             byte[] numberInBinary = new byte[GetArraySize(number)];
@@ -367,8 +404,7 @@ namespace Bytes
             int number = 0;
             int power = 0;
             for(int i = numberInBinary.Length-1; i>=0; i--)
-            {
-                
+            {           
                 if(numberInBinary[i] != 0)
                 {
                     number += (int)Math.Pow(2, power);
