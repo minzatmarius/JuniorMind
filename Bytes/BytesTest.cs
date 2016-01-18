@@ -184,6 +184,11 @@ namespace Bytes
         {
             Assert.AreEqual(4, GetArraySize(10));
         }
+        [TestMethod]
+        public void RightShifting8With3PositionsIs1()
+        {
+            Assert.AreEqual(1, RightHandShift(8, 3));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -294,6 +299,22 @@ namespace Bytes
             }
 
             return newBinaryNumber;
+        }
+
+        int RightHandShift(int number, int positions)
+        {
+            byte[] binaryNumber = ToBinary(number);
+            while (positions > 0)
+            {  
+                for(int i = binaryNumber.Length - 1; i>0; i--)
+                {
+                    binaryNumber[i] = binaryNumber[i - 1];
+                }
+                binaryNumber[0] = 0;
+                positions--;
+            }
+
+            return ToDecimal(binaryNumber);
         }
 
         byte[] ToBinary(int number)
