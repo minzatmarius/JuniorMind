@@ -169,8 +169,9 @@ namespace Bytes
 
         byte[] AND(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            byte[] newBinaryNumber = new byte[binaryNumber1.Length];
-            for(int i = 0; i < binaryNumber1.Length; i++)
+            int length = (binaryNumber1.Length > binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
+            byte[] newBinaryNumber = new byte[length];
+            for(int i = 0; i < length; i++)
             {
                 newBinaryNumber[i] = ANDBit(binaryNumber1[i], binaryNumber2[i]);
             }
@@ -179,7 +180,8 @@ namespace Bytes
 
         byte[] OR(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            byte[] newBinaryNumber = new byte[binaryNumber1.Length];
+            int length = (binaryNumber1.Length > binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
+            byte[] newBinaryNumber = new byte[length];
             for (int i = 0; i < binaryNumber1.Length; i++)
             {
                 newBinaryNumber[i] = ORBit(binaryNumber1[i], binaryNumber2[i]);
@@ -189,7 +191,8 @@ namespace Bytes
 
         byte[] XOR(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            byte[] newBinaryNumber = new byte[binaryNumber1.Length];
+            int length = (binaryNumber1.Length > binaryNumber2.Length) ? binaryNumber1.Length : binaryNumber2.Length;
+            byte[] newBinaryNumber = new byte[length];
             for (int i = 0; i < binaryNumber1.Length; i++)
             {
                 newBinaryNumber[i] = XORBit(binaryNumber1[i], binaryNumber2[i]);
@@ -199,7 +202,7 @@ namespace Bytes
 
         byte[] ToBinary(int number)
         {
-            byte[] numberInBinary = new byte[8];
+            byte[] numberInBinary = null; 
             int position = numberInBinary.Length - 1;
             while (number != 0)
             {
