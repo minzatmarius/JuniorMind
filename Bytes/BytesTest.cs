@@ -99,8 +99,8 @@ namespace Bytes
         [TestMethod]
         public void OneANDThreeShouldBe1()
         {
-            byte[] expected = { 0, 1 };
-            CollectionAssert.AreEqual(expected, AND(ToBinary(1), ToBinary(3)));
+            //byte[] expected = { 0, 1 };
+            CollectionAssert.AreEqual(ToBinary(1), ToBinary(ToDecimal(AND(ToBinary(1), ToBinary(3)))));
         }
 
 
@@ -128,8 +128,8 @@ namespace Bytes
         [TestMethod]
         public void OneORThreeShouldBe3()
         {
-            byte[] expected = { 1, 1 };
-            CollectionAssert.AreEqual(expected, OR(ToBinary(1), ToBinary(3)));
+          //  byte[] expected = { 1, 1 };
+            CollectionAssert.AreEqual(ToBinary(3), ToBinary(ToDecimal(OR(ToBinary(1), ToBinary(3)))));
         }
 
         [TestMethod]
@@ -155,14 +155,14 @@ namespace Bytes
         [TestMethod]
         public void OneXORZeroShouldBe1()
         {
-            byte[] expected = { 1 };
-            CollectionAssert.AreEqual(expected, XOR(ToBinary(1), ToBinary(0)));
+          //  byte[] expected = { 1 };
+            CollectionAssert.AreEqual(ToBinary(1), ToBinary(ToDecimal(XOR(ToBinary(1), ToBinary(0)))));
         }
         [TestMethod]
         public void OneXORThreeShouldBe2()
         {
-            byte[] expected = { 1, 0 };
-            CollectionAssert.AreEqual(expected, XOR(ToBinary(1), ToBinary(3)));
+           // byte[] expected = { 1, 0 };
+            CollectionAssert.AreEqual(ToBinary(2), ToBinary(ToDecimal(XOR(ToBinary(1), ToBinary(3)))));
         }
         [TestMethod]
         public void ArraySizeOf1Is1()
