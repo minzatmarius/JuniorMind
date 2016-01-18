@@ -7,6 +7,14 @@ namespace Bytes
     public class BytesTest
     {
         [TestMethod]
+        public void ZeroToBinaryShouldBe0()
+        {
+            byte[] binary = ToBinary(0);
+            byte[] expected = { 0 };
+            CollectionAssert.AreEqual(expected, binary);
+
+        }
+        [TestMethod]
         public void OneToBinaryShouldBe1()
         {
             byte[] binary = ToBinary(1);
@@ -38,6 +46,23 @@ namespace Bytes
             CollectionAssert.AreEqual(expected, binary);
 
         }
+        [TestMethod]
+        public void ToDecimal1()
+        {
+            Assert.AreEqual(1, ToDecimal(ToBinary(1)));
+        }
+        [TestMethod]
+        public void ToDecimal2()
+        {
+            Assert.AreEqual(2, ToDecimal(ToBinary(2)));
+        }
+
+        [TestMethod]
+        public void ToDecimal6()
+        {
+            Assert.AreEqual(6, ToDecimal(ToBinary(6)));
+        }
+
         [TestMethod]
         public void NOTBitZero()
         {
@@ -286,5 +311,22 @@ namespace Bytes
            
             return numberInBinary ;
         }
+
+        int ToDecimal(byte[] numberInBinary)
+        {
+            int number = 0;
+            int power = 0;
+            for(int i = numberInBinary.Length-1; i>=0; i--)
+            {
+                
+                if(numberInBinary[i] != 0)
+                {
+                    number += (int)Math.Pow(2, power);
+                }
+                power++;
+            }
+            return number;
+        }
+
     }
 }
