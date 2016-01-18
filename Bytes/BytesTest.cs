@@ -10,7 +10,7 @@ namespace Bytes
         public void OneToBinaryShouldBe1()
         {
             byte[] binary = ToBinary(1);
-            byte[] expected = { 0, 0, 0, 0, 0, 0, 0, 1 };
+            byte[] expected = { 1 };
             CollectionAssert.AreEqual(expected, binary);
 
         }
@@ -26,7 +26,7 @@ namespace Bytes
         public void TenToBinaryShouldBe1010()
         {
             byte[] binary = ToBinary(10);
-            byte[] expected = { 0, 0, 0, 0, 1, 0, 1, 0 };
+            byte[] expected = { 1, 0, 1, 0 };
             CollectionAssert.AreEqual(expected, binary);
 
         }
@@ -148,7 +148,12 @@ namespace Bytes
         [TestMethod]
         public void ArraySizeOf8Is4()
         {
-            Assert.AreEqual(3, GetArraySize(7));
+            Assert.AreEqual(4, GetArraySize(8));
+        }
+        [TestMethod]
+        public void ArraySizeOf10Is4()
+        {
+            Assert.AreEqual(4, GetArraySize(10));
         }
 
         byte NOTBit(byte bit) {
@@ -231,7 +236,7 @@ namespace Bytes
             while (number != 0)
             {
 
-                numberInBinary[numberInBinary.Length - 1] = (byte)(number % 2);
+                numberInBinary[position] = (byte)(number % 2);
                 number /= 2;
                 position--;
 
