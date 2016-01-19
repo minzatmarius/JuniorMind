@@ -99,8 +99,14 @@ namespace Bytes
         [TestMethod]
         public void OneANDThreeShouldBe1()
         {
-            //byte[] expected = { 0, 1 };
+            byte[] expected = { 0, 1 };
             CollectionAssert.AreEqual(ToBinary(1), ToBinary(ToDecimal(AND(ToBinary(1), ToBinary(3)))));
+        }
+        [TestMethod]
+        public void OneANDNineShouldBe1()
+        {
+            //byte[] expected = { 1 };
+            CollectionAssert.AreEqual(ToBinary(1), ToBinary(ToDecimal(AND(ToBinary(1), ToBinary(9)))));
         }
 
 
@@ -219,6 +225,24 @@ namespace Bytes
         {
             Assert.IsFalse(LessThan(10, 10));
         }
+        [TestMethod]
+        public void GetAt0ShouldReturn3()
+        {
+            byte[] array = { 1, 2, 3 };
+            Assert.AreEqual(3, GetAt(array, 0));
+        }
+        [TestMethod]
+        public void GetAt10ShouldReturn0()
+        {
+            byte[] array = { 1, 2, 3 };
+            Assert.AreEqual(0, GetAt(array, 10));
+        }
+        [TestMethod]
+        public void GetAt2houldReturn1()
+        {
+            byte[] array = { 1, 2, 3 };
+            Assert.AreEqual(1, GetAt(array, 2));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -269,6 +293,15 @@ namespace Bytes
             return binaryNumber2;
         }
 
+        byte GetAt(byte[] array, int position)
+        {
+            if (position >= array.Length) return 0;
+            return array[array.Length - 1 -position];
+
+        }
+
+
+
         byte[] NOT(byte[] binaryNumber)
         {
             byte[] newBinaryNumber = new byte[binaryNumber.Length];
@@ -281,19 +314,12 @@ namespace Bytes
 
         byte[] AND(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            int length = GreatestOf(binaryNumber1, binaryNumber2).Length;
-            int delta = Math.Abs(binaryNumber1.Length - binaryNumber2.Length);
-            byte[] newBinaryNumber = new byte[length];
-            for(int i = 0; i < delta; i++)
+            byte[] result = new byte[Math.Max(binaryNumber1.Length, binaryNumber2.Length)];
+            for(int i=0; i < result.Length; i++)
             {
-                newBinaryNumber[i] = ANDBit(GreatestOf(binaryNumber1,binaryNumber2)[i], 0);
+                result[result.Length - 1 - i] = ANDBit(GetAt(binaryNumber1, i), GetAt(binaryNumber2, i));
             }
-            for(int i = delta; i < length; i++)
-            {
-                newBinaryNumber[i] = ANDBit(SmallestOf(binaryNumber1, binaryNumber2)[i - delta], GreatestOf(binaryNumber1, binaryNumber2)[i]);
-            }
-
-            return newBinaryNumber;
+            return result;
         }
 
         byte[] OR(byte[] binaryNumber1, byte[] binaryNumber2)
