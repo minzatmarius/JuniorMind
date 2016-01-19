@@ -324,36 +324,22 @@ namespace Bytes
 
         byte[] OR(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            int length = GreatestOf(binaryNumber1, binaryNumber2).Length;
-            int delta = Math.Abs(binaryNumber1.Length - binaryNumber2.Length);
-            byte[] newBinaryNumber = new byte[length];
-            for (int i = 0; i < delta; i++)
+            byte[] result = new byte[Math.Max(binaryNumber1.Length, binaryNumber2.Length)];
+            for (int i = 0; i < result.Length; i++)
             {
-                newBinaryNumber[i] = ORBit(GreatestOf(binaryNumber1, binaryNumber2)[i], 0);
+                result[result.Length - 1 - i] = ORBit(GetAt(binaryNumber1, i), GetAt(binaryNumber2, i));
             }
-            for (int i = delta; i < length; i++)
-            {
-                newBinaryNumber[i] = ORBit(SmallestOf(binaryNumber1, binaryNumber2)[i - delta], GreatestOf(binaryNumber1, binaryNumber2)[i]);
-            }
-
-            return newBinaryNumber;
+            return result;
         }
 
         byte[] XOR(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            int length = GreatestOf(binaryNumber1, binaryNumber2).Length;
-            int delta = Math.Abs(binaryNumber1.Length - binaryNumber2.Length);
-            byte[] newBinaryNumber = new byte[length];
-            for (int i = 0; i < delta; i++)
+            byte[] result = new byte[Math.Max(binaryNumber1.Length, binaryNumber2.Length)];
+            for (int i = 0; i < result.Length; i++)
             {
-                newBinaryNumber[i] = XORBit(GreatestOf(binaryNumber1, binaryNumber2)[i], 0);
+                result[result.Length - 1 - i] = XORBit(GetAt(binaryNumber1, i), GetAt(binaryNumber2, i));
             }
-            for (int i = delta; i < length; i++)
-            {
-                newBinaryNumber[i] = XORBit(SmallestOf(binaryNumber1, binaryNumber2)[i - delta], GreatestOf(binaryNumber1, binaryNumber2)[i]);
-            }
-
-            return newBinaryNumber;
+            return result;
         }
 
         int RightHandShift(int number, int positions)
