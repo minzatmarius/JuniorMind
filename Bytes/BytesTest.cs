@@ -193,22 +193,30 @@ namespace Bytes
         [TestMethod]
         public void RightShifting8With3PositionsIs1()
         {
-            Assert.AreEqual(1, RightHandShift(8, 3));
+            byte[] expected = ToBinary(1);
+            byte[] actual = RightHandShift(ToBinary(8), 3);
+            CollectionAssert.AreEqual(expected,actual);
         }
         [TestMethod]
         public void RightShifting50With2PositionsIs12()
         {
-            Assert.AreEqual(12, RightHandShift(50, 2));
+            byte[] expected = ToBinary(12);
+            byte[] actual = RightHandShift(ToBinary(50), 2);
+            CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void LefttShifting1With3PositionsIs8()
         {
-            Assert.AreEqual(8, LeftHandShift(1, 3));
+            byte[] expected = ToBinary(8);
+            byte[] actual = LeftHandShift(ToBinary(1), 3);
+            CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void LefttShifting5With2PositionsIs20()
         {
-            Assert.AreEqual(20, LeftHandShift(5, 2));
+            byte[] expected = ToBinary(20);
+            byte[] actual = LeftHandShift(ToBinary(5), 2);
+            CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void SixIsLessThanSeven()
@@ -342,9 +350,9 @@ namespace Bytes
             return result;
         }
 
-        int RightHandShift(int number, int positions)
+        byte[] RightHandShift(byte[] binaryNumber, int positions)
         {
-            byte[] binaryNumber = ToBinary(number);
+            
             while (positions > 0)
             {  
                 for(int i = binaryNumber.Length - 1; i>0; i--)
@@ -355,21 +363,19 @@ namespace Bytes
                 positions--;
             }
 
-            return ToDecimal(binaryNumber);
+            return ToBinary(ToDecimal(binaryNumber));
         }
 
-        int LeftHandShift(int number, int positions)
+        byte[] LeftHandShift(byte[] binaryNumber, int positions)
         {
-                 byte[] binaryNumber = ToBinary(number);
                  while (positions > 0)
                  {
-
                     Array.Resize<byte>(ref binaryNumber, binaryNumber.Length + 1);
                     binaryNumber[binaryNumber.Length - 1] = 0;
 
                     positions--;
                  }
-            return ToDecimal(binaryNumber);
+            return (binaryNumber);
         }
 
         bool LessThan(int number1, int number2)
@@ -394,6 +400,8 @@ namespace Bytes
 
             return false;
         }
+
+
 
         byte[] ToBinary(int number)
         {
