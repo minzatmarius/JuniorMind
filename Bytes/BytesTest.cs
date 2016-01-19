@@ -198,6 +198,14 @@ namespace Bytes
             CollectionAssert.AreEqual(expected,actual);
         }
         [TestMethod]
+        public void RightShifting8With1PositionIs4()
+        {
+            byte[] expected = ToBinary(4);
+            byte[] actual = RightHandShift(ToBinary(8), 1);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void RightShifting50With2PositionsIs12()
         {
             byte[] expected = ToBinary(12);
@@ -211,6 +219,7 @@ namespace Bytes
             byte[] actual = LeftHandShift(ToBinary(1), 3);
             CollectionAssert.AreEqual(expected, actual);
         }
+
         [TestMethod]
         public void LefttShifting5With2PositionsIs20()
         {
@@ -251,6 +260,35 @@ namespace Bytes
             byte[] array = { 1, 2, 3 };
             Assert.AreEqual(1, GetAt(array, 2));
         }
+        [TestMethod]
+        public void OnePlusOneIs2()
+        {
+            byte[] expected = ToBinary(2);
+            byte[] actual = Addition(ToBinary(1), ToBinary(1));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void OnePlusFourIs5()
+        {
+            byte[] expected = ToBinary(5);
+            byte[] actual = Addition(ToBinary(1), ToBinary(4));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void FivePlusFiveIs10()
+        {
+            byte[] expected = ToBinary(10);
+            byte[] actual = Addition(ToBinary(5), ToBinary(5));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void FivePlusTwentyIs20()
+        {
+            byte[] expected = ToBinary(20);
+            byte[] actual = Addition(ToBinary(5), ToBinary(15));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -365,6 +403,21 @@ namespace Bytes
 
             return ToBinary(ToDecimal(binaryNumber));
         }
+        byte[] RightHandShiftKeepZeroes(byte[] binaryNumber, int positions)
+        {
+
+            while (positions > 0)
+            {
+                for (int i = binaryNumber.Length - 1; i > 0; i--)
+                {
+                    binaryNumber[i] = binaryNumber[i - 1];
+                }
+                binaryNumber[0] = 0;
+                positions--;
+            }
+
+            return binaryNumber;
+        }
 
         byte[] LeftHandShift(byte[] binaryNumber, int positions)
         {
@@ -401,7 +454,32 @@ namespace Bytes
             return false;
         }
 
+        byte[] Addition(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            byte[] result = new byte[Math.Max(binaryNumber1.Length, binaryNumber2.Length)];
+            byte carry = 0;
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[result.Length - 1 - i] = (byte)((GetAt(binaryNumber1, i) + GetAt(binaryNumber2, i) + carry) % 2);
 
+                if ((byte)(GetAt(binaryNumber1, i) + GetAt(binaryNumber2, i) + carry)  > 1)
+                {
+                    carry = 1;
+                }
+                else
+                {
+                    carry = 0;
+                }
+            }
+            if (carry == 1)
+            {
+                Array.Resize<byte>(ref result, result.Length + 1);
+                result = RightHandShiftKeepZeroes(result, 1);
+                result[0] = 1;
+            }
+
+            return result;
+        }
 
         byte[] ToBinary(int number)
         {
