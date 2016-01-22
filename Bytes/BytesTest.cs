@@ -289,7 +289,6 @@ namespace Bytes
             CollectionAssert.AreEqual(expected, actual);
         }
 
-
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
         }
@@ -421,13 +420,8 @@ namespace Bytes
 
         byte[] LeftHandShift(byte[] binaryNumber, int positions)
         {
-                 while (positions > 0)
-                 {
-                    Array.Resize<byte>(ref binaryNumber, binaryNumber.Length + 1);
-                    binaryNumber[binaryNumber.Length - 1] = 0;
-
-                    positions--;
-                 }
+            Array.Resize<byte>(ref binaryNumber, binaryNumber.Length + positions);
+  
             return (binaryNumber);
         }
 
