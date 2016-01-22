@@ -454,9 +454,10 @@ namespace Bytes
             byte carry = 0;
             for (int i = 0; i < result.Length; i++)
             {
-                result[result.Length - 1 - i] = (byte)((GetAt(binaryNumber1, i) + GetAt(binaryNumber2, i) + carry) % 2);
+                byte bitSum = (byte)(GetAt(binaryNumber1, i) + GetAt(binaryNumber2, i) + carry);
+                result[result.Length - 1 - i] = (byte)(bitSum % 2);
 
-                if ((byte)(GetAt(binaryNumber1, i) + GetAt(binaryNumber2, i) + carry)  > 1)
+                if ( bitSum > 1)
                 {
                     carry = 1;
                 }
