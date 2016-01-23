@@ -514,11 +514,6 @@ namespace Bytes
         byte[] TwoSComplement(byte[] binaryNumber)
         {
             byte[] result = NOT(binaryNumber);     
-           /* for(int i = 0; i < result.Length; i++)
-            {
-                result[i] = NOTBit(binaryNumber[i]);
-            }
-            */
             result = Addition(result, ToBinary(1));
     
             return result;
@@ -535,7 +530,7 @@ namespace Bytes
             }
              Array.Resize<byte>(ref result, result.Length - 1);
             
-            return result;
+            return ToBinary(ToDecimal(result));
         }
 
         byte[] ToBinary(int number)
