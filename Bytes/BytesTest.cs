@@ -288,7 +288,46 @@ namespace Bytes
             byte[] actual = Addition(ToBinary(5), ToBinary(15));
             CollectionAssert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void TwoMinusOne()
+        {
+            byte[] expected = ToBinary(1);
+            byte[] actual = Subtraction(ToBinary(2), ToBinary(1));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void FourMinusThree()
+        {
+            byte[] expected = ToBinary(1);
+            byte[] actual = Subtraction(ToBinary(4), ToBinary(3));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void FourtyFourMinusThirtyOne()
+        {
+            byte[] expected = ToBinary(13);
+            byte[] actual = Subtraction(ToBinary(44), ToBinary(31));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TWoSComplementFor1()
+        {
+            byte[] expected = ToBinary(1);
+            byte[] actual = TwoSComplement(ToBinary(1));
+        }
+        [TestMethod]
+        public void TWoSComplementFor3()
+        {
+            byte[] expected = ToBinary(1);
+            byte[] actual = TwoSComplement(ToBinary(1));
+        }
 
+        [TestMethod]
+        public void TWoSComplementFor13()
+        {
+            byte[] expected = { 0, 0, 1, 1 };
+            byte[] actual = TwoSComplement(ToBinary(13));
+        }
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
         }
@@ -467,6 +506,35 @@ namespace Bytes
                 result[0] = 1;
             }
 
+            return result;
+        }
+
+
+
+        byte[] TwoSComplement(byte[] binaryNumber)
+        {
+            byte[] result = NOT(binaryNumber);     
+           /* for(int i = 0; i < result.Length; i++)
+            {
+                result[i] = NOTBit(binaryNumber[i]);
+            }
+            */
+            result = Addition(result, ToBinary(1));
+    
+            return result;
+        }
+
+
+        byte[] Subtraction(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            byte[] result = Addition(binaryNumber1, TwoSComplement(binaryNumber2));
+            
+             for(int i = 0; i < result.Length -1; i++)
+            {
+                result[i] = result[i + 1];
+            }
+             Array.Resize<byte>(ref result, result.Length - 1);
+            
             return result;
         }
 
