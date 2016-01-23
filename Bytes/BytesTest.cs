@@ -328,6 +328,28 @@ namespace Bytes
             byte[] expected = { 0, 0, 1, 1 };
             byte[] actual = TwoSComplement(ToBinary(13));
         }
+        [TestMethod]
+        public void OneTimesOne()
+        {
+            byte[] expected = ToBinary(1);
+            byte[] actual = Multiplication(ToBinary(1), ToBinary(1));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TwoTimesTwo()
+        {
+            byte[] expected = ToBinary(4);
+            byte[] actual = Multiplication(ToBinary(2), ToBinary(2));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void ThreeTimesFive()
+        {
+            byte[] expected = ToBinary(15);
+            byte[] actual = Multiplication(ToBinary(3), ToBinary(5));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
         }
@@ -531,6 +553,17 @@ namespace Bytes
              Array.Resize<byte>(ref result, result.Length - 1);
             
             return ToBinary(ToDecimal(result));
+        }
+
+        byte[] Multiplication(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            byte[] result = new byte[binaryNumber1.Length];
+
+            for (uint i = 0; i< ToDecimal(binaryNumber2); i++)
+            {
+                result = Addition(result, binaryNumber1);
+            }
+            return result;
         }
 
         byte[] ToBinary(int number)
