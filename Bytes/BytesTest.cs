@@ -349,6 +349,27 @@ namespace Bytes
             byte[] actual = Multiplication(ToBinary(3), ToBinary(5));
             CollectionAssert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void OneDividedByOne()
+        {
+            byte[] expected = ToBinary(1);
+            byte[] actual = Division(ToBinary(1), ToBinary(1));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void FourDividedByTwo()
+        {
+            byte[] expected = ToBinary(2);
+            byte[] actual = Division(ToBinary(4), ToBinary(2));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void FifteenDividedByThree()
+        {
+            byte[] expected = ToBinary(5);
+            byte[] actual = Division(ToBinary(15), ToBinary(3));
+            CollectionAssert.AreEqual(expected, actual);
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -564,6 +585,18 @@ namespace Bytes
                 result = Addition(result, binaryNumber1);
             }
             return result;
+        }
+
+        byte[] Division(byte[] binaryNumber1, byte[] binaryNumber2)
+        {         
+            int result = 0;
+            for (int i = 0; i<ToDecimal(binaryNumber1); i += ToDecimal(binaryNumber2))
+            {
+                result++;
+            }
+
+           
+            return ToBinary(result);
         }
 
         byte[] ToBinary(int number)
