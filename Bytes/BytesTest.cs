@@ -385,7 +385,16 @@ namespace Bytes
         {
             Assert.IsTrue(NotEqual(ToBinary(10), ToBinary(11)));
         }
-
+        [TestMethod]
+        public void TenIsGreaterThanOne()
+        {
+            Assert.IsTrue(GreaterThan(ToBinary(10), ToBinary(1)));
+        }
+        [TestMethod]
+        public void SevenIsGreaterThanSix()
+        {
+            Assert.IsTrue(GreaterThan(ToBinary(7), ToBinary(6)));
+        }
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
         }
@@ -546,7 +555,7 @@ namespace Bytes
         {
             for(int i = 0; i < binaryNumber1.Length; i++)
             {
-                if (binaryNumber1[i] != binaryNumber2[i])
+                if (GetAt(binaryNumber1, i) != GetAt(binaryNumber2, i)) 
                     return false;
             }
             return true;
@@ -554,6 +563,12 @@ namespace Bytes
         bool NotEqual(byte[] binaryNumber1, byte[] binaryNumber2)
         {
             return !(Equal(binaryNumber1, binaryNumber2));
+        }
+        bool GreaterThan(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            if (((NotEqual(binaryNumber1, binaryNumber2) == true) && (LessThan(binaryNumber1, binaryNumber2) == false)))
+                return true;
+            return false;
         }
 
         byte[] Addition(byte[] binaryNumber1, byte[] binaryNumber2)
