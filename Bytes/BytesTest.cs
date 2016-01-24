@@ -230,17 +230,17 @@ namespace Bytes
         [TestMethod]
         public void SixIsLessThanSeven()
         {
-            Assert.IsTrue(LessThan(6, 7));
+            Assert.IsTrue(LessThan(ToBinary(6), ToBinary(7)));
         }
         [TestMethod]
         public void SixIsNotLessThanOne()
         {
-            Assert.IsFalse(LessThan(6, 1));
+            Assert.IsFalse(LessThan(ToBinary(6), ToBinary(1)));
         }
         [TestMethod]
         public void TenIsNotLessThanTen()
         {
-            Assert.IsFalse(LessThan(10, 10));
+            Assert.IsFalse(LessThan(ToBinary(10), ToBinary(10)));
         }
         [TestMethod]
         public void GetAt0ShouldReturn3()
@@ -369,6 +369,16 @@ namespace Bytes
             byte[] expected = ToBinary(5);
             byte[] actual = Division(ToBinary(15), ToBinary(3));
             CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void OneEqualsOne()
+        {
+            Assert.IsTrue(Equal(ToBinary(1), ToBinary(1)));
+        }
+        [TestMethod]
+        public void TenEqualsTen()
+        {
+            Assert.IsTrue(Equal(ToBinary(10), ToBinary(10)));
         }
 
         byte NOTBit(byte bit) {
@@ -507,10 +517,8 @@ namespace Bytes
             return (binaryNumber);
         }
 
-        bool LessThan(int number1, int number2)
+        bool LessThan(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            byte[] binaryNumber1 = ToBinary(number1);
-            byte[] binaryNumber2 = ToBinary(number2);
             if(binaryNumber1.Length < binaryNumber2.Length)
             {
                 return true;
@@ -526,8 +534,17 @@ namespace Bytes
                 }
             }
 
-
             return false;
+        }
+
+        bool Equal(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            for(int i = 0; i < binaryNumber1.Length; i++)
+            {
+                if (binaryNumber1[i] != binaryNumber2[i])
+                    return false;
+            }
+            return true;
         }
 
         byte[] Addition(byte[] binaryNumber1, byte[] binaryNumber2)
