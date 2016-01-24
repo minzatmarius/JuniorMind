@@ -380,6 +380,11 @@ namespace Bytes
         {
             Assert.IsTrue(Equal(ToBinary(10), ToBinary(10)));
         }
+        [TestMethod]
+        public void TenIsNotEleven()
+        {
+            Assert.IsTrue(NotEqual(ToBinary(10), ToBinary(11)));
+        }
 
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
@@ -545,6 +550,10 @@ namespace Bytes
                     return false;
             }
             return true;
+        }
+        bool NotEqual(byte[] binaryNumber1, byte[] binaryNumber2)
+        {
+            return !(Equal(binaryNumber1, binaryNumber2));
         }
 
         byte[] Addition(byte[] binaryNumber1, byte[] binaryNumber2)
