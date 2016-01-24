@@ -395,6 +395,21 @@ namespace Bytes
         {
             Assert.IsTrue(GreaterThan(ToBinary(7), ToBinary(6)));
         }
+        [TestMethod]
+        public void TenInBaseEightIs12()
+        {
+            byte[] expected = { 1, 2 };
+            byte[] actual = Convert(10, 8);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TenInBaseTwoIs1010()
+        {
+            byte[] expected = { 1, 0, 1, 0 };
+            byte[] actual = Convert(10, 2);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
         }
@@ -671,5 +686,20 @@ namespace Bytes
             return number;
         }
 
+        byte[] Convert(int number, int newBase)
+        {
+            byte[] newNumber = new byte[0];
+            int position = 0;
+            while (number != 0)
+            {
+                Array.Resize<byte>(ref newNumber, newNumber.Length + 1);
+                newNumber[position] = (byte)(number % newBase);
+                number /= newBase;
+                position++;
+                
+            }
+            Array.Reverse(newNumber);
+            return newNumber;
+        }
     }
 }
