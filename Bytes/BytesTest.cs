@@ -581,7 +581,7 @@ namespace Bytes
         }
         bool GreaterThan(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            if (((NotEqual(binaryNumber1, binaryNumber2) == true) && (LessThan(binaryNumber1, binaryNumber2) == false)))
+            if (((NotEqual(binaryNumber1, binaryNumber2) ) && !(LessThan(binaryNumber1, binaryNumber2))))
                 return true;
             return false;
         }
