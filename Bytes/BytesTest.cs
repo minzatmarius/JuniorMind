@@ -635,10 +635,12 @@ namespace Bytes
         byte[] Multiplication(byte[] binaryNumber1, byte[] binaryNumber2)
         {
             byte[] result = new byte[binaryNumber1.Length];
+            byte[] index = { 0 };
 
-            for (uint i = 0; i< ToDecimal(binaryNumber2); i++)
+            while (LessThan(index, binaryNumber1))
             {
-                result = Addition(result, binaryNumber1);
+                result = Addition(result, binaryNumber2);
+                index = Addition(index, ToBinary(1));
             }
             return result;
         }
@@ -646,9 +648,11 @@ namespace Bytes
         byte[] Division(byte[] binaryNumber1, byte[] binaryNumber2)
         {         
             int result = 0;
-            for (int i = 0; i<ToDecimal(binaryNumber1); i += ToDecimal(binaryNumber2))
+            byte[] index = { 0 };
+            while(LessThan(index,binaryNumber1))
             {
                 result++;
+                index = Addition(index, binaryNumber2);
             }
 
            
