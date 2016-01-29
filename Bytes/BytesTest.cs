@@ -264,28 +264,28 @@ namespace Bytes
         public void OnePlusOneIs2()
         {
             byte[] expected = ToBinary(2);
-            byte[] actual = Addition(ToBinary(1), ToBinary(1));
+            byte[] actual = Addition(ToBinary(1), ToBinary(1), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void OnePlusFourIs5()
         {
             byte[] expected = ToBinary(5);
-            byte[] actual = Addition(ToBinary(1), ToBinary(4));
+            byte[] actual = Addition(ToBinary(1), ToBinary(4), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void FivePlusFiveIs10()
         {
             byte[] expected = ToBinary(10);
-            byte[] actual = Addition(ToBinary(5), ToBinary(5));
+            byte[] actual = Addition(ToBinary(5), ToBinary(5), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void FivePlusTwentyIs20()
         {
             byte[] expected = ToBinary(20);
-            byte[] actual = Addition(ToBinary(5), ToBinary(15));
+            byte[] actual = Addition(ToBinary(5), ToBinary(15), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
@@ -371,6 +371,13 @@ namespace Bytes
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
+        public void SixteenDividedByThree()
+        {
+            byte[] expected = ToBinary(5);
+            byte[] actual = Division(ToBinary(16), ToBinary(3));
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
         public void OneEqualsOne()
         {
             Assert.IsTrue(Equal(ToBinary(1), ToBinary(1)));
@@ -407,6 +414,20 @@ namespace Bytes
         {
             byte[] expected = { 1, 0, 1, 0 };
             byte[] actual = Convert(10, 2);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TwentyInBaseTwentyIs10()
+        {
+            byte[] expected = { 1, 0 };
+            byte[] actual = Convert(20, 20);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void ThirtyInHexadecimalIs114()
+        {
+            byte[] expected = { 1, 14 };
+            byte[] actual = Convert(30, 16);
             CollectionAssert.AreEqual(expected, actual);
         }
 
@@ -586,23 +607,23 @@ namespace Bytes
             return false;
         }
 
-        byte[] Addition(byte[] binaryNumber1, byte[] binaryNumber2)
+        byte[] Addition(byte[] firstNumber, byte[] secondNumber, byte Base)
         {
-            byte[] result = new byte[Math.Max(binaryNumber1.Length, binaryNumber2.Length)];
+            byte[] result = new byte[Math.Max(firstNumber.Length, secondNumber.Length)];
             byte carry = 0;
             for (int i = 0; i < result.Length; i++)
             {
-                byte bitSum = (byte)(GetAt(binaryNumber1, i) + GetAt(binaryNumber2, i) + carry);
-                result[result.Length - 1 - i] = (byte)(bitSum % 2);
+                byte bitSum = (byte)(GetAt(firstNumber, i) + GetAt(secondNumber, i) + carry);
+                result[result.Length - 1 - i] = (byte)(bitSum % Base);
 
-                carry = (byte)((bitSum > 1) ? 1 : 0);
+                carry = (byte)((bitSum > Base - 1) ? (1) : 0);
               
             }
-            if (carry == 1)
+            if (carry != 0)
             {
                 Array.Resize<byte>(ref result, result.Length + 1);
                 result = RightHandShiftKeepZeroes(result, 1);
-                result[0] = 1;
+                result[0] = carry;
             }
 
             return result;
@@ -613,7 +634,7 @@ namespace Bytes
         byte[] TwoSComplement(byte[] binaryNumber)
         {
             byte[] result = NOT(binaryNumber);     
-            result = Addition(result, ToBinary(1));
+            result = Addition(result, ToBinary(1), 2);
     
             return result;
         }
@@ -621,15 +642,23 @@ namespace Bytes
 
         byte[] Subtraction(byte[] binaryNumber1, byte[] binaryNumber2)
         {
-            byte[] result = Addition(binaryNumber1, TwoSComplement(binaryNumber2));
-            
-             for(int i = 0; i < result.Length -1; i++)
-            {
-                result[i] = result[i + 1];
-            }
-             Array.Resize<byte>(ref result, result.Length - 1);
-            
-            return ToBinary(ToDecimal(result));
+             if (Equal(binaryNumber2, ToBinary(1)))
+              {
+
+              }
+
+              byte[] result = Addition(binaryNumber1, TwoSComplement(binaryNumber2), 2);
+
+               for(int i = 0; i < result.Length -1; i++)
+              {
+                  result[i] = result[i + 1];
+              }
+               Array.Resize<byte>(ref result, result.Length - 1);
+
+              return ToBinary(ToDecimal(result));
+              
+
+      
         }
 
         byte[] Multiplication(byte[] binaryNumber1, byte[] binaryNumber2)
@@ -639,24 +668,26 @@ namespace Bytes
 
             while (LessThan(index, binaryNumber1))
             {
-                result = Addition(result, binaryNumber2);
-                index = Addition(index, ToBinary(1));
+                result = Addition(result, binaryNumber2, 2);
+                index = Addition(index, ToBinary(1), 2);
             }
             return result;
         }
 
         byte[] Division(byte[] binaryNumber1, byte[] binaryNumber2)
         {         
-            int result = 0;
-            byte[] index = { 0 };
+            byte[] result = { 0 };
+            byte[] index = binaryNumber2; ;
             while(LessThan(index,binaryNumber1))
             {
-                result++;
-                index = Addition(index, binaryNumber2);
+               // result++;
+                result = Addition(result, ToBinary(1), 2);
+                index = Addition(index, binaryNumber2, 2);
+                
             }
 
-           
-            return ToBinary(result);
+
+            return result = (LessThan(binaryNumber1, index)) ? result : Addition(result, ToBinary(1), 2);
         }
 
         byte[] ToBinary(int number)
