@@ -332,49 +332,71 @@ namespace Bytes
         public void OneTimesOne()
         {
             byte[] expected = ToBinary(1);
-            byte[] actual = Multiplication(ToBinary(1), ToBinary(1));
+            byte[] actual = Multiplication(ToBinary(1), ToBinary(1), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void TwoTimesTwo()
         {
             byte[] expected = ToBinary(4);
-            byte[] actual = Multiplication(ToBinary(2), ToBinary(2));
+            byte[] actual = Multiplication(ToBinary(2), ToBinary(2), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void ThreeTimesFive()
         {
             byte[] expected = ToBinary(15);
-            byte[] actual = Multiplication(ToBinary(3), ToBinary(5));
+            byte[] actual = Multiplication(ToBinary(3), ToBinary(5), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void ThreeTimesFiveBaseFive()
+        {
+            byte[] expected = Convert(15, 5);
+            byte[] actual = Multiplication(Convert(3, 5), Convert(5, 5), 5);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void ThreeTimesTenBaseSixteen()
+        {
+            byte[] expected = Convert(30, 16);
+            byte[] actual = Multiplication(Convert(3, 16), Convert(10, 16), 16);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void ThirtyDividedByTenBaseSixteen()
+        {
+            byte[] expected = Convert(3, 16);
+            byte[] actual = Division(Convert(30, 16), Convert(10, 16), 16);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
         [TestMethod]
         public void OneDividedByOne()
         {
             byte[] expected = ToBinary(1);
-            byte[] actual = Division(ToBinary(1), ToBinary(1));
+            byte[] actual = Division(ToBinary(1), ToBinary(1), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void FourDividedByTwo()
         {
             byte[] expected = ToBinary(2);
-            byte[] actual = Division(ToBinary(4), ToBinary(2));
+            byte[] actual = Division(ToBinary(4), ToBinary(2), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void FifteenDividedByThree()
         {
             byte[] expected = ToBinary(5);
-            byte[] actual = Division(ToBinary(15), ToBinary(3));
+            byte[] actual = Division(ToBinary(15), ToBinary(3), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void SixteenDividedByThree()
         {
             byte[] expected = ToBinary(5);
-            byte[] actual = Division(ToBinary(16), ToBinary(3));
+            byte[] actual = Division(ToBinary(16), ToBinary(3), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
@@ -661,33 +683,33 @@ namespace Bytes
       
         }
 
-        byte[] Multiplication(byte[] binaryNumber1, byte[] binaryNumber2)
+        byte[] Multiplication(byte[] firstNumber, byte[] secondNumber, byte Base)
         {
-            byte[] result = new byte[binaryNumber1.Length];
+            byte[] result = new byte[firstNumber.Length];
             byte[] index = { 0 };
 
-            while (LessThan(index, binaryNumber1))
+            while (LessThan(index, firstNumber))
             {
-                result = Addition(result, binaryNumber2, 2);
-                index = Addition(index, ToBinary(1), 2);
+                result = Addition(result, secondNumber, Base);
+                index = Addition(index, Convert(1 ,Base), Base);
             }
             return result;
         }
 
-        byte[] Division(byte[] binaryNumber1, byte[] binaryNumber2)
+        byte[] Division(byte[] firstNumber, byte[] secondNumber, byte Base)
         {         
             byte[] result = { 0 };
-            byte[] index = binaryNumber2; ;
-            while(LessThan(index,binaryNumber1))
+            byte[] index = secondNumber; ;
+            while(LessThan(index,firstNumber))
             {
                // result++;
-                result = Addition(result, ToBinary(1), 2);
-                index = Addition(index, binaryNumber2, 2);
+                result = Addition(result, ToBinary(1), Base);
+                index = Addition(index, secondNumber, Base);
                 
             }
 
 
-            return result = (LessThan(binaryNumber1, index)) ? result : Addition(result, ToBinary(1), 2);
+            return result = (LessThan(firstNumber, index)) ? result : Addition(result, Convert(1, Base), Base);
         }
 
         byte[] ToBinary(int number)
