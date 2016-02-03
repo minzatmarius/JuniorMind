@@ -292,21 +292,21 @@ namespace Bytes
         public void TwoMinusOne()
         {
             byte[] expected = ToBinary(1);
-            byte[] actual = Subtraction(ToBinary(2), ToBinary(1));
+            byte[] actual = Subtraction(ToBinary(2), ToBinary(1), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void FourMinusThree()
         {
             byte[] expected = ToBinary(1);
-            byte[] actual = Subtraction(ToBinary(4), ToBinary(3));
+            byte[] actual = Subtraction(ToBinary(4), ToBinary(3), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void FourtyFourMinusThirtyOne()
         {
             byte[] expected = ToBinary(13);
-            byte[] actual = Subtraction(ToBinary(44), ToBinary(31));
+            byte[] actual = Subtraction(ToBinary(44), ToBinary(31), 2);
             CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
@@ -453,6 +453,7 @@ namespace Bytes
             CollectionAssert.AreEqual(expected, actual);
         }
 
+
         byte NOTBit(byte bit) {
             return (byte)((bit == 1) ? 0 : 1);
         }
@@ -530,6 +531,7 @@ namespace Bytes
             }
             return result;
         }
+
 
         byte[] OR(byte[] binaryNumber1, byte[] binaryNumber2)
         {
@@ -662,25 +664,20 @@ namespace Bytes
         }
 
 
-        byte[] Subtraction(byte[] binaryNumber1, byte[] binaryNumber2)
+        byte[] Subtraction(byte[] binaryNumber1, byte[] binaryNumber2, byte Base)
         {
-             if (Equal(binaryNumber2, ToBinary(1)))
-              {
 
-              }
+            byte[] result = new byte[binaryNumber1.Length];
+            byte bitDifference = 0;
+            byte reminder = 0;
+            for(int i = 0; i< binaryNumber1.Length - 1; i++)
+            {
+                bitDifference = (byte)(Base + (GetAt(binaryNumber1, i) - GetAt(binaryNumber2, i) - reminder));
+                result[result.Length - 1 - i] = (byte)(bitDifference % Base);
+                reminder = (byte)((bitDifference < 2) ? 1 : 0); 
+            }
 
-              byte[] result = Addition(binaryNumber1, TwoSComplement(binaryNumber2), 2);
-
-               for(int i = 0; i < result.Length -1; i++)
-              {
-                  result[i] = result[i + 1];
-              }
-               Array.Resize<byte>(ref result, result.Length - 1);
-
-              return ToBinary(ToDecimal(result));
-              
-
-      
+            return ToBinary(ToDecimal(result));
         }
 
         byte[] Multiplication(byte[] firstNumber, byte[] secondNumber, byte Base)
