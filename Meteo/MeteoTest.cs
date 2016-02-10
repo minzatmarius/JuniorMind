@@ -13,8 +13,15 @@ namespace Meteo
             Assert.AreEqual(days[1], GetWarmestDay(days));
 
         }
+        [TestMethod]
+        public void ColdestDay()
+        {
+            Data[] days = new Data[] { new Data(0, 8, 10), new Data(1, 7, 11), new Data(2, 9, 9) };
+            Assert.AreEqual(days[1], GetColdestDay(days));
 
-     
+        }
+
+       
 
         struct Data
         {
@@ -34,7 +41,7 @@ namespace Meteo
         {
             Data maximum = days[0];
             var position = 0;
-            for( int i = 0; i < days.Length; i++)
+            for( int i = 1; i < days.Length; i++)
             {
                 if(maximum.maximum < days[i].maximum)
                 {
@@ -43,6 +50,22 @@ namespace Meteo
                 }
             }
             return days[position];
+        }
+
+        Data GetColdestDay(Data[] days)
+        {
+            Data minimum = days[0];
+            var position = 0;
+            for (int i = 1; i < days.Length; i++)
+            {
+                if (minimum.minimum > days[i].minimum)
+                {
+                    minimum = days[i];
+                    position = i;
+                }
+            }
+            return days[position];
+
         }
     }
 }
