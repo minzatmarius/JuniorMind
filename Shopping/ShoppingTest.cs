@@ -31,7 +31,7 @@ namespace Shopping
         public void SwapAppleWithMilk()
         {
             Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) };
-            Swap(ref items, 0, 1);
+            Swap(ref items[0], ref items[1]);
             CollectionAssert.AreEqual( new Item[] { new Item("Milk", 4), new Item("Apple", 2), new Item("Bread", 3), new Item("Candy", 1) }, items);
         }
 
@@ -91,11 +91,11 @@ namespace Shopping
             return minimum;
         }
         
-        void Swap(ref Item[] array, int first, int second)
+        void Swap(ref Item first, ref Item second)
         {
-            Item aux = array[first];
-            array[first] = array[second];
-            array[second] = aux;
+            Item aux = first;
+            first = second;
+            second = aux;
             
         }
 
@@ -112,7 +112,7 @@ namespace Shopping
                 }
 
             }
-            Swap(ref items, position, items.Length - 1);
+            Swap(ref items[position], ref items[items.Length - 1]);
             Array.Resize<Item>(ref items, items.Length - 1);
             return items;
         }
