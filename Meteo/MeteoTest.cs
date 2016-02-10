@@ -33,6 +33,12 @@ namespace Meteo
             Assert.AreEqual(4 , CalculateMaximumDifference(days));
 
         }
+        [TestMethod]
+        public void AddAnotherDay()
+        {
+            Data[] days = new Data[] { new Data(0, 8, 10), new Data(1, 7, 11), new Data(2, 9, 9) };
+            CollectionAssert.AreEqual(new Data[] { new Data(0, 8, 10), new Data(1, 7, 11), new Data(2, 9, 9), new Data(3, 11, 13) }, AddDay(days, new Data(3, 11, 13)));
+        }
 
 
 
@@ -91,6 +97,7 @@ namespace Meteo
 
             return total / days.Length;
         }
+
         int CalculateMaximumDifference(Data[] days)
         {
             int difference = days[0].maximum - days[0].minimum;
@@ -103,6 +110,12 @@ namespace Meteo
             }
 
             return maximumDifference;
+        }
+        Data[] AddDay(Data[] days, Data newDay)
+        {
+            Array.Resize<Data>(ref days, days.Length + 1);
+            days[days.Length - 1] = newDay;
+            return days;
         }
     }
 }
