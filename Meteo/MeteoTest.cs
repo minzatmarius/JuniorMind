@@ -20,8 +20,14 @@ namespace Meteo
             Assert.AreEqual(days[1], GetColdestDay(days));
 
         }
+        [TestMethod]
+        public void AverageTemperature()
+        {
+            Data[] days = new Data[] { new Data(0, 8, 10), new Data(1, 7, 11), new Data(2, 9, 9) };
+            Assert.AreEqual(10, CalculateAverageTemperature(days));
+        }
 
-       
+
 
         struct Data
         {
@@ -66,6 +72,17 @@ namespace Meteo
             }
             return days[position];
 
+        }
+
+        double CalculateAverageTemperature(Data[] days)
+        {
+            double total = 0;
+            for(int i = 0; i < days.Length; i++)
+            {
+                total += days[i].maximum;
+            }
+
+            return total / days.Length;
         }
     }
 }
