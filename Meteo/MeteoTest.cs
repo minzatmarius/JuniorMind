@@ -26,6 +26,13 @@ namespace Meteo
             Data[] days = new Data[] { new Data(0, 8, 10), new Data(1, 7, 11), new Data(2, 9, 9) };
             Assert.AreEqual(10, CalculateAverageTemperature(days));
         }
+        [TestMethod]
+        public void MaximumDifference()
+        {
+            Data[] days = new Data[] { new Data(0, 8, 10), new Data(1, 7, 11), new Data(2, 9, 9) };
+            Assert.AreEqual(4 , CalculateMaximumDifference(days));
+
+        }
 
 
 
@@ -83,6 +90,19 @@ namespace Meteo
             }
 
             return total / days.Length;
+        }
+        int CalculateMaximumDifference(Data[] days)
+        {
+            int difference = days[0].maximum - days[0].minimum;
+            int maximumDifference = difference;
+
+            for (int i = 1; i < days.Length; i++)
+            {
+                difference = days[i].maximum - days[i].minimum;
+                maximumDifference = (days[i].maximum - days[i].minimum > maximumDifference) ? difference : maximumDifference;        
+            }
+
+            return maximumDifference;
         }
     }
 }
