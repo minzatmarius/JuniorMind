@@ -12,18 +12,21 @@ namespace Shopping
             Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3) };
             Assert.AreEqual(9, CalculateTotalPrice(items));
         }
+
         [TestMethod]
         public void CheapestProductShouldBeApple()
         {
             Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3) };
             Assert.AreEqual(items[0], FindTheCheapest(items));
         }
+
         [TestMethod]
         public void CheapestProductShouldBeCandy()
         {
             Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) };
             Assert.AreEqual(items[3], FindTheCheapest(items));
         }
+
         [TestMethod]
         public void SwapAppleWithMilk()
         {
@@ -31,6 +34,7 @@ namespace Shopping
             Swap(ref items, 0, 1);
             CollectionAssert.AreEqual( new Item[] { new Item("Milk", 4), new Item("Apple", 2), new Item("Bread", 3), new Item("Candy", 1) }, items);
         }
+
         [TestMethod]
         public void EliminateMilk()
         {
@@ -38,12 +42,21 @@ namespace Shopping
             CollectionAssert.AreEqual(new Item[] { new Item("Apple", 2), new Item("Candy", 1), new Item("Bread", 3)}, EliminateExpensive(items));
            
         }
+
         [TestMethod]
         public void AddEggs()
         {
             Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) };
             CollectionAssert.AreEqual(new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) , new Item("Eggs", 5) }, AddItem(items, new Item("Eggs", 5)));
         }
+
+        [TestMethod]
+        public void AveragePrice()
+        {
+            Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) };
+            Assert.AreEqual(10m / 4, CalculateAveragePrice(items));
+        }
+
         struct Item
         {
             public string name;
@@ -109,6 +122,11 @@ namespace Shopping
             Array.Resize<Item>(ref items, items.Length + 1);
             items[items.Length - 1] = newItem;
             return items; 
+        }
+
+        decimal CalculateAveragePrice(Item[] items)
+        {
+            return CalculateTotalPrice(items) / items.Length;
         }
     }
 }
