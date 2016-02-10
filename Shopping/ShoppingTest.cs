@@ -12,6 +12,18 @@ namespace Shopping
             Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3) };
             Assert.AreEqual(9, CalculateTotalPrice(items));
         }
+        [TestMethod]
+        public void CheapestProductShouldBeApple()
+        {
+            Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3) };
+            Assert.AreEqual(items[0], FindTheCheapest(items));
+        }
+        [TestMethod]
+        public void CheapestProductShouldBeCandy()
+        {
+            Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) };
+            Assert.AreEqual(items[3], FindTheCheapest(items));
+        }
 
         struct Item
         {
@@ -34,6 +46,16 @@ namespace Shopping
                 total += items[i].price;
             }
             return total;
+        }
+
+        Item FindTheCheapest(Item [] items)
+        {
+            Item minim = items[0];
+            for(int i = 1; i< items.Length; i++)
+            {
+                minim = (minim.price > items[i].price) ? items[i] : minim;
+            }
+            return minim;
         }
 
 
