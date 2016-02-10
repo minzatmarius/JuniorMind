@@ -38,6 +38,12 @@ namespace Shopping
             CollectionAssert.AreEqual(new Item[] { new Item("Apple", 2), new Item("Candy", 1), new Item("Bread", 3)}, EliminateExpensive(items));
            
         }
+        [TestMethod]
+        public void AddEggs()
+        {
+            Item[] items = new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) };
+            CollectionAssert.AreEqual(new Item[] { new Item("Apple", 2), new Item("Milk", 4), new Item("Bread", 3), new Item("Candy", 1) , new Item("Eggs", 5) }, AddItem(items, new Item("Eggs", 5)));
+        }
         struct Item
         {
             public string name;
@@ -91,13 +97,18 @@ namespace Shopping
                     maximum = items[i];
                     position = i;
                 }
-                //position = (maximum.price < items[i].price) ? i : position;
-              
+
             }
             Swap(ref items, position, items.Length - 1);
             Array.Resize<Item>(ref items, items.Length - 1);
             return items;
         }
 
+        Item[] AddItem(Item[] items, Item newItem)
+        {
+            Array.Resize<Item>(ref items, items.Length + 1);
+            items[items.Length - 1] = newItem;
+            return items; 
+        }
     }
 }
