@@ -59,31 +59,27 @@ namespace Meteo
         Data GetWarmestDay(Data[] days)
         {
             Data maximum = days[0];
-            var position = 0;
             for( int i = 1; i < days.Length; i++)
             {
                 if(maximum.maximum < days[i].maximum)
                 {
                     maximum = days[i];
-                    position = i;
                 }
             }
-            return days[position];
+            return maximum;
         }
 
         Data GetColdestDay(Data[] days)
         {
             Data minimum = days[0];
-            var position = 0;
             for (int i = 1; i < days.Length; i++)
             {
                 if (minimum.minimum > days[i].minimum)
                 {
                     minimum = days[i];
-                    position = i;
                 }
             }
-            return days[position];
+            return minimum;
 
         }
 
