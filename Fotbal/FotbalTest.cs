@@ -13,6 +13,12 @@ namespace Fotbal
             Game[] expected = new Game[] { new Game(new Team("TeamA", 2), new Team("TeamB", 1)), new Game(new Team("TeamC", 3), new Team("TeamD", 0)) };
             CollectionAssert.AreEqual(expected, AddGame(games, new Game(new Team("TeamC", 3), new Team("TeamD", 0))));
         }
+        [TestMethod]
+        public void TotalGoals()
+        {
+            Game[] games = new Game[] { new Game(new Team("TeamA", 2), new Team("TeamB", 1)), new Game(new Team("TeamC", 3), new Team("TeamD", 0)) };
+            Assert.AreEqual(6, GetTotalGoals(games));
+        }
 
         struct Game
         {
@@ -43,5 +49,14 @@ namespace Fotbal
             return games; 
         }
 
+        int GetTotalGoals(Game[] games)
+        {
+            int total = 0;
+            for (int i=0; i < games.Length; i++)
+            {
+                total += games[i].teamA.goals + games[i].teamB.goals;
+            }
+            return total;
+        }
     }
 }
