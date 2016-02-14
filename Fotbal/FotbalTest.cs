@@ -33,6 +33,12 @@ namespace Fotbal
             Game[] games = new Game[] { new Game(new Team("TeamA", 2), new Team("TeamB", 1)), new Game(new Team("TeamC", 3), new Team("TeamD", 0)) };
             Assert.AreEqual(1.5, GetAverageGoals(games));
         }
+        [TestMethod]
+        public void RemoveGame()
+        {
+            Game[] games = new Game[] { new Game(new Team("TeamA", 2), new Team("TeamB", 1)), new Game(new Team("TeamC", 3), new Team("TeamD", 0)) };
+            CollectionAssert.AreEqual(new Game[] { new Game(new Team("TeamA", 2), new Team("TeamB", 1)) }, RemoveGame(games));
+        }
 
         struct Game
         {
@@ -104,6 +110,31 @@ namespace Fotbal
                 total += games[i].teamA.goals + games[i].teamB.goals;
             }
             return total / (games.Length * 2);
+        }
+
+        void Swap(ref Game first, ref Game second)
+        {
+            Game aux = first;
+            first = second;
+            second = aux;
+        }
+
+        Game[] RemoveGame(Game[] games)
+        {
+            int maximum = 0;
+            int position = 0;
+            for(int i=0; i<games.Length; i++)
+            {
+                int currentDifference = Math.Abs(games[i].teamA.goals - games[i].teamB.goals);
+                if (currentDifference > maximum)
+                {
+                    maximum = currentDifference;
+                    position = i;
+                }             
+            }
+            Swap(ref games[position], ref games[games.Length - 1]);
+            Array.Resize<Game>(ref games, games.Length - 1);
+            return games;
         }
     }
 }
