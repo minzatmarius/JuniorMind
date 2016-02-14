@@ -27,6 +27,12 @@ namespace Fotbal
             Game[] games = new Game[] { new Game(new Team("TeamA", 2), new Team("TeamB", 1)), new Game(new Team("TeamC", 3), new Team("TeamD", 0)) };
             Assert.AreEqual(games[1].teamB, GetTeam(games));
         }
+        [TestMethod]
+        public void AverageGoals()
+        {
+            Game[] games = new Game[] { new Game(new Team("TeamA", 2), new Team("TeamB", 1)), new Game(new Team("TeamC", 3), new Team("TeamD", 0)) };
+            Assert.AreEqual(1.5, GetAverageGoals(games));
+        }
 
         struct Game
         {
@@ -87,6 +93,17 @@ namespace Fotbal
                 }               
             }
             return minimumTeam;
+        }
+
+        double GetAverageGoals(Game[] games)
+        {
+            double total = 0;
+
+            for(int i=0; i< games.Length; i++)
+            {
+                total += games[i].teamA.goals + games[i].teamB.goals;
+            }
+            return total / (games.Length * 2);
         }
     }
 }
