@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Password
 {
@@ -47,19 +48,9 @@ namespace Password
 
         string Shuffle(string input)
         {
-            string output = "";
-            int currentRandomPosition = 0;
+            
             Random position = new Random();
-            while (input.Length > output.Length) {
-                for (int i = 0; i < input.Length; i++)
-                {
-                    currentRandomPosition = input[position.Next(0, input.Length)];
-                    output += input[currentRandomPosition];
-                
-    
-                }
-            }
-          
+            string output = new string(input.OrderBy(r => position.Next()).ToArray());
             return output;
         }
         string GeneratePassword(Password password)
