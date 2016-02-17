@@ -55,10 +55,7 @@ namespace Password
                 this.symbols = symbols;
             } 
         }
-        int CountExcluded(string password)
-        {
-            char[]
-        }
+
 
         int CountLowercase(string password)
         {
