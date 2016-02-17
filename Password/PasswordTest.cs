@@ -17,7 +17,10 @@ namespace Password
         public void CheckPassword()
         {
             Password password = new Password(8, 2, 2, 2, 2);
-            Assert.AreEqual(password.lowercase, countLowercase(GeneratePassword(password)));
+            Assert.AreEqual(password.lowercase, CountLowercase(GeneratePassword(password)));
+            Assert.AreEqual(password.uppercase, CountUppercase(GeneratePassword(password)));
+            Assert.AreEqual(password.digits, CountDigits(GeneratePassword(password)));
+            Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password)));
 
         }
         [TestMethod]
@@ -52,8 +55,12 @@ namespace Password
                 this.symbols = symbols;
             } 
         }
+        int CountExcluded(string password)
+        {
+            char[]
+        }
 
-        int countLowercase(string password)
+        int CountLowercase(string password)
         {
             int count = 0;
             for(int i=0; i < password.Length; i++)
@@ -62,6 +69,37 @@ namespace Password
             }
             return count;
         }
+
+        int CountUppercase(string password)
+        {
+            int count = 0;
+            for (int i = 0; i < password.Length; i++)
+            {
+                count += ((int)password[i] >= 65 && (int)password[i] < 91) ? 1 : 0;
+            }
+            return count;
+        }
+
+        int CountDigits(string password)
+        {
+            int count = 0;
+            for (int i = 0; i < password.Length; i++)
+            {
+                count += ((int)password[i] >= 50 && (int)password[i] < 58) ? 1 : 0;
+            }
+            return count;
+        }
+
+        int CountSymbols(string password)
+        {
+            int count = 0;
+            for (int i = 0; i < password.Length; i++)
+            {
+                count += ((int)password[i] >= 33 && (int)password[i] < 48) ? 1 : 0;
+            }
+            return count;
+        }
+
 
         string Shuffle(string input)
         {
