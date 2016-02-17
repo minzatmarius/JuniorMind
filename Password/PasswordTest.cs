@@ -14,12 +14,20 @@ namespace Password
             Assert.AreEqual(6, GeneratePassword(password).Length);
         }
         [TestMethod]
+        public void CheckPassword()
+        {
+            Password password = new Password(8, 2, 2, 2, 2);
+            Assert.AreEqual(password.lowercase, countLowercase(GeneratePassword(password)));
+
+        }
+        [TestMethod]
         public void GeneratePassword()
         {
             Password password = new Password(8, 2, 2, 2, 2);
             // Assert.AreEqual(9, GeneratePassword(password).Length);
             Assert.AreEqual("abcdefgh", GeneratePassword(password));
         }
+
         [TestMethod]
         public void ShuffleTest()
         {
@@ -45,6 +53,15 @@ namespace Password
             } 
         }
 
+        int countLowercase(string password)
+        {
+            int count = 0;
+            for(int i=0; i < password.Length; i++)
+            {
+                count += ((int)password[i] >= 96 && (int)password[i] < 123) ? 1 : 0;
+            }
+            return count;
+        }
 
         string Shuffle(string input)
         {
@@ -68,7 +85,9 @@ namespace Password
 
             while (password.uppercase > 0)
             {
-                result += (char)random.Next(65, 91);
+                char nextCharacter = (char)random.Next(65, 91);
+                if (nextCharacter == 'I' || nextCharacter == 'O') continue;
+                result += nextCharacter;
                 password.uppercase--;
             }
             
