@@ -55,46 +55,34 @@ namespace Password
                 this.symbols = symbols;
             } 
         }
-
+        int CountType(string password, int first, int last)
+        {
+            int count = 0;
+            for (int i = 0; i < password.Length; i++)
+            {
+                count += ((int)password[i] >= first && (int)password[i] < last) ? 1 : 0;
+            }
+            return count;
+        }
 
         int CountLowercase(string password)
         {
-            int count = 0;
-            for(int i=0; i < password.Length; i++)
-            {
-                count += ((int)password[i] >= 96 && (int)password[i] < 123) ? 1 : 0;
-            }
-            return count;
+            return CountType(password, 96, 123);
         }
 
         int CountUppercase(string password)
         {
-            int count = 0;
-            for (int i = 0; i < password.Length; i++)
-            {
-                count += ((int)password[i] >= 65 && (int)password[i] < 91) ? 1 : 0;
-            }
-            return count;
+            return CountType(password, 65, 91);
         }
 
         int CountDigits(string password)
         {
-            int count = 0;
-            for (int i = 0; i < password.Length; i++)
-            {
-                count += ((int)password[i] >= 50 && (int)password[i] < 58) ? 1 : 0;
-            }
-            return count;
+            return CountType(password, 50, 58);
         }
 
         int CountSymbols(string password)
         {
-            int count = 0;
-            for (int i = 0; i < password.Length; i++)
-            {
-                count += ((int)password[i] >= 33 && (int)password[i] < 48) ? 1 : 0;
-            }
-            return count;
+            return CountType(password, 33, 48);
         }
 
 
@@ -105,38 +93,26 @@ namespace Password
             string output = new string(input.OrderBy(r => position.Next()).ToArray());
             return output;
         }
-        string GeneratePassword(Password password)
+        string GenerateType(int length, int first, int last)
         {
             string result = "";
             Random random = new Random();
-
-            while (password.lowercase > 0)
+            for (int i = 0; i < length; i++)
             {
-                char nextCharacter = (char)random.Next(96, 123);
-                if (nextCharacter == 'l' || nextCharacter == 'o') continue;
+                char nextCharacter = (char)random.Next(first, last);
                 result += nextCharacter;
-                password.lowercase--;
             }
+            return result;
+        }
 
-            while (password.uppercase > 0)
-            {
-                char nextCharacter = (char)random.Next(65, 91);
-                if (nextCharacter == 'I' || nextCharacter == 'O') continue;
-                result += nextCharacter;
-                password.uppercase--;
-            }
-            
-            while (password.digits > 0)
-            {
-                result += (char)random.Next(50, 58);
-                password.digits--;
-            }
+        string GeneratePassword(Password password)
+        {
+            string result = "";
 
-            while(password.symbols > 0)
-            {
-                result += (char)random.Next(33, 48);
-                password.symbols--;
-            }
+            result += GenerateType(password.lowercase, 96, 123);
+            result += GenerateType(password.uppercase, 65, 91);
+            result += GenerateType(password.digits, 50, 58);
+            result += GenerateType(password.symbols, 33, 48);
 
             return result;
         }
