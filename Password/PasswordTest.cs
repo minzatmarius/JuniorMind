@@ -23,6 +23,13 @@ namespace Password
             Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, true)));
 
         }
+
+        [TestMethod]
+        public void PsswordShouldNotContainExcludedCharacters()
+        {
+            Password password = new Password(8, 2, 2, 2, 2);
+            Assert.IsTrue(IsOk(GeneratePassword(password, true)));
+        }
         [TestMethod]
         public void ExcludedCharacters()
         {
@@ -66,6 +73,17 @@ namespace Password
                 this.symbols = symbols;
             } 
         }
+
+        //Check every character if it should be excluded
+        bool IsOk(string password)
+        {
+            for(int i = 0; i < password.Length; i++)
+            {
+                if (IsExcluded(password[i])) return false; 
+            }
+            return true;
+        }
+
         int CountType(string password, int first, int last)
         {
             int count = 0;
