@@ -27,7 +27,6 @@ namespace Password
         public void GeneratePassword()
         {
             Password password = new Password(8, 2, 2, 2, 2);
-            // Assert.AreEqual(9, GeneratePassword(password).Length);
             Assert.AreEqual("abcdefgh", GeneratePassword(password));
         }
 
@@ -85,13 +84,26 @@ namespace Password
             return CountType(password, 33, 48);
         }
 
+        void Swap(ref char first, ref char second)
+        {
+            char aux = first;
+            first = second;
+            second = aux;
+        }
 
         string Shuffle(string input)
-        {
+        {           
+            Random random = new Random();
             
-            Random position = new Random();
-            string output = new string(input.OrderBy(r => position.Next()).ToArray());
-            return output;
+            char[] output = input.ToCharArray(0, input.Length);
+            for (int i = 0; i < input.Length; i++)
+            {
+                int firstPosition = random.Next(0, input.Length);
+                int secondPosition = random.Next(0, input.Length);
+                Swap(ref output[firstPosition], ref output[secondPosition]);
+                //string output = new string(input.OrderBy(r => position.Next()).ToArray());
+            }
+            return new string(output);
         }
         string GenerateType(int length, int first, int last)
         {
