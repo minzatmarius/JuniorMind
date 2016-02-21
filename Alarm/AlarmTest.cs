@@ -9,17 +9,27 @@ namespace Alarm
         [TestMethod]
         public void AlarmRingsMondayAt7()
         {
-            Alarm[] alarms = new Alarm[] { new Alarm(Day.Monday, 7, 0, true) };
-            CollectionAssert.AreEqual(new bool[] { true }, IsOn(alarms));
+            Alarm[] alarms =  { new Alarm(Day.Monday, 7, 0, true) };
+            Assert.IsTrue(IsOn(alarms,Day.Monday, 7, 0));
         }
+
         [TestMethod]
         public void MultipleAlarms()
         {
-            Alarm[] alarms = new Alarm[] { new Alarm(Day.Monday, 7, 0, true), new Alarm(Day.Tuesday, 7, 0, true), new Alarm(Day.Wednesday, 7, 0, true), new Alarm(Day.Thursday, 7, 0, true), new Alarm(Day.Friday, 7, 0, true), new Alarm(Day.Saturday, 9, 30, true), new Alarm(Day.Monday, 7, 0, false) };
-            CollectionAssert.AreEqual(new bool[] { true, true, true, true, true, true, false },IsOn(alarms)); 
+            Alarm[] alarms = { new Alarm(Day.Monday | Day.Thursday | Day.Wednesday, 7, 0, true) };
+            Assert.IsTrue(IsOn(alarms,Day.Monday, 7, 0)); 
         }
 
-        enum Day { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday }
+        [Flags]
+        enum Day {
+                Sunday = 1,
+                Monday = 2,
+                Tuesday = 4,    
+                Wednesday = 8,
+                Thursday = 16,
+                Friday = 32,
+                Saturday = 64
+        }
 
         struct Alarm
         {
@@ -37,14 +47,15 @@ namespace Alarm
             }
         }
 
-        bool[] IsOn(Alarm[] alarms)
+        bool IsOn(Alarm[] alarms, Day day, int hour, int minute)
         {
-            bool[] states = new bool[alarms.Length];
+            bool state = false;
             for(int i = 0; i < alarms.Length; i++)
             {
-                states[i] = alarms[i].state;
+                state = (day & alarms[i].day) != 0 && hour == alarms[i].hour && alarms[i].minute == minute && alarms[i].state;
+                if (state) break;
             }
-            return states;
+            return state;
         }
     }
 }
