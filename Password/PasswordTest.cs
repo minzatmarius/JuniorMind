@@ -21,7 +21,7 @@ namespace Password
             Assert.AreEqual(password.uppercase, CountUppercase(GeneratePassword(password, true)));
             Assert.AreEqual(password.digits, CountDigits(GeneratePassword(password, true)));
             Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, true)));
-
+            Assert.IsTrue(IsOk(GeneratePassword(password, true)));
         }
 
         [TestMethod]
@@ -179,7 +179,7 @@ namespace Password
             result += GenerateType(password.digits, 50, 58, exclude);
             result += GenerateType(password.symbols, 33, 48, exclude);
 
-            return result;
+            return Shuffle(result);
         }
     }
 }
