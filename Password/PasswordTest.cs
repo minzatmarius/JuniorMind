@@ -148,24 +148,28 @@ namespace Password
             return false;
         }
 
-        string GenerateType(int length, int first, int last, bool exclude)
+        char GenerateRandomCharacter(int first, int last, Random random )
+        {
+            //Random random = new Random();
+
+            char randomCharacter = (char)random.Next(first, last);
+            while (IsExcluded(randomCharacter))
+            {
+                randomCharacter = (char)random.Next(first, last);
+            }
+            return randomCharacter;
+        }
+
+        string GenerateType(int length, int first, int last, bool shouldExclude)
         {
             string result = "";
             Random random = new Random();
             for (int i = 0; i < length; i++)
             {
-                //Generate character
-                char nextCharacter = (char)random.Next(first, last);
-                //Check if it should be ignored
-                if (exclude)
-                {
-                    if (IsExcluded(nextCharacter))
-                    {
-                        length++;
-                        continue;
-                    }
-                    result += nextCharacter;
-                }
+
+                char nextCharacter = GenerateRandomCharacter(first, last, random);
+                result += nextCharacter;
+                
             }
             return result;
         }
