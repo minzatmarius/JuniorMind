@@ -23,7 +23,34 @@ namespace Password
             Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, true)));
             Assert.IsTrue(IsOk(GeneratePassword(password, true)));
         }
+        [TestMethod]
+        public void LowercaseShouldBe2()
+        {
+            Password password = new Password(8, 2, 2, 2, 2);
+            Assert.AreEqual(password.lowercase, CountLowercase(GeneratePassword(password, true)));
+        }
 
+        [TestMethod]
+        public void UppercaseShouldBe2()
+        {
+            Password password = new Password(8, 2, 2, 2, 2);
+            Assert.AreEqual(password.uppercase, CountUppercase(GeneratePassword(password, true)));
+        }
+
+        [TestMethod]
+        public void DigitsShouldBe2()
+        {
+            Password password = new Password(8, 2, 2, 2, 2);
+            Assert.AreEqual(password.digits, CountDigits(GeneratePassword(password, true)));
+        }
+
+        [TestMethod]
+        public void SymbolsShouldBe2()
+        {
+            Password password = new Password(8, 2, 2, 2, 2);
+            Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, true)));
+
+        }
         [TestMethod]
         public void PsswordShouldNotContainExcludedCharacters()
         {
@@ -111,7 +138,10 @@ namespace Password
 
         int CountSymbols(string password)
         {
-            return CountType(password, 33, 48);
+            return CountType(password, 33, 48) + CountType(password, 58, 65)
+                 + CountType(password, 91, 97) + CountType(password, 123, 127);
+                
+                
         }
 
         void Swap(ref char first, ref char second)
@@ -135,7 +165,7 @@ namespace Password
             return new string(output);
         }
 
-        bool IsExcluded(char c, string excluded = "oOlI{}[]()/\\'\"/~/,/;.<> ")
+        bool IsExcluded(char c, string excluded = "oO01lI{}[]()/\\'\"/~/,/;.<> ")
         {
             for (int i = 0; i < excluded.Length; i++)
             {
@@ -150,8 +180,6 @@ namespace Password
 
         char GenerateRandomCharacter(int first, int last, Random random )
         {
-            //Random random = new Random();
-
             char randomCharacter = (char)random.Next(first, last);
             while (IsExcluded(randomCharacter))
             {
@@ -160,28 +188,42 @@ namespace Password
             return randomCharacter;
         }
 
+        string GenerateSymbols(int symbols, bool shouldExclude)
+        {
+            string result = string.Empty;
+            result += GenerateType(symbols, 33, 48, shouldExclude)
+                   + GenerateType(symbols, 58, 65, shouldExclude)
+                   + GenerateType(symbols, 91, 97, shouldExclude)
+                   + GenerateType(symbols, 123, 127, shouldExclude);
+            result = Shuffle(result);
+
+            return result.Substring(0, symbols);
+            
+            
+        }
+
         string GenerateType(int length, int first, int last, bool shouldExclude)
         {
             string result = "";
             Random random = new Random();
             for (int i = 0; i < length; i++)
             {
-
                 char nextCharacter = GenerateRandomCharacter(first, last, random);
-                result += nextCharacter;
-                
+                result += nextCharacter;                
             }
             return result;
         }
 
-        string GeneratePassword(Password password, bool exclude)
+
+        string GeneratePassword(Password password, bool shouldExclude)
         {
             string result = "";
 
-            result += GenerateType(password.lowercase, 96, 123, exclude);
-            result += GenerateType(password.uppercase, 65, 91, exclude);
-            result += GenerateType(password.digits, 50, 58, exclude);
-            result += GenerateType(password.symbols, 33, 48, exclude);
+            result += GenerateType(password.lowercase, 'a', 'z' + 1, shouldExclude);
+            result += GenerateType(password.uppercase, 'A', 'Z' + 1, shouldExclude);
+            result += GenerateType(password.digits, '0', '9' + 1, shouldExclude);
+            //result += GenerateType(password.symbols, 33, 48, exclude);
+            result += GenerateSymbols(password.symbols, shouldExclude);
 
             return Shuffle(result);
         }
