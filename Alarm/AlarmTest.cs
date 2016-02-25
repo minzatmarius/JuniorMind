@@ -65,13 +65,21 @@ namespace Alarm
             }
         }
 
+        bool GetState(Alarm alarm, Day day, int hour, int minute)
+        {
+            bool state = (day & alarm.day) != 0 
+                         && hour == alarm.hour 
+                         && alarm.minute == minute 
+                         && alarm.state;
+            return state;
+        }
 
         bool IsOn(Alarm[] alarms, Day day, int hour, int minute)
         {
             bool state = false;
             for(int i = 0; i < alarms.Length; i++)
             {
-                state = (day & alarms[i].day) != 0 && hour == alarms[i].hour && alarms[i].minute == minute && alarms[i].state;
+                state = GetState(alarms[i], day, hour, minute);
                 if (state) break;
             }
             return state;
