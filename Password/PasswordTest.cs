@@ -10,52 +10,52 @@ namespace Password
         [TestMethod]
         public void Generate6Lowercase()
         {
-            Password password = new Password(6, 6, 0, 0, 0);
-            Assert.AreEqual(6, GeneratePassword(password,true).Length);
+            Password password = new Password(6, 6, 0, 0, 0, true);
+            Assert.AreEqual(6, GeneratePassword(password, password.shouldExclude).Length);
         }
         [TestMethod]
         public void CheckPassword()
         {
-            Password password = new Password(8, 2, 2, 2, 2);
-            Assert.AreEqual(password.lowercase, CountLowercase(GeneratePassword(password, true)));
-            Assert.AreEqual(password.uppercase, CountUppercase(GeneratePassword(password, true)));
-            Assert.AreEqual(password.digits, CountDigits(GeneratePassword(password, true)));
-            Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, true)));
-            Assert.IsTrue(IsOk(GeneratePassword(password, true)));
+            Password password = new Password(8, 2, 2, 2, 2, true);
+            Assert.AreEqual(password.lowercase, CountLowercase(GeneratePassword(password, password.shouldExclude)));
+            Assert.AreEqual(password.uppercase, CountUppercase(GeneratePassword(password, password.shouldExclude)));
+            Assert.AreEqual(password.digits, CountDigits(GeneratePassword(password, password.shouldExclude)));
+            Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, password.shouldExclude)));
+            Assert.IsTrue(IsOk(GeneratePassword(password, password.shouldExclude)));
         }
         [TestMethod]
         public void LowercaseShouldBe2()
         {
-            Password password = new Password(8, 2, 2, 2, 2);
-            Assert.AreEqual(password.lowercase, CountLowercase(GeneratePassword(password, true)));
+            Password password = new Password(8, 2, 2, 2, 2, true);
+            Assert.AreEqual(password.lowercase, CountLowercase(GeneratePassword(password, password.shouldExclude)));
         }
 
         [TestMethod]
         public void UppercaseShouldBe2()
         {
-            Password password = new Password(8, 2, 2, 2, 2);
-            Assert.AreEqual(password.uppercase, CountUppercase(GeneratePassword(password, true)));
+            Password password = new Password(8, 2, 2, 2, 2, true);
+            Assert.AreEqual(password.uppercase, CountUppercase(GeneratePassword(password, password.shouldExclude)));
         }
 
         [TestMethod]
         public void DigitsShouldBe2()
         {
-            Password password = new Password(8, 2, 2, 2, 2);
-            Assert.AreEqual(password.digits, CountDigits(GeneratePassword(password, true)));
+            Password password = new Password(8, 2, 2, 2, 2, true);
+            Assert.AreEqual(password.digits, CountDigits(GeneratePassword(password, password.shouldExclude)));
         }
 
         [TestMethod]
         public void SymbolsShouldBe2()
         {
-            Password password = new Password(8, 2, 2, 2, 2);
-            Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, true)));
+            Password password = new Password(8, 2, 2, 2, 2, true);
+            Assert.AreEqual(password.symbols, CountSymbols(GeneratePassword(password, password.shouldExclude)));
 
         }
         [TestMethod]
         public void PsswordShouldNotContainExcludedCharacters()
         {
-            Password password = new Password(8, 2, 2, 2, 2);
-            Assert.IsTrue(IsOk(GeneratePassword(password, true)));
+            Password password = new Password(8, 2, 2, 2, 2, true);
+            Assert.IsTrue(IsOk(GeneratePassword(password, password.shouldExclude)));
         }
         [TestMethod]
         public void ExcludedCharacters()
@@ -72,8 +72,8 @@ namespace Password
         [TestMethod]
         public void GeneratePassword()
         {
-            Password password = new Password(8, 2, 2, 2, 2);
-            Assert.AreEqual("abcdefgh", GeneratePassword(password, true));
+            Password password = new Password(8, 2, 2, 2, 2, true);
+            Assert.AreEqual("abcdefgh", GeneratePassword(password, password.shouldExclude));
         }
 
         [TestMethod]
@@ -90,14 +90,16 @@ namespace Password
             public int uppercase;
             public int digits;
             public int symbols;
+            public bool shouldExclude;
 
-            public Password(int length, int lowercase, int uppercase, int digits, int symbols)
+            public Password(int length, int lowercase, int uppercase, int digits, int symbols, bool shouldExclude)
             {
                 this.length = length;
                 this.lowercase = lowercase;
                 this.uppercase = uppercase;
                 this.digits = digits;
                 this.symbols = symbols;
+                this.shouldExclude = shouldExclude;
             } 
         }
 
@@ -219,11 +221,11 @@ namespace Password
         {
             string result = "";
 
-            result += GenerateType(password.lowercase, 'a', 'z' + 1, shouldExclude);
-            result += GenerateType(password.uppercase, 'A', 'Z' + 1, shouldExclude);
-            result += GenerateType(password.digits, '0', '9' + 1, shouldExclude);
+            result += GenerateType(password.lowercase, 'a', 'z' + 1, password.shouldExclude);
+            result += GenerateType(password.uppercase, 'A', 'Z' + 1, password.shouldExclude);
+            result += GenerateType(password.digits, '0', '9' + 1, password.shouldExclude);
             //result += GenerateType(password.symbols, 33, 48, exclude);
-            result += GenerateSymbols(password.symbols, shouldExclude);
+            result += GenerateSymbols(password.symbols, password.shouldExclude);
 
             return Shuffle(result);
         }
