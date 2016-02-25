@@ -48,7 +48,14 @@ namespace Cyclemeter
 
         }
 
+        [TestMethod]
+        public void AverageSpeed()
+        {
+            Cyclist cyclist = new Cyclist("First", 1, new Records[] { new Records(1, 1), new Records(2, 2) });
+            Assert.AreEqual(4.71, GetAverageSpeed(cyclist));
+        }
 
+       
         struct Records
         {
             public int rotations;
@@ -115,6 +122,10 @@ namespace Cyclemeter
             return name;
         }
 
+        double GetAverageSpeed(Cyclist cyclist)
+        {
+           return GetDistance(cyclist) / cyclist.records.Length;
+        }
 
         double GetTotalDistance(Cyclist[] cyclists)
         {
