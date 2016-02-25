@@ -9,10 +9,19 @@ namespace Cyclemeter
         [TestMethod]
         public void TotalDistanceForOneCyclist()
         {
+            // A cyclist that makes 1 rotation in second 1 and 2 rotations in second 2
             Cyclist cyclist = new Cyclist(1, new Records[]  {new Records(1, 1), new Records(2, 2) });
             Assert.AreEqual(9.42, GetDistance(cyclist));
         }
 
+        [TestMethod]
+        public void TotalDistanceForTwoCyclists()
+        {
+            Cyclist[] cyclists = { new Cyclist(1, new Records[] { new Records(1, 1), new Records(2, 2) }),
+                                 new Cyclist(1, new Records[] {new Records(1, 1), new Records(2, 2) })};
+
+            Assert.AreEqual(18.84, GetTotalDistance(cyclists));
+        }
        
 
         struct Records
@@ -38,6 +47,16 @@ namespace Cyclemeter
             }
         }
 
+        double GetTotalDistance(Cyclist[] cyclists)
+        {
+            double totalDistance = 0;
+            for(int i = 0; i < cyclists.Length; i++)
+            {
+                totalDistance += GetDistance(cyclists[i]);
+            }
+
+            return totalDistance;
+        }
 
         double GetDistance(Cyclist cyclist)
         {
