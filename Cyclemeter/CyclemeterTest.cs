@@ -30,12 +30,22 @@ namespace Cyclemeter
 
             Assert.AreEqual(6.28, GetSpeed(cyclist));
         }
+
         [TestMethod]
         public void MaximumSpeedOfTwoCyclists()
         {
             Cyclist[] cyclists = { new Cyclist("First", 1, new Records[] { new Records(1, 1), new Records(3, 2) }),
                                  new Cyclist("Second", 1, new Records[] {new Records(1, 1), new Records(2, 2) })};
             Assert.AreEqual(9.42, GetMaximumSpeed(cyclists));
+        }
+
+        [TestMethod]
+        public void CyclistWithMaximumSpeed()
+        {
+            Cyclist[] cyclists = { new Cyclist("First", 1, new Records[] { new Records(1, 1), new Records(3, 2) }),
+                                 new Cyclist("Second", 1, new Records[] {new Records(1, 1), new Records(2, 2) })};
+            Assert.AreEqual("First", GetName(cyclists));
+
         }
 
 
@@ -53,7 +63,7 @@ namespace Cyclemeter
 
         struct Cyclist
         {
-            string name;
+            public string name;
             public int diameter;
             public Records[] records;
             public Cyclist(string name, int diameter, Records[] records)
@@ -94,6 +104,16 @@ namespace Cyclemeter
             return MaximumSpeed;
         }
         
+        String GetName(Cyclist[] cyclists)
+        {
+            string name = string.Empty;
+            double maximumSpeed = GetMaximumSpeed(cyclists);
+            for(int i = 0; i < cyclists.Length; i++)
+            {
+                name += (maximumSpeed == GetSpeed(cyclists[i])) ? cyclists[i].name : "";
+            }
+            return name;
+        }
 
 
         double GetTotalDistance(Cyclist[] cyclists)
