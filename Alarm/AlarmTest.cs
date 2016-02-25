@@ -20,6 +20,24 @@ namespace Alarm
             Assert.IsTrue(IsOn(alarms,Day.Monday, 7, 0)); 
         }
 
+        [TestMethod] 
+        public void AlarmShouldTriggerSaturdayToo()
+        {
+            Alarm[] alarms = { new Alarm(Day.Monday | Day.Thursday | Day.Wednesday, 7, 0, true), new Alarm(Day.Saturday, 9, 0, true) };
+            Assert.IsTrue(IsOn(alarms, Day.Monday, 7, 0));
+            Assert.IsFalse(IsOn(alarms, Day.Saturday, 7, 0));
+            Assert.IsTrue(IsOn(alarms, Day.Saturday, 9, 0));
+        }
+
+        [TestMethod]
+        public void AlarmShouldNotTrigger()
+        {
+            Alarm[] alarms = { new Alarm(Day.Monday, 7, 0, true) };
+            Assert.IsFalse(IsOn(alarms, Day.Monday, 8, 0));
+        }
+
+
+
         [Flags]
         enum Day {
                 Sunday = 1,
@@ -46,6 +64,7 @@ namespace Alarm
                 this.state = state;
             }
         }
+
 
         bool IsOn(Alarm[] alarms, Day day, int hour, int minute)
         {
