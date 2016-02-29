@@ -69,19 +69,7 @@ namespace Password
             Assert.IsFalse(IsExcluded('X'));
         }
 
-        [TestMethod]
-        public void GeneratePassword()
-        {
-            Password password = new Password(8, 2, 2, 2, 2, true);
-            Assert.AreEqual("abcdefgh", GeneratePassword(password, password.shouldExclude));
-        }
 
-        [TestMethod]
-        public void ShuffleTest()
-        {
-            string input = "aaBB22@#";
-            Assert.AreEqual(input, Shuffle(input));
-        }
 
         struct Password
         {
@@ -125,17 +113,17 @@ namespace Password
 
         int CountLowercase(string password)
         {
-            return CountType(password, 96, 123);
+            return CountType(password, 'a', 'z' + 1);
         }
 
         int CountUppercase(string password)
         {
-            return CountType(password, 65, 91);
+            return CountType(password, 'A', 'Z' + 1);
         }
 
         int CountDigits(string password)
         {
-            return CountType(password, 50, 58);
+            return CountType(password, '0', '9');
         }
 
         int CountSymbols(string password)
