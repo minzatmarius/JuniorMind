@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reverse", "Reverse\Reverse.csproj", "{61BB8BF6-F1EA-4910-887D-1824EAE3544E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Replace", "Replace\Replace.csproj", "{9AE7DB35-25A9-496D-B715-67F2A0A689A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,10 @@ Global
 		{61BB8BF6-F1EA-4910-887D-1824EAE3544E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61BB8BF6-F1EA-4910-887D-1824EAE3544E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61BB8BF6-F1EA-4910-887D-1824EAE3544E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE7DB35-25A9-496D-B715-67F2A0A689A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE7DB35-25A9-496D-B715-67F2A0A689A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE7DB35-25A9-496D-B715-67F2A0A689A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE7DB35-25A9-496D-B715-67F2A0A689A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
