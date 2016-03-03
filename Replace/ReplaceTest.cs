@@ -12,9 +12,17 @@ namespace Replace
             string originalString = "axe";
             char character = 'x';
 
-            Assert.AreEqual("aICSe", ReplaceCharacter(string original, char c));
+            Assert.AreEqual("aICSe", ReplaceCharacter(originalString, character));
         }
 
-        ReplaceCharacter(string original, char c, string replaceWith = "ICS");
+        string ReplaceCharacter(string original, char character, string replaceWith = "ICS")
+        {
+            if (original.Length < 2) return original;
+            if(original[original.Length - 1] != character)
+            {
+                replaceWith = "";
+            }
+            return replaceWith + ReplaceCharacter(original.Remove(original.Length - 1), character);
+        }
     }
 }
