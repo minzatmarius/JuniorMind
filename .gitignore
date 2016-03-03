@@ -279,3 +279,15 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+BaseTwo/BaseTwo.csproj
+BaseTwo/UnitTest1.cs
+Cube/Properties/AssemblyInfo.cs
+Loto/Loto.csproj
+Intersection/IntersectionsTest.cs
+Cyclemeter/Cyclemeter.csproj
+Intersection/IntersectionsTest.cs
+Cube/Cube.csproj
+Cyclemeter/Cyclemeter.csproj
+Intersection/IntersectionsTest.cs
+Intersection/IntersectionsTest.cs
+Cyclemeter/Cyclemeter.csproj

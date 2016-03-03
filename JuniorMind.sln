@@ -51,6 +51,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyclemeter", "Cyclemeter\Cy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{07516469-4CB7-4969-9EA1-96C52A5AA578}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reverse", "Reverse\Reverse.csproj", "{61BB8BF6-F1EA-4910-887D-1824EAE3544E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,10 @@ Global
 		{07516469-4CB7-4969-9EA1-96C52A5AA578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07516469-4CB7-4969-9EA1-96C52A5AA578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07516469-4CB7-4969-9EA1-96C52A5AA578}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61BB8BF6-F1EA-4910-887D-1824EAE3544E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61BB8BF6-F1EA-4910-887D-1824EAE3544E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61BB8BF6-F1EA-4910-887D-1824EAE3544E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61BB8BF6-F1EA-4910-887D-1824EAE3544E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

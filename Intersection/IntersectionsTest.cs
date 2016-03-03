@@ -9,17 +9,17 @@ namespace Intersection
         [TestMethod]
         public void FindTheFirstPoint()
         {
-            Point[] points = new Point[] { new Point(0, 1, 0, 0), new Point(0, 0, 1, 0), new Point(0, 1, 0, 0), new Point(0, 0, 0, 1), new Point(1, 0, 0, 0), new Point(0, 0, 0, 1), new Point(0, 0, 1, 0) };
+            Direction[] points = new Direction[] { new Direction(0, 1, 0, 0), new Direction(0, 0, 1, 0), new Direction(0, 1, 0, 0), new Direction(0, 0, 0, 1), new Direction(1, 0, 0, 0), new Direction(0, 0, 0, 1), new Direction(0, 0, 1, 0) };
             Assert.AreEqual(points[1], FindIntersection(points));
         }
 
-        struct Point
+        struct Direction
         {
             public int left;
             public int right;
             public int up;
             public int down;
-            public Point(int left, int right, int up, int down)
+            public Direction(int left, int right, int up, int down)
             {
                 this.left = left;
                 this.right = right;
@@ -27,34 +27,35 @@ namespace Intersection
                 this.down = down;
             }
         }
-        bool CheckPoint(int start, Point[] points)
+        bool CheckPoint(int start, Direction[] directions)
         {
             int totalLefts = 0;
             int totalRights = 0;
             int totalUps = 0;
             int totalDowns = 0;
-            for(int i = start; i<points.Length; i++)
+            for(int i = start; i<directions.Length; i++)
             {
-                totalLefts += points[i].left;
-                totalRights += points[i].right;
-                totalUps += points[i].up;
-                totalDowns += points[i].down;
+                totalLefts += directions[i].left;
+                totalRights += directions[i].right;
+                totalUps += directions[i].up;
+                totalDowns += directions[i].down;
 
                 if (totalLefts - totalRights == 0 && totalUps - totalDowns == 0) break;
             }
             return (totalLefts - totalRights == 0 && totalUps - totalDowns == 0);
         }
 
-        Point FindIntersection(Point[] points)
+        Direction FindIntersection(Direction[] directions)
         {
-            for(int i=0; i< points.Length; i++)
+
+            for(int i=0; i< directions.Length; i++)
             {
-                if (CheckPoint(i, points))
+                if (CheckPoint(i, directions))
                 {
-                    return points[i];
+                    return directions[i];
                 }
             }
-            return new Point(0, 0, 0, 0);
+            return new Direction(0, 0, 0, 0);
         }
 
     }
