@@ -47,6 +47,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intersection", "Intersectio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alarm", "Alarm\Alarm.csproj", "{43A2904B-C863-4A4B-A8B5-A6EB37AAFDA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cyclemeter", "Cyclemeter\Cyclemeter.csproj", "{02883BAD-84F9-468B-B959-76938B78115E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{07516469-4CB7-4969-9EA1-96C52A5AA578}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +145,14 @@ Global
 		{43A2904B-C863-4A4B-A8B5-A6EB37AAFDA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43A2904B-C863-4A4B-A8B5-A6EB37AAFDA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43A2904B-C863-4A4B-A8B5-A6EB37AAFDA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02883BAD-84F9-468B-B959-76938B78115E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02883BAD-84F9-468B-B959-76938B78115E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02883BAD-84F9-468B-B959-76938B78115E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02883BAD-84F9-468B-B959-76938B78115E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07516469-4CB7-4969-9EA1-96C52A5AA578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07516469-4CB7-4969-9EA1-96C52A5AA578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07516469-4CB7-4969-9EA1-96C52A5AA578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07516469-4CB7-4969-9EA1-96C52A5AA578}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
