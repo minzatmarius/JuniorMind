@@ -9,53 +9,83 @@ namespace Intersection
         [TestMethod]
         public void FindTheFirstPoint()
         {
-            Direction[] points = new Direction[] { new Direction(0, 1, 0, 0), new Direction(0, 0, 1, 0), new Direction(0, 1, 0, 0), new Direction(0, 0, 0, 1), new Direction(1, 0, 0, 0), new Direction(0, 0, 0, 1), new Direction(0, 0, 1, 0) };
-            Assert.AreEqual(points[1], FindIntersection(points));
+            Direction[] directions = new Direction[] { Direction.right,
+                                                    Direction.up,
+                                                    Direction.right,
+                                                    Direction.down,
+                                                    Direction.left,
+                                                    Direction.down,
+                                                    Direction.up };
+            Assert.AreEqual(1, FindIntersection(directions));
         }
 
-        struct Direction
+        [TestMethod]
+        public void FirstIntersectionIsPoint3()
         {
-            public int left;
-            public int right;
-            public int up;
-            public int down;
-            public Direction(int left, int right, int up, int down)
+            Direction[] directions = new Direction[]
             {
-                this.left = left;
-                this.right = right;
-                this.up = up;
-                this.down = down;
-            }
+                Direction.right,
+                Direction.right,
+                Direction.right,
+                Direction.right,
+                Direction.left
+            };
+            Assert.AreEqual(3, FindIntersection(directions));
         }
-        bool CheckPoint(int start, Direction[] directions)
+        [TestMethod]
+        public void FirstIntersectionIsPoint0()
+        {
+            Direction[] directions = new Direction[]
+            {
+                Direction.right,
+                Direction.down,
+                Direction.left,
+                Direction.up
+            };
+            Assert.AreEqual(0, FindIntersection(directions));
+
+        }
+
+       
+        [Flags]
+        enum Direction
+        {
+            left = 1,
+            right = 2,
+            up = 4,
+            down = 8
+        }
+
+        bool IsIntersection(int start, Direction[] directions)
         {
             int totalLefts = 0;
             int totalRights = 0;
             int totalUps = 0;
             int totalDowns = 0;
+
             for(int i = start; i<directions.Length; i++)
             {
-                totalLefts += directions[i].left;
-                totalRights += directions[i].right;
-                totalUps += directions[i].up;
-                totalDowns += directions[i].down;
-
+                if (directions[i] == Direction.left)  totalLefts += 1;
+                if (directions[i] == Direction.right) totalRights += 1;
+                if (directions[i] == Direction.up) totalUps += 1;
+                if (directions[i] == Direction.down) totalDowns += 1;
+            
                 if (totalLefts - totalRights == 0 && totalUps - totalDowns == 0) break;
             }
             return (totalLefts - totalRights == 0 && totalUps - totalDowns == 0);
         }
 
-        Direction FindIntersection(Direction[] directions)
+        int FindIntersection(Direction[] directions)
         {
 
             for(int i=0; i< directions.Length; i++)
             {
-                if (CheckPoint(i, directions))
+                if (IsIntersection(i, directions))
                 {
-                    return directions[i];
+                    return i;
                 }
             }
-            return new Direction(0, 0, 0, 0);
+            return 0;
         }
 
     }
