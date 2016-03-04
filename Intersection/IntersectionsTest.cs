@@ -56,6 +56,11 @@ namespace Intersection
             down = 8
         }
 
+        void Increase(ref int totalInOneDirection, Direction first, Direction second)
+        {
+            totalInOneDirection += (first == second) ? 1 : 0;
+        }
+
         bool IsIntersection(int start, Direction[] directions)
         {
             int totalLefts = 0;
@@ -65,11 +70,12 @@ namespace Intersection
 
             for(int i = start; i<directions.Length; i++)
             {
-                if (directions[i] == Direction.left)  totalLefts += 1;
-                if (directions[i] == Direction.right) totalRights += 1;
-                if (directions[i] == Direction.up) totalUps += 1;
-                if (directions[i] == Direction.down) totalDowns += 1;
-            
+
+                Increase(ref totalLefts, directions[i], Direction.left);
+                Increase(ref totalRights, directions[i], Direction.right);
+                Increase(ref totalUps, directions[i], Direction.up);
+                Increase(ref totalDowns, directions[i], Direction.down);
+         
                 if (totalLefts - totalRights == 0 && totalUps - totalDowns == 0) break;
             }
             return (totalLefts - totalRights == 0 && totalUps - totalDowns == 0);
