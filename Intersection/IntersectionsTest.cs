@@ -46,8 +46,6 @@ namespace Intersection
 
         }
 
-       
-        [Flags]
         enum Direction
         {
             left = 1,
