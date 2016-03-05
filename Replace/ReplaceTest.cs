@@ -22,11 +22,18 @@ namespace Replace
             Assert.AreEqual("aKAPPAbKAPPAcdKAPPAe", ReplaceCharacter(originalString, 'k', "KAPPA"));
         }
 
+        [TestMethod]
+        public void ReplaceKOnFirstPosition()
+        {
+            string originalString = "kbk";
+            Assert.AreEqual("KAPPAbKAPPA", ReplaceCharacter(originalString, 'k', "KAPPA"));
+        }
+
         string ReplaceCharacter(string original, char character, string replaceWith )
         {
             if (original.Length < 2)
             {
-                return original;
+                return original[0] == character ? replaceWith : original;
             }
             if (original[original.Length - 1] == character)
             {
