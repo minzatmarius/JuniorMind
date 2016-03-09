@@ -11,7 +11,8 @@ namespace Pascal
         public void FirstLineIs1()
         {
             int[] expected = { 1 };
-            CollectionAssert.AreEqual(expected, GetLine(1));
+            int[] actual = GetLine(1);
+            CollectionAssert.AreEqual(expected, actual );
         }
 
         [TestMethod]
@@ -25,7 +26,8 @@ namespace Pascal
         public void ThirdLineIs121()
         {
             int[] expected = { 1, 2, 1 };
-            CollectionAssert.AreEqual(expected, GetLine(3));
+            int[] actual = GetLine(3);
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestMethod]
@@ -92,7 +94,7 @@ namespace Pascal
         {
             int[] elements = new int[lineNumber]; 
             
-            for(int i = 0; i < lineNumber - 1; i++)
+            for(int i = 0; i < lineNumber; i++)
             {
                 elements[i] = GetElement(lineNumber, i);
             }
