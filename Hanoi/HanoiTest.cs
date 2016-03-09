@@ -48,19 +48,19 @@ namespace Hanoi
             {
                 destination[disk - 1] = source[disk - 1];
                 source[disk - 1] = 0;
+                return;
             }
-            else
-            {
-                //move all the smaller disks on the extra pole
-                MoveDisks(ref source, ref destination, ref extra, disk - 1);
 
-                //move this disk on the destination pole
-                destination[disk - 1] = disk;
-                source[disk - 1] = 0;
+            //move all the smaller disks on the extra pole
+            MoveDisks(ref source, ref destination, ref extra, disk - 1);
 
-                //move the smaller disks on the destination pole
-                MoveDisks(ref extra, ref source, ref destination, disk - 1);
-            }
+            //move this disk on the destination pole
+            destination[disk - 1] = disk;
+            source[disk - 1] = 0;
+
+            //move the smaller disks on the destination pole
+            MoveDisks(ref extra, ref source, ref destination, disk - 1);
+
         }
     }
 }
