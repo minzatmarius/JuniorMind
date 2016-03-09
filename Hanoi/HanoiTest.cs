@@ -41,13 +41,17 @@ namespace Hanoi
             CollectionAssert.AreEqual(extra, new int[] { 0, 0, 0, 0, 0, 0 });
             CollectionAssert.AreEqual(destination, new int[] { 1, 2, 3, 4, 5, 6 });
         }
+        void MoveOneDisk(int[] source, int[] destination, int disk)
+        {
+            destination[disk - 1] = source[disk - 1];
+            source[disk - 1] = 0;
+        }
 
         void MoveDisks(ref int[] source, ref int[] extra, ref int[] destination,  int disk )
         {
             if (disk == 1)
             {
-                destination[disk - 1] = source[disk - 1];
-                source[disk - 1] = 0;
+                MoveOneDisk(source, destination, disk);
                 return;
             }
 
@@ -55,8 +59,7 @@ namespace Hanoi
             MoveDisks(ref source, ref destination, ref extra, disk - 1);
 
             //move this disk on the destination pole
-            destination[disk - 1] = disk;
-            source[disk - 1] = 0;
+            MoveOneDisk(source, destination, disk);
 
             //move the smaller disks on the destination pole
             MoveDisks(ref extra, ref source, ref destination, disk - 1);
