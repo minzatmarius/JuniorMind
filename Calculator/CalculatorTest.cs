@@ -18,6 +18,11 @@ namespace Calculator
             Assert.AreEqual(2, Calculate("+ 1 1"));
         }
 
+        [TestMethod]
+        public void OnePlusOneTimesTwo()
+        {
+            Assert.AreEqual(4, "* + 1 1 2");
+        }
 
         double Calculate(string input)
         {
@@ -34,7 +39,7 @@ namespace Calculator
                 case "+": return Calculate(input.Substring(2)) + Calculate(input.Substring(4));
                 case "-": return Calculate(input.Substring(2)) - Calculate(input.Substring(4));
                 case "*": return Calculate(input.Substring(2)) * Calculate(input.Substring(4));
-                default: return Calculate(input.Substring(2)) / Calculate(input.Substring(2));
+                default: return Calculate(input.Substring(2)) / Calculate(input.Substring(4));
             }
         }
     }
