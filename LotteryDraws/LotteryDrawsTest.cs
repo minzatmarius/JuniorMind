@@ -13,6 +13,13 @@ namespace LotteryDraws
             CollectionAssert.AreEqual(new int[] { 1, 2, 3, 4, 5, 6 }, Sort(new int[] { 2, 3, 1, 4, 5, 6 }));
         }
 
+        void Swap(ref int a, ref int b)
+        {
+            int aux = a;
+            a = b;
+            b = aux;
+        }
+
         int[] Sort(int[] numbers)
         {
             return numbers;   
