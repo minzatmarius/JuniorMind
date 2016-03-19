@@ -19,6 +19,23 @@ namespace RepairCenter
 
         }
 
+        [TestMethod]
+        public void MultipleCases()
+        {
+            Case[] cases = new Case[] { new Case("Case1", Priority.Medium),
+                                        new Case("Case2", Priority.Low),
+                                        new Case("Case3", Priority.High),
+                                        new Case("Case4", Priority.High),
+                                        new Case("Case5", Priority.High),
+                                        new Case("Case6", Priority.Low),
+                                        new Case("Case7", Priority.Medium),
+            };
+
+            Case[] expected = new Case[] { cases[2], cases[3], cases[4], cases[0] ,cases[6], cases[1], cases[5] };
+            CollectionAssert.AreEqual(expected, SortCases(cases));
+
+        }
+
         void Swap(ref Case a, ref Case b)
         {
             var aux = a;
