@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pascal", "Pascal\Pascal.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{A1B7369A-DF52-49A5-AD9D-2B274D34486C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryDraws", "LotteryDraws\LotteryDraws.csproj", "{5C704CA7-4C38-43C8-8D96-6B002EBE69A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -183,6 +185,10 @@ Global
 		{A1B7369A-DF52-49A5-AD9D-2B274D34486C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1B7369A-DF52-49A5-AD9D-2B274D34486C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1B7369A-DF52-49A5-AD9D-2B274D34486C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C704CA7-4C38-43C8-8D96-6B002EBE69A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C704CA7-4C38-43C8-8D96-6B002EBE69A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C704CA7-4C38-43C8-8D96-6B002EBE69A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C704CA7-4C38-43C8-8D96-6B002EBE69A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
