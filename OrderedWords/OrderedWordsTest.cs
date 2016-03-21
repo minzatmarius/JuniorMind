@@ -7,15 +7,21 @@ namespace OrderedWords
     public class OrderedWordsTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CountWords()
         {
             string input = "word word word";
             Assert.AreEqual(3, Count("word", input));
         }
 
-        private int Count(string v, string input)
+        int Count(string word, string input)
         {
-            throw new NotImplementedException();
+            int count = 0;
+            string[] words = input.Split(' ');
+            for(int i = 0; i < words.Length; i++)
+            {
+                if (words[i] == word) count++;
+            }
+            return count;
         }
 
         [TestMethod]
