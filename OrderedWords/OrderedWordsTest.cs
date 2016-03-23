@@ -83,6 +83,17 @@ namespace OrderedWords
             allWords[allWords.Length - 1].counter++;
         }
 
+        void IncreaseCounter(ref Word[] allWords, string currentWord)
+        {
+            for (int j = 0; j < allWords.Length; j++)
+            {
+                if (allWords[j].word == currentWord)
+                {
+                    allWords[j].counter++;
+                }
+            }
+        }
+
         Word[] GetWords(string input)
         {
             string[] words = input.Split(' ');
@@ -95,18 +106,11 @@ namespace OrderedWords
                 {
                     uniqueWords += words[i] + " ";
                     AddWord(ref allWords, words[i]);
-                    
-                    
+                                       
                 }
                 else
                 {
-                   for(int j = 0; j < allWords.Length; j++)
-                    {
-                        if(allWords[j].word == words[i])
-                        {
-                            allWords[j].counter++;
-                        }
-                    }
+                    IncreaseCounter(ref allWords, words[i]);
                 }
             }
 
