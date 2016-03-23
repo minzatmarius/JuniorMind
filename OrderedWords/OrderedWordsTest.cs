@@ -76,7 +76,12 @@ namespace OrderedWords
             }
         }
 
-
+        void AddWord(ref Word[] allWords, string currentWord)
+        {
+            Array.Resize<Word>(ref allWords, allWords.Length + 1);
+            allWords[allWords.Length - 1].word = currentWord;
+            allWords[allWords.Length - 1].counter++;
+        }
 
         Word[] GetWords(string input)
         {
@@ -89,9 +94,9 @@ namespace OrderedWords
                 if (!uniqueWords.Contains(words[i]))
                 {
                     uniqueWords += words[i] + " ";
-                    Array.Resize<Word>(ref allWords, allWords.Length + 1);
-                    allWords[allWords.Length - 1].word = words[i];
-                    allWords[allWords.Length - 1].counter++;
+                    AddWord(ref allWords, words[i]);
+                    
+                    
                 }
                 else
                 {
