@@ -70,14 +70,6 @@ namespace OrderedWords
             b = aux;
         }
 
-        void Count(Word wordToFind, string input)
-        {
-            string[] words = input.Split(' ');
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (words[i] == wordToFind.word) wordToFind.counter++;
-            }
-        }
 
         void AddWord(ref Word[] allWords, string currentWord)
         {
@@ -149,25 +141,6 @@ namespace OrderedWords
             Swap(ref words[cursor + 1], ref words[end]);
             return cursor + 1;
         }
-
-        Word[] OrderWords(Word[] words)
-        {
-
-
-            for (int i = 1; i < words.Length; i++)
-            {
-                for (int j = i; j > 0; j--)
-                {
-                    if (words[j].counter < words[j - 1].counter)
-                    {
-                        Swap(ref words[j], ref words[j - 1]);
-                    }
-                }
-            }
-
-            return words;
-        }
-
 
     }
 }
