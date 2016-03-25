@@ -6,15 +6,16 @@ namespace OrderedWords
     [TestClass]
     public class OrderedWordsTest
     {
-       
+
 
 
         [TestMethod]
         public void OrderThreeWords()
         {
             string input = "word word word2";
-            Word[] expected = new Word[] { new Word("word2", 1), new Word("word", 2)};
-            Word[] actual = OrderWords(GetWords(input));
+            Word[] expected = new Word[] { new Word("word2", 1), new Word("word", 2) };
+            Word[] actual = GetWords(input);
+            QuickSortWords(actual, 0, actual.Length - 1);
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -24,7 +25,8 @@ namespace OrderedWords
         {
             string input = "word2 word3 word1 word3 word2 word3";
             Word[] expected = new Word[] { new Word("word1", 1), new Word("word2", 2), new Word("word3", 3) };
-            Word[] actual = OrderWords(GetWords(input));
+            Word[] actual = GetWords(input);
+            QuickSortWords(actual, 0, actual.Length -1 );
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -49,7 +51,8 @@ namespace OrderedWords
 
         }
 
-        struct Word {
+        struct Word
+        {
             public string word;
             public int counter;
             public Word(string word, int counter)
@@ -57,7 +60,7 @@ namespace OrderedWords
                 this.word = word;
                 this.counter = counter;
             }
-              
+
         }
 
         void Swap(ref Word a, ref Word b)
@@ -99,14 +102,15 @@ namespace OrderedWords
             string[] words = input.Split(' ');
             string uniqueWords = "";
             Word[] allWords = new Word[0];
-          
-            for (int i = 0; i<words.Length; i++)
+
+            for (int i = 0; i < words.Length; i++)
             {
-                if (!uniqueWords.Contains(words[i]))
+                Word currentWord = new Word(words[i], 0);
+                if (!uniqueWords.Contains(words[i])) 
                 {
                     uniqueWords += words[i] + " ";
                     AddWord(ref allWords, words[i]);
-                                       
+
                 }
                 else
                 {
@@ -117,10 +121,39 @@ namespace OrderedWords
             return allWords;
         }
 
+        void QuickSortWords(Word[] words, int start, int end)
+        {
+            int pivot = 0;
+            if(start < end)
+            {
+                pivot = Partition(words, start, end);
+                QuickSortWords(words, start, pivot - 1);
+                QuickSortWords(words, pivot + 1, end);
+
+            }
+        }
+
+        private int Partition(Word[] words, int start, int end)
+        {
+            int pivot = end;
+            int cursor = start - 1;
+
+            for(int i = start; i< end; i++)
+            {
+                if(words[i].counter <= words[pivot].counter)
+                {
+                    cursor++;
+                    Swap(ref words[cursor], ref words[i]);
+                }
+            }
+            Swap(ref words[cursor + 1], ref words[end]);
+            return cursor + 1;
+        }
+
         Word[] OrderWords(Word[] words)
         {
 
-            
+
             for (int i = 1; i < words.Length; i++)
             {
                 for (int j = i; j > 0; j--)
@@ -132,8 +165,9 @@ namespace OrderedWords
                 }
             }
 
-            return  words;
+            return words;
         }
-    
+
+
     }
 }
