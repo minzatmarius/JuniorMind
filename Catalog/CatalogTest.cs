@@ -7,8 +7,9 @@ namespace Catalog
     public class CatalogTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void OrderAlphabetically()
         {
+            
         }
 
         void Swap(ref Student a, ref Student b)
@@ -30,9 +31,11 @@ namespace Catalog
         }
         struct Subject
         {
+            public string name;
             public int[] marks;
-            public Subject(int[] marks)
+            public Subject(string name, int[] marks)
             {
+                this.name = name;
                 this.marks = marks;
             }
         }
