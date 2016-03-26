@@ -19,9 +19,36 @@ namespace Elections
             CollectionAssert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void GetVotesForFirst()
+        {
+            Section section1 = new Section(new Candidate[] { new Candidate("First", 2), new Candidate("Second", 1) });
+            Assert.AreEqual(2, GetVotes(section1, "First"));
+        }
+
+        int GetVotes(Section section, string name) {
+
+            int result = 0;
+            for(int i = 0; i < section.candidates.Length; i++)
+            {
+                result += (section.candidates[i].name == name) ? section.candidates[i].votes : 0;
+            }
+
+            return result;
+        }
+
         Candidate[] GetFinalResults(Section[] sections)
         {
-            throw new NotImplementedException();
+            Candidate[] results = new Candidate[sections[0].candidates.Length];
+
+
+            //get names
+            for (int i= 0; i < results.Length; i++)
+            {
+                results[i].name = sections[0].candidates[i].name;
+            }
+            //get votes
+            return results;
         }
 
         struct Candidate
