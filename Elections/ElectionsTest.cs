@@ -26,6 +26,16 @@ namespace Elections
             Assert.AreEqual(2, GetVotesPerSection(section1, "First"));
         }
 
+        [TestMethod]
+        public void GetTotalVotesForFirst()
+        {
+            Section section1 = new Section(new Candidate[] { new Candidate("First", 2), new Candidate("Second", 1) });
+            Section section2 = new Section(new Candidate[] { new Candidate("Second", 10), new Candidate("First", 2) });
+            Section[] sections = { section1, section2 };
+
+            Assert.AreEqual(4, GetTotalVotes(sections, "First"));
+        }
+
         int GetVotesPerSection(Section section, string name) {
 
             int result = 0;
@@ -39,6 +49,17 @@ namespace Elections
             }
             return result;
         }
+
+        int GetTotalVotes(Section[] sections, string name)
+        {
+            int results = 0;
+            for(int i = 0; i < sections.Length; i++)
+            {
+                results += GetVotesPerSection(sections[i], name);
+            }
+            return results;
+        }
+
 
         
 
