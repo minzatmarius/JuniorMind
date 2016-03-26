@@ -23,19 +23,24 @@ namespace Elections
         public void GetVotesForFirst()
         {
             Section section1 = new Section(new Candidate[] { new Candidate("First", 2), new Candidate("Second", 1) });
-            Assert.AreEqual(2, GetVotes(section1, "First"));
+            Assert.AreEqual(2, GetVotesPerSection(section1, "First"));
         }
 
-        int GetVotes(Section section, string name) {
+        int GetVotesPerSection(Section section, string name) {
 
             int result = 0;
-            for(int i = 0; i < section.candidates.Length; i++)
+            for (int i = 0; i < section.candidates.Length; i++)
             {
-                result += (section.candidates[i].name == name) ? section.candidates[i].votes : 0;
+                if (section.candidates[i].name == name)
+                {
+                    result = section.candidates[i].votes;
+                    break;
+                }
             }
-
             return result;
         }
+
+        
 
         Candidate[] GetFinalResults(Section[] sections)
         {
@@ -48,6 +53,11 @@ namespace Elections
                 results[i].name = sections[0].candidates[i].name;
             }
             //get votes
+
+            for (int i = 0; i < results.Length; i++)
+            {
+               
+            }
             return results;
         }
 
