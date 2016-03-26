@@ -20,6 +20,22 @@ namespace Elections
         }
 
         [TestMethod]
+        public void ManyCandidatesAndSections()
+        {
+            Section section1 = new Section(new Candidate[] { new Candidate("First", 10), new Candidate("Second", 5), new Candidate("Third", 5) });
+            Section section2 = new Section(new Candidate[] { new Candidate("Second", 20), new Candidate("Third", 15), new Candidate("First", 5) });
+            Section section3 = new Section(new Candidate[] { new Candidate("First", 15), new Candidate("Second", 5), new Candidate("Third", 0) });
+            Section section4 = new Section(new Candidate[] { new Candidate("First", 10), new Candidate("Second", 5), new Candidate("Third", 0) });
+            Section section5 = new Section(new Candidate[] { new Candidate("Third", 15), new Candidate("First", 10), new Candidate("Second", 5) });
+            Section[] sections = { section1, section2, section3, section4, section5 };
+
+            Candidate[] expected = { new Candidate("First", 50), new Candidate("Second", 40), new Candidate("Third", 35) };
+            Candidate[] actual = GetFinalResults(sections);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void GetVotesForFirst()
         {
             Section section1 = new Section(new Candidate[] { new Candidate("First", 2), new Candidate("Second", 1) });
@@ -36,6 +52,7 @@ namespace Elections
             Assert.AreEqual(4, GetTotalVotes(sections, "First"));
         }
 
+      
         int GetVotesPerSection(Section section, string name)
         {
 
