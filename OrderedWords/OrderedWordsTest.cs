@@ -7,7 +7,7 @@ namespace OrderedWords
     public class OrderedWordsTest
     {
 
-
+     
 
         [TestMethod]
         public void OrderThreeWords()
@@ -89,6 +89,22 @@ namespace OrderedWords
             }
         }
 
+        int BinarySearch(Word[] allWords, Word word)
+        {
+            return BinarySearch(allWords, word, 0, allWords.Length - 1);
+        }
+
+        int BinarySearch(Word[] allWords, Word word, int start, int end)
+        {
+            if (start > end)
+                return -1;
+            var mid = (start + end) / 2;
+            if (allWords[mid].word == word.word)
+                return mid;
+            return allWords[mid].counter < word.counter ? BinarySearch(allWords, word, mid + 1, end)
+                                          : BinarySearch(allWords, word, start, mid - 1);
+        }
+
         Word[] GetWords(string input)
         {
             string[] words = input.Split(' ');
@@ -97,7 +113,7 @@ namespace OrderedWords
 
             for (int i = 0; i < words.Length; i++)
             {
-                Word currentWord = new Word(words[i], 0);
+
                 if (!uniqueWords.Contains(words[i])) 
                 {
                     uniqueWords += words[i] + " ";
@@ -124,6 +140,8 @@ namespace OrderedWords
 
             }
         }
+
+
 
         private int Partition(Word[] words, int start, int end)
         {
