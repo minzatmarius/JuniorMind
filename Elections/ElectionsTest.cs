@@ -9,8 +9,8 @@ namespace Elections
         [TestMethod]
         public void TwoCandidatesTwoSections()
         {
-            Section section1 = new Section(new Candidate[] { new Candidate("First", 2), new Candidate("Second", 1) }) ;
-            Section section2 = new Section(new Candidate[] { new Candidate("Second", 10), new Candidate("First",2) });
+            Section section1 = new Section(new Candidate[] { new Candidate("First", 2), new Candidate("Second", 1) });
+            Section section2 = new Section(new Candidate[] { new Candidate("Second", 10), new Candidate("First", 2) });
             Section[] sections = { section1, section2 };
 
             Candidate[] expected = { new Candidate("Second", 11), new Candidate("First", 4) };
@@ -36,7 +36,8 @@ namespace Elections
             Assert.AreEqual(4, GetTotalVotes(sections, "First"));
         }
 
-        int GetVotesPerSection(Section section, string name) {
+        int GetVotesPerSection(Section section, string name)
+        {
 
             int result = 0;
             for (int i = 0; i < section.candidates.Length; i++)
@@ -53,32 +54,46 @@ namespace Elections
         int GetTotalVotes(Section[] sections, string name)
         {
             int results = 0;
-            for(int i = 0; i < sections.Length; i++)
+            for (int i = 0; i < sections.Length; i++)
             {
                 results += GetVotesPerSection(sections[i], name);
             }
             return results;
         }
 
+        void SortCandidates(Candidate[] candidates)
+        {
+            for (int i = 1; i < candidates.Length; i++)
+            {
+                for (int j = i; j > 0; j--)
+                {
+                    if (candidates[j].votes > candidates[j - 1].votes)
+                    {
+                        Swap(ref candidates[j], ref candidates[j - 1]);
+                    }
+                }
+            }
 
-        
+        }
+
+        private void Swap(ref Candidate a, ref Candidate b)
+        {
+            var aux = a;
+            a = b;
+            b = aux;
+        }
 
         Candidate[] GetFinalResults(Section[] sections)
         {
             Candidate[] results = new Candidate[sections[0].candidates.Length];
 
-
-            //get names
-            for (int i= 0; i < results.Length; i++)
-            {
-                results[i].name = sections[0].candidates[i].name;
-            }
-            //get votes
-
             for (int i = 0; i < results.Length; i++)
             {
-               
+                results[i].name = sections[0].candidates[i].name;
+                results[i].votes = GetTotalVotes(sections, results[i].name);
             }
+
+            SortCandidates(results);
             return results;
         }
 
