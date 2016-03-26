@@ -11,6 +11,13 @@ namespace Catalog
         {
         }
 
+        void Swap(ref Student a, ref Student b)
+        {
+            var aux = a;
+            a = b;
+            b = aux;
+        }
+
         struct Student
         {
             public string name;
