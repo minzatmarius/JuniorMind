@@ -7,8 +7,40 @@ namespace Catalog
     public class CatalogTest
     {
         [TestMethod]
-        public void OrderAlphabetically()
+        public void OrderAlphabeticallyTwoStudents()
         {
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 7 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+
+            Student student2 = new Student("Alex", new Subject[] { new Subject("Math", new int[] { 5, 5 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student[] students = { student1, student2 };
+            Student[] expected = { student2, student1 };
+
+            OrderAlphabetically(students);
+            CollectionAssert.AreEqual(expected, students);
+        
+
+        }
+
+        string CompareStrings(string first,string second)
+        {
+            for(int i = 0; i < first.Length; i++)
+            {
+                if((int)first[i] > (int)second[i])
+                {
+                    return second;
+                }
+            }
+
+            return first;
+        }
+
+        void OrderAlphabetically(Student[] students)
+        {
+
             
         }
 
