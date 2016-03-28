@@ -125,24 +125,7 @@ namespace Catalog
                     Array.Resize<Student>(ref found, found.Length + 1);
                     found[found.Length - 1] = students[mid];
 
-                    for(int i = mid + 1; i < students.Length; i++)
-                    {
-                        if (students[i].GetAverage() == toFind)
-                        {
-                            Array.Resize<Student>(ref found, found.Length + 1);
-                            found[found.Length - 1] = students[i];
-                        }
-                        else break;
-                    }
-                    for (int i = mid - 1; i >= 0; i--)
-                    {
-                        if (students[i].GetAverage() == toFind)
-                        {
-                            Array.Resize<Student>(ref found, found.Length + 1);
-                            found[found.Length - 1] = students[i];
-                        }
-                        else break;
-                    }
+                    LookAround(toFind, students, ref found, mid);
                 }
                 if (students[mid].GetAverage() < toFind)
                     start = mid + 1;
@@ -150,6 +133,29 @@ namespace Catalog
                     end = mid - 1;
             }
             return found;
+        }
+
+        void LookAround(int toFind, Student[] students, ref Student[] found, int mid)
+        {
+            for (int i = mid + 1; i < students.Length; i++)
+            {
+                if (students[i].GetAverage() == toFind)
+                {
+                    Array.Resize<Student>(ref found, found.Length + 1);
+                    found[found.Length - 1] = students[i];
+                }
+                else break;
+            }
+            for (int i = mid - 1; i >= 0; i--)
+            {
+                if (students[i].GetAverage() == toFind)
+                {
+                    Array.Resize<Student>(ref found, found.Length + 1);
+                    found[found.Length - 1] = students[i];
+                }
+                else break;
+            }
+
         }
 
         void SortByAverage(Student[] students)
