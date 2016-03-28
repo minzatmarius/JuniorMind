@@ -133,6 +133,31 @@ namespace Catalog
         }
 
         [TestMethod]
+        public void FindStudentsWithLowestAverage()
+        {
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 10 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student2 = new Student("Alex", new Subject[] { new Subject("Math", new int[] { 5, 5 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student3 = new Student("Adriane", new Subject[] { new Subject("Math", new int[] { 5, 10, 10 }),
+                                                                    new Subject("English", new int[]{ 8, 6}) });
+
+            Student student4 = new Student("Dan", new Subject[] { new Subject("Math", new int[] { 4, 6}),
+                                                                    new Subject("English", new int[]{ 6, 5}) });
+
+            Student[] students = { student1, student2, student3, student4 };
+            Student[] expected = { student4, student2 };
+
+            Student[] actual = GetLowAverage(students);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+       
+
+        [TestMethod]
         public void CountTensForOneStudent()
         {
             Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 9 }),
@@ -152,6 +177,28 @@ namespace Catalog
                 
             }
             return tens;
+        }
+
+        private Student[] GetLowAverage(Student[] students)
+        {
+            SortByAverage(students);
+            Student[] lowAverage = new Student[1];
+            lowAverage[0] = students[students.Length - 1];
+            double minimumAverage = lowAverage[0].GetAverage();
+
+
+            for (int i = students.Length - 2; i >= 0; i--)
+            {
+                if(students[i].GetAverage() != minimumAverage)
+                {
+                    break;
+                }
+
+                Array.Resize<Student>(ref lowAverage, lowAverage.Length + 1);
+                lowAverage[lowAverage.Length - 1] = students[i];
+            }
+
+            return lowAverage;
         }
 
         Student[] GetStudents(Student[] students)
