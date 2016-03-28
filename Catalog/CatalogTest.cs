@@ -111,6 +111,54 @@ namespace Catalog
             CollectionAssert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void FindStudentsWith10s()
+        {
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 10 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student2 = new Student("Alex", new Subject[] { new Subject("Math", new int[] { 5, 5 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student3 = new Student("Adriane", new Subject[] { new Subject("Math", new int[] { 5, 10, 10 }),
+                                                                    new Subject("English", new int[]{ 8, 6}) });
+
+            Student student4 = new Student("Dan", new Subject[] { new Subject("Math", new int[] { 8, 8}),
+                                                                    new Subject("English", new int[]{ 10, 9}) });
+
+            Student[] students = { student1, student2, student3, student4 };
+            Student[] expected = { student1, student3 };
+            Student[] actual = GetStudents(students);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void CountTensForOneStudent()
+        {
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 9 }),
+                                                                    new Subject("English", new int[]{ 5, 10, 7}) });
+            Assert.AreEqual(2, CountTens(student1));
+        }
+
+        int CountTens(Student student)
+        {
+            int tens = 0;
+            for(int i = 0; i < student.subjects.Length; i++)
+            {
+                for(int j = 0; j < student.subjects[i].marks.Length; j++)
+                {
+                    tens += (student.subjects[i].marks[j] == 10)? 1 : 0;
+                }
+                
+            }
+            return tens;
+        }
+
+        Student[] GetStudents(Student[] students)
+        {
+            return students;
+        }
+
         Student[] FindStudentsWith(int toFind, Student[] students)
         {
             SortByAverage(students);
