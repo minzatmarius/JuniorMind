@@ -63,23 +63,42 @@ namespace Catalog
 
         }
 
-
-        void OrderAlphabetically(Student[] students)
+        [TestMethod]
+        public void OrderByAverage()
         {
-            bool sorted = false;
-            while (!sorted)
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 7 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student2 = new Student("Alex", new Subject[] { new Subject("Math", new int[] { 5, 5 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student3 = new Student("Adriane", new Subject[] { new Subject("Math", new int[] { 5, 8 }),
+                                                                    new Subject("English", new int[]{ 8, 6}) });
+
+            Student student4 = new Student("Dan", new Subject[] { new Subject("Math", new int[] { 8, 8}),
+                                                                    new Subject("English", new int[]{ 7, 9}) });
+
+            Student[] students = { student1, student2, student3, student4 };
+            Student[] expected = { student4, student1, student3, student2 };
+            SortByAverage(students);
+
+            CollectionAssert.AreEqual(expected, students);
+        }
+
+
+        void SortByAverage(Student[] students)
+        {
+            for (int i = 1; i < students.Length; i++)
             {
-                sorted = true;
-                for (int i = 0; i < students.Length - 1; i++)
+                for (int j = i; j > 0; j--)
                 {
-                    if (string.Compare(students[i].name, students[i + 1].name) == -1)
+                    if (students[j].GetAverage() > students[j - 1].GetAverage())
                     {
-                        Swap(ref students[i], ref students[i + 1]);
-                        sorted = false;
+                        Swap(ref students[j], ref students[j - 1]);
                     }
                 }
-
             }
+
         }
 
         void QuickSortAplhabetically(Student[] students, int start, int end)
