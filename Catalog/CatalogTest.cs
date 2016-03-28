@@ -19,11 +19,9 @@ namespace Catalog
             Student[] students = { student1, student2 };
             Student[] expected = { student2, student1 };
 
-             QuickSortAplhabetically(students, 0, students.Length - 1);
-            //OrderAlphabetically(students);
+            QuickSortAplhabetically(students, 0, students.Length - 1);
 
             CollectionAssert.AreEqual(expected, students);
-
 
         }
 
@@ -46,11 +44,24 @@ namespace Catalog
             Student[] expected = { student3, student2, student4, student1 };
 
             QuickSortAplhabetically(students, 0, students.Length - 1);
-            //OrderAlphabetically(students);
+
             CollectionAssert.AreEqual(expected, students);
         }
 
- 
+        [TestMethod]
+        public void CalculateAverage()
+        {
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 7 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student2 = new Student("Alex", new Subject[] { new Subject("Math", new int[] { 5, 5 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+
+            Assert.AreEqual(7, student1.GetAverage());
+            Assert.AreEqual(5.25, student2.GetAverage());
+
+        }
 
 
         void OrderAlphabetically(Student[] students)
@@ -61,7 +72,7 @@ namespace Catalog
                 sorted = true;
                 for (int i = 0; i < students.Length - 1; i++)
                 {
-                    if (string.Compare(students[i].name, students[i+1].name) == -1)
+                    if (string.Compare(students[i].name, students[i + 1].name) == -1)
                     {
                         Swap(ref students[i], ref students[i + 1]);
                         sorted = false;
@@ -117,6 +128,19 @@ namespace Catalog
             {
                 this.name = name;
                 this.subjects = subjects;
+            }
+
+            public double GetAverage()
+            {
+                double sum = 0;
+                foreach(Subject subject in subjects)
+                {
+                    for(int i = 0; i < subject.marks.Length; i++)
+                    {
+                        sum += subject.marks[i];
+                    }
+                }
+                return (double)sum / subjects.Length / subjects[0].marks.Length;
             }
         }
         struct Subject
