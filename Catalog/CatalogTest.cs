@@ -156,7 +156,28 @@ namespace Catalog
 
         Student[] GetStudents(Student[] students)
         {
-            return students;
+            Student[] mostTens = new Student[0];
+            int max = 0;
+            for(int i = 0; i < students.Length; i++)
+            {
+                int current = CountTens(students[i]);
+               
+                if(current > max)
+                {
+                    max = current;
+                    mostTens = new Student[0];
+                    Array.Resize<Student>(ref mostTens, mostTens.Length + 1);
+                    mostTens[mostTens.Length - 1] = students[i];
+                    continue;
+                }
+
+                if (current == max)
+                {
+                    Array.Resize<Student>(ref mostTens, mostTens.Length + 1);
+                    mostTens[mostTens.Length - 1] = students[i];
+                }
+            }
+            return mostTens;
         }
 
         Student[] FindStudentsWith(int toFind, Student[] students)
