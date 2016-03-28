@@ -154,12 +154,9 @@ namespace Catalog
                 double sum = 0;
                 foreach(Subject subject in subjects)
                 {
-                    for(int i = 0; i < subject.marks.Length; i++)
-                    {
-                        sum += subject.marks[i];
-                    }
+                    sum += subject.GetAverage();
                 }
-                return (double)sum / subjects.Length / subjects[0].marks.Length;
+                return (double)sum / subjects.Length;
             }
         }
         struct Subject
@@ -170,6 +167,16 @@ namespace Catalog
             {
                 this.name = name;
                 this.marks = marks;
+            }
+            public double GetAverage()
+            {
+                int sum = 0;
+                for(int i = 0; i < marks.Length; i++)
+                {
+                    sum += marks[i];
+                }
+
+                return (double)sum / marks.Length;
             }
         }
     }
