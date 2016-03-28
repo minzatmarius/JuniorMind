@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Catalog
@@ -85,6 +86,71 @@ namespace Catalog
             CollectionAssert.AreEqual(expected, students);
         }
 
+        [TestMethod]
+        public void FindStudentsWith7()
+        {
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 7 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student2 = new Student("Alex", new Subject[] { new Subject("Math", new int[] { 5, 5 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student3 = new Student("Adriane", new Subject[] { new Subject("Math", new int[] { 5, 8 }),
+                                                                    new Subject("English", new int[]{ 8, 6}) });
+
+            Student student4 = new Student("Dan", new Subject[] { new Subject("Math", new int[] { 8, 8}),
+                                                                    new Subject("English", new int[]{ 7, 9}) });
+
+            Student student5 = new Student("John", new Subject[] { new Subject("Math", new int[] { 7, 7, 7 }),
+                                                                    new Subject("English", new int[]{ 7, 7, 8, 6}) });
+
+            Student[] students = { student1, student2, student3, student4, student5 };
+            Student[] expected = { student5, student1 };
+
+            var actual = FindStudentsWith(7, students);
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        Student[] FindStudentsWith(int toFind, Student[] students)
+        {
+            SortByAverage(students);
+            int start = 0;
+            int end = students.Length - 1;
+            Student[] found = new Student[0];
+            while (start <= end)
+            {
+                int mid = (start + end) / 2;
+                if (students[mid].GetAverage() == toFind)
+                {
+                    Array.Resize<Student>(ref found, found.Length + 1);
+                    found[found.Length - 1] = students[mid];
+
+                    for(int i = mid + 1; i < students.Length; i++)
+                    {
+                        if (students[i].GetAverage() == toFind)
+                        {
+                            Array.Resize<Student>(ref found, found.Length + 1);
+                            found[found.Length - 1] = students[i];
+                        }
+                        else break;
+                    }
+                    for (int i = mid - 1; i >= 0; i--)
+                    {
+                        if (students[i].GetAverage() == toFind)
+                        {
+                            Array.Resize<Student>(ref found, found.Length + 1);
+                            found[found.Length - 1] = students[i];
+                        }
+                        else break;
+                    }
+                }
+                if (students[mid].GetAverage() < toFind)
+                    start = mid + 1;
+                else
+                    end = mid - 1;
+            }
+            return found;
+        }
 
         void SortByAverage(Student[] students)
         {
