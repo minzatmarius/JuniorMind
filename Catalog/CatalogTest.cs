@@ -19,29 +19,87 @@ namespace Catalog
             Student[] students = { student1, student2 };
             Student[] expected = { student2, student1 };
 
-            OrderAlphabetically(students);
+             QuickSortAplhabetically(students, 0, students.Length - 1);
+            //OrderAlphabetically(students);
+
             CollectionAssert.AreEqual(expected, students);
-        
+
 
         }
 
-        string CompareStrings(string first,string second)
+        [TestMethod]
+        public void OrderAlphabeticallyManyStudents()
         {
-            for(int i = 0; i < first.Length; i++)
-            {
-                if((int)first[i] > (int)second[i])
-                {
-                    return second;
-                }
-            }
+            Student student1 = new Student("John", new Subject[] { new Subject("Math", new int[] { 10, 7 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
 
-            return first;
+            Student student2 = new Student("Alex", new Subject[] { new Subject("Math", new int[] { 5, 5 }),
+                                                                    new Subject("English", new int[]{ 5, 6}) });
+
+            Student student3 = new Student("Adriane", new Subject[] { new Subject("Math", new int[] { 5, 8 }),
+                                                                    new Subject("English", new int[]{ 8, 6}) });
+
+            Student student4 = new Student("Dan", new Subject[] { new Subject("Math", new int[] { 8, 8}),
+                                                                    new Subject("English", new int[]{ 7, 9}) });
+
+            Student[] students = { student1, student2, student3, student4 };
+            Student[] expected = { student3, student2, student4, student1 };
+
+            QuickSortAplhabetically(students, 0, students.Length - 1);
+            //OrderAlphabetically(students);
+            CollectionAssert.AreEqual(expected, students);
         }
+
+ 
+
 
         void OrderAlphabetically(Student[] students)
         {
+            bool sorted = false;
+            while (!sorted)
+            {
+                sorted = true;
+                for (int i = 0; i < students.Length - 1; i++)
+                {
+                    if (string.Compare(students[i].name, students[i+1].name) == -1)
+                    {
+                        Swap(ref students[i], ref students[i + 1]);
+                        sorted = false;
+                    }
+                }
 
-            
+            }
+        }
+
+        void QuickSortAplhabetically(Student[] students, int start, int end)
+        {
+            int pivot = 0;
+            if (start < end)
+            {
+                pivot = Partition(students, start, end);
+                QuickSortAplhabetically(students, start, pivot - 1);
+                QuickSortAplhabetically(students, pivot + 1, end);
+
+            }
+        }
+
+
+
+        private int Partition(Student[] students, int start, int end)
+        {
+            int pivot = end;
+            int cursor = start - 1;
+
+            for (int i = start; i < end; i++)
+            {
+                if (string.Compare(students[i].name, students[pivot].name) == -1)
+                {
+                    cursor++;
+                    Swap(ref students[cursor], ref students[i]);
+                }
+            }
+            Swap(ref students[cursor + 1], ref students[end]);
+            return cursor + 1;
         }
 
         void Swap(ref Student a, ref Student b)
