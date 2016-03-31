@@ -51,6 +51,17 @@ namespace OrderedWords
 
         }
 
+        [TestMethod]
+        public void OrderAlphabetically()
+        {
+            string input = "word word word2";
+            Word[] expected = new Word[] { new Word("word", 2), new Word("word2", 1) };
+            Word[] actual = GetWords(input);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+
         struct Word
         {
             public string word;
@@ -108,25 +119,35 @@ namespace OrderedWords
         Word[] GetWords(string input)
         {
             string[] words = input.Split(' ');
-            string uniqueWords = "";
+        //    string uniqueWords = "";
             Word[] allWords = new Word[0];
-
             for (int i = 0; i < words.Length; i++)
             {
+                AddWord(ref allWords, words[i]);
 
-                if (!uniqueWords.Contains(words[i])) 
+                for (int j = allWords.Length - 2; j >= 0; j--)
                 {
-                    uniqueWords += words[i] + " ";
-                    AddWord(ref allWords, words[i]);
+                    
+                    if (string.Compare(allWords[allWords.Length - 1].word, allWords[j].word) == 1) break;
 
-                }
-                else
-                {
-                    IncreaseCounter(ref allWords, words[i]);
+                    if (string.Compare(allWords[allWords.Length - 1].word, allWords[j].word)== 0)
+                    {
+                        allWords[j].counter++;
+
+
+                            Array.Resize<Word>(ref allWords, allWords.Length - 1);
+
+                        
+
+
+                        break;
+                    }
+                   // if(string.Compare(allWords[allWords.Length - 1].word, allWords[j].word) == 0)
+                    Swap(ref allWords[allWords.Length - 1], ref allWords[j]);
                 }
             }
 
-            return allWords;
+         return allWords;
         }
 
         void QuickSortWords(Word[] words, int start, int end)
