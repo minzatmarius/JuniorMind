@@ -212,8 +212,7 @@ namespace Catalog
                 if(current > max)
                 {
                     max = current;
-                    mostTens = new Student[0];
-                    Array.Resize<Student>(ref mostTens, mostTens.Length + 1);
+                    mostTens = new Student[1];
                     mostTens[mostTens.Length - 1] = students[i];
                     continue;
                 }
