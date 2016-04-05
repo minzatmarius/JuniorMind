@@ -5,20 +5,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace First
+namespace Vector
 {
     class Vector<T> : IList<T>
     {
+
+        private T[] content;
+        private int count;
+
+        public Vector()
+        {
+            content = new T[0];
+        }
+
+
+        public Vector(T[] content)
+        {
+            this.content = new T[content.Length];
+            for(int i = 0; i< content.Length; i++)
+            this.content[i] = content[i];
+        }
+        
         public T this[int index]
         {
             get
             {
-                throw new NotImplementedException();
+                return content[index];
             }
 
             set
             {
                 throw new NotImplementedException();
+
             }
         }
 
@@ -40,17 +58,26 @@ namespace First
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            
+
+            Array.Resize(ref content, content.Length + 1);
+            content[content.Length -1] = item;
+
+
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            count = 0;
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            for(int i = 0; i < content.Length; i++)
+            {
+                if (content[i].Equals(item)) return true;
+            }
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -60,7 +87,7 @@ namespace First
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return (IEnumerator<T>)content.GetEnumerator();
         }
 
         public int IndexOf(T item)
@@ -85,7 +112,8 @@ namespace First
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return (IEnumerator)GetEnumerator();
+
         }
     }
 }
