@@ -86,7 +86,18 @@ namespace Vector
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            int length = array.Length;
+            Array.Resize<T>(ref array, array.Length + content.Length);
+            for(int i = arrayIndex + content.Length; i < array.Length; i++)
+            {
+                array[i] = array[i - content.Length];
+            }
+            for(int i = arrayIndex; i < content.Length; i++)
+            {
+                array[i] = content[i - arrayIndex];
+            }
+
+            
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -123,9 +134,10 @@ namespace Vector
         {
             int index = IndexOf(item);
             T[] contentCopy = content;
+            if (index == -1) return false;
             RemoveAt(index);
 
-            return ((index == -1) || (content == contentCopy)) ? false : true;
+            return (content == contentCopy) ? false : true;
         }
 
         public void RemoveAt(int index)

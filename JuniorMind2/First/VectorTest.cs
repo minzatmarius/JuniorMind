@@ -81,5 +81,15 @@ namespace Vector
             Assert.IsTrue(obj.Remove(2));
             Assert.IsFalse(obj.Remove(4));
         }
+
+        [TestMethod]
+        public void TestCopyTo()
+        {
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
+            int[] array = { 7, 8 };
+            obj.CopyTo(array, 1);
+            CollectionAssert.AreEqual(new int[] { 7, 1, 2, 3, 8 }, array);
+        }
+    
     }
 }
