@@ -103,7 +103,6 @@ namespace Vector
             }
             return -1;
 
-            throw new NotImplementedException();
 
         }
 
@@ -115,17 +114,22 @@ namespace Vector
                 content[i] = content[i - 1];
             }
             content[index] = item;
-           // throw new NotImplementedException();
         }
 
         public bool Remove(T item)
         {
+            
             throw new NotImplementedException();
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            for(int i = index; i < content.Length - 1; i++)
+            {
+                content[i] = content[i + 1];
+
+            }
+            Array.Resize<T>(ref content, content.Length - 1);
         }
 
         IEnumerator IEnumerable.GetEnumerator()

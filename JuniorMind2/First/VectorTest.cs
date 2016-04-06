@@ -37,6 +37,7 @@ namespace Vector
             Assert.AreEqual(1, obj.IndexOf(2));
             Assert.AreEqual(-1, obj.IndexOf(5));
         }
+
         [TestMethod]
         public void TestInsert()
         {
@@ -47,5 +48,13 @@ namespace Vector
             Assert.AreEqual(3, obj.IndexOf(3));
         }
 
+        [TestMethod]
+        public void TestRemoveAt()
+        {
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
+            obj.RemoveAt(0);
+            Assert.AreEqual(0, obj.IndexOf(2));
+            Assert.IsFalse(obj.Contains(1));
+        }
     }
 }
