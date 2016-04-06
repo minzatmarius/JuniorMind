@@ -46,7 +46,7 @@ namespace Vector
                 int count = 0;
                 for (int i = 0; i < content.Length; i++)
                 {
-                    if (content[i] != null) count++;
+                    if (!content[i].Equals(default(T))) count++;
                 }
                 return count;
             }
