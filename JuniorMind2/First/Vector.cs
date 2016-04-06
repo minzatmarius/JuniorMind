@@ -93,7 +93,7 @@ namespace Vector
 
         public int IndexOf(T item)
         {
-            for (int i = 0; i < content.Length - 1; i++)
+            for (int i = 0; i < content.Length ; i++)
             {
                 
                 if(content[i].Equals(item))
@@ -109,7 +109,13 @@ namespace Vector
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+            Array.Resize<T>(ref content, content.Length + 1);
+            for(int i = content.Length - 1; i > index; i--)
+            {
+                content[i] = content[i - 1];
+            }
+            content[index] = item;
+           // throw new NotImplementedException();
         }
 
         public bool Remove(T item)
