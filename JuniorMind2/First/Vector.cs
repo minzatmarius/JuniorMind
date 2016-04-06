@@ -56,7 +56,7 @@ namespace Vector
         {
             get
             {
-                throw new NotImplementedException();
+                return false;
             }
         }
 

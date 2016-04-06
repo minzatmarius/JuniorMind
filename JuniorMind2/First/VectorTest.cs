@@ -25,6 +25,12 @@ namespace Vector
         }
 
         [TestMethod]
+        public void TestReadOnly()
+        {
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
+            Assert.IsFalse(obj.IsReadOnly);
+        }
+        [TestMethod]
         public void TestAdd()
         {
             Vector<int> obj = new Vector<int>();
@@ -89,6 +95,7 @@ namespace Vector
             int[] array = { 7, 8 };
             obj.CopyTo(array, 1);
             CollectionAssert.AreEqual(new int[] { 7, 1, 2, 3, 8 }, array);
+
         }
     
     }
