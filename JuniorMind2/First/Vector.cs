@@ -11,7 +11,6 @@ namespace Vector
     {
 
         private T[] content;
-        private int count;
 
         public Vector()
         {
@@ -44,8 +43,12 @@ namespace Vector
         {
             get
             {
+                int count = 0;
+                for(int i= 0; i< content.Length; i++)
+                {
+                    if (content[i] != null) count++;
+                }
                 return count;
-                throw new NotImplementedException();
             }
         }
 
@@ -69,7 +72,8 @@ namespace Vector
 
         public void Clear()
         {
-            count = 0;
+            throw new NotImplementedException();
+
         }
 
         public bool Contains(T item)

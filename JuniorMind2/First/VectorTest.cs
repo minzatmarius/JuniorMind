@@ -8,6 +8,15 @@ namespace Vector
     public class VectorTest
     {
         [TestMethod]
+        public void TestCount()
+        {
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
+            obj.RemoveAt(2);
+            Assert.AreEqual(2, obj.Count);
+
+        }
+
+        [TestMethod]
         public void TestAdd()
         {
             Vector<int> obj = new Vector<int>();
