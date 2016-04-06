@@ -17,6 +17,14 @@ namespace Vector
         }
 
         [TestMethod]
+        public void TestClear()
+        {
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
+            obj.Clear();
+            Assert.AreEqual(0, obj.Count);
+        }
+
+        [TestMethod]
         public void TestAdd()
         {
             Vector<int> obj = new Vector<int>();

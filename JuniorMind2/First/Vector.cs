@@ -72,8 +72,7 @@ namespace Vector
 
         public void Clear()
         {
-            throw new NotImplementedException();
-
+            content = new T[0];
         }
 
         public bool Contains(T item)
