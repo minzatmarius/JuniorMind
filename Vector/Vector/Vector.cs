@@ -148,8 +148,7 @@ namespace Vector
             T[] contentCopy = content;
             if (index == -1) return false;
             RemoveAt(index);
-
-            return (content == contentCopy) ? false : true;
+            return true;
         }
 
         public void RemoveAt(int index)
