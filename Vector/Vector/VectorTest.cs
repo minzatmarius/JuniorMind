@@ -76,7 +76,6 @@ namespace Vector
         {
             Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
             obj.RemoveAt(0);
-            Assert.AreEqual(0, obj.IndexOf(2));
             Assert.IsFalse(obj.Contains(1));
         }
 

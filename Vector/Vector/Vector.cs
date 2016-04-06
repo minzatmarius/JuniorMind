@@ -154,12 +154,7 @@ namespace Vector
 
         public void RemoveAt(int index)
         {
-            for (int i = index; i < content.Length - 1; i++)
-            {
-                content[i] = content[i + 1];
-            }
-
-            Array.Resize<T>(ref content, content.Length - 1);
+            content[index] = default(T);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
