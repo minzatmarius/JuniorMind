@@ -56,5 +56,13 @@ namespace Vector
             Assert.AreEqual(0, obj.IndexOf(2));
             Assert.IsFalse(obj.Contains(1));
         }
+
+        [TestMethod]
+        public void TestRemove()
+        {
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
+            Assert.IsTrue(obj.Remove(2));
+            Assert.IsFalse(obj.Remove(4));
+        }
     }
 }

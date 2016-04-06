@@ -118,8 +118,11 @@ namespace Vector
 
         public bool Remove(T item)
         {
-            
-            throw new NotImplementedException();
+            int index = IndexOf(item);
+            T[] contentCopy = content;
+            RemoveAt(index);
+
+            return ((index == -1) || (content == contentCopy)) ? false : true;
         }
 
         public void RemoveAt(int index)
@@ -127,8 +130,8 @@ namespace Vector
             for(int i = index; i < content.Length - 1; i++)
             {
                 content[i] = content[i + 1];
-
             }
+
             Array.Resize<T>(ref content, content.Length - 1);
         }
 
