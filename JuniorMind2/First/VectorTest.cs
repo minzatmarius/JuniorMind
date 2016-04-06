@@ -12,8 +12,7 @@ namespace Vector
         {
             Vector<int> obj = new Vector<int>();
             obj.Add(1);
-            Vector<int> obj2 = new Vector<int>(new int[] { 1 });
-          //  CollectionAssert.AreEqual(obj2, obj);
+            Assert.IsTrue(obj.Contains(1));
             
         }
 
