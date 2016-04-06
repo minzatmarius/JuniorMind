@@ -44,6 +44,7 @@ namespace Vector
         {
             get
             {
+                return count;
                 throw new NotImplementedException();
             }
         }
@@ -92,7 +93,18 @@ namespace Vector
 
         public int IndexOf(T item)
         {
+            for (int i = 0; i < content.Length - 1; i++)
+            {
+                
+                if(content[i].Equals(item))
+                {
+                    return i;
+                }
+            }
+            return -1;
+
             throw new NotImplementedException();
+
         }
 
         public void Insert(int index, T item)

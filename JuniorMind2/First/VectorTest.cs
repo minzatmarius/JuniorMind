@@ -31,5 +31,14 @@ namespace Vector
             Assert.IsFalse(obj.Contains(4));
         }
 
+        [TestMethod]
+        public void TestIndexOf()
+        {
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
+            Assert.AreEqual(1, obj.IndexOf(2));
+            Assert.AreEqual(-1, obj.IndexOf(5));
+
+        }
+
     }
 }
