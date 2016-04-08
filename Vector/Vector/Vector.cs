@@ -127,11 +127,13 @@ namespace Vector
 
         public bool Remove(T item)
         {
-            int index = IndexOf(item);
-            T[] contentCopy = content;
-            if (index == -1) return false;
-            RemoveAt(index);
-            return true;
+            if (Contains(item))
+            {
+                RemoveAt(IndexOf(item));
+                return true;
+
+            }
+            return false;
         }
 
         public void RemoveAt(int index)
