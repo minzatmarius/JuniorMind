@@ -66,10 +66,7 @@ namespace Vector
 
         public void Clear()
         {
-            for(int i = 0; i< content.Length; i++)
-            {
-                content[i] = default(T);
-            }
+            count = 0;
         }
 
         public bool Contains(T item)
