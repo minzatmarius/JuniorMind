@@ -80,18 +80,12 @@ namespace Vector
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            int length = array.Length;
-            Array.Resize<T>(ref array, array.Length + content.Length);
-            for (int i = arrayIndex + content.Length; i < array.Length; i++)
+            int j = arrayIndex;
+            for (int i = arrayIndex; i < Math.Min(count, array.Length); i++)
             {
-                array[i] = array[i - content.Length];
+                array.SetValue(content[i], j);
+                j++;
             }
-            for (int i = arrayIndex; i < content.Length; i++)
-            {
-                array[i] = content[i - arrayIndex];
-            }
-
-
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -103,7 +97,6 @@ namespace Vector
         {
             for (int i = 0; i < content.Length; i++)
             {
-
                 if (content[i].Equals(item))
                 {
                     return i;
@@ -120,6 +113,7 @@ namespace Vector
                 content[i] = content[i - 1];
             }
             content[index] = item;
+
         }
 
         public bool Remove(T item)

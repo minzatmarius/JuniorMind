@@ -93,10 +93,13 @@ namespace Vector
         [TestMethod]
         public void TestCopyTo()
         {
-            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
-            int[] array = { 7, 8 };
+            Vector<int> obj = new Vector<int>();
+            obj.Add(1);
+            obj.Add(2);
+
+            int[] array = { 7, 8, 9 };
             obj.CopyTo(array, 1);
-            CollectionAssert.AreEqual(new int[] { 7, 1, 2, 3, 8 }, array);
+            CollectionAssert.AreEqual(new int[] { 7, 2, 9 }, array);
 
         }
 
