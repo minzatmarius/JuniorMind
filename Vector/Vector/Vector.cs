@@ -44,11 +44,6 @@ namespace Vector
         {
             get
             {
-                int count = 0;
-                for (int i = 0; i < content.Length; i++)
-                {
-                    if (!content[i].Equals(default(T))) count++;
-                }
                 return count;
             }
         }
@@ -64,19 +59,8 @@ namespace Vector
         public void Add(T item)
         {
             Resize();
-
-            if (content.Length == 0)
-                Array.Resize(ref content, content.Length + 1);
-
-            for (int i = 0; i < content.Length; i++)
-            {
-                if (content[i].Equals(default(T)))
-                {
-                    content[i] = item;
-                    break;
-                }
-            }
-
+            content[count] = item;
+            count++;
 
         }
 
@@ -152,7 +136,11 @@ namespace Vector
 
         public void RemoveAt(int index)
         {
-            content[index] = default(T);
+            for (int i = index; i < content.Length - 1; i++)
+            {
+                content[i] = content[i + 1];
+            }
+            count--;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -163,7 +151,7 @@ namespace Vector
 
         private void Resize()
         {
-            if (content.Length == Count)
+            if (content.Length == count)
                 Array.Resize(ref content, content.Length * 2);
         }
     }

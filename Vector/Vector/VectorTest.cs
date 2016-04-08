@@ -10,8 +10,11 @@ namespace Vector
         [TestMethod]
         public void TestCount()
         {
-            Vector<int> obj = new Vector<int>(new int[] { 1, 2, 3 });
-            obj.RemoveAt(2);
+            Vector<int> obj = new Vector<int>();
+            obj.Add(1);
+            obj.Add(2);
+            obj.Add(3);
+            obj.RemoveAt(1);
             Assert.AreEqual(2, obj.Count);
 
         }
