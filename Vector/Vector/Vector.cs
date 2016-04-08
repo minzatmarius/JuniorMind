@@ -11,10 +11,11 @@ namespace Vector
     {
 
         private T[] content;
+        private int count = 0;
 
         public Vector()
         {
-            content = new T[0];
+            content = new T[8];
         }
 
 
@@ -34,7 +35,7 @@ namespace Vector
 
             set
             {
-                throw new NotImplementedException();
+                content[index] = value;
 
             }
         }
@@ -62,9 +63,7 @@ namespace Vector
 
         public void Add(T item)
         {
-
-            if (content.Length == Count)
-                Array.Resize(ref content, content.Length * 2);
+            Resize();
 
             if (content.Length == 0)
                 Array.Resize(ref content, content.Length + 1);
@@ -80,7 +79,6 @@ namespace Vector
 
 
         }
-
 
         public void Clear()
         {
@@ -131,8 +129,6 @@ namespace Vector
                 }
             }
             return -1;
-
-
         }
 
         public void Insert(int index, T item)
@@ -163,6 +159,12 @@ namespace Vector
         {
             return (IEnumerator)GetEnumerator();
 
+        }
+
+        private void Resize()
+        {
+            if (content.Length == Count)
+                Array.Resize(ref content, content.Length * 2);
         }
     }
 }
