@@ -94,9 +94,8 @@ namespace Vector
         [TestMethod]
         public void TestCopyTo()
         {
-            Vector<int> obj = new Vector<int>();
-            obj.Add(1);
-            obj.Add(2);
+            Vector<int> obj = new Vector<int>(new int[] { 1, 2 });
+           
 
             int[] array = { 7, 8, 9 };
             obj.CopyTo(array, 1);

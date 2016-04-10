@@ -23,7 +23,10 @@ namespace Vector
         {
             this.content = new T[content.Length];
             for (int i = 0; i < content.Length; i++)
+            {
                 this.content[i] = content[i];
+                count++;
+            }
         }
 
         public T this[int index]
