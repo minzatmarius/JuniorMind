@@ -99,7 +99,7 @@ namespace Vector
 
             int[] array = { 7, 8, 9 };
             obj.CopyTo(array, 1);
-            CollectionAssert.AreEqual(new int[] { 7, 2, 9 }, array);
+            CollectionAssert.AreEqual(new int[] { 7, 1, 2 }, array);
 
         }
 
