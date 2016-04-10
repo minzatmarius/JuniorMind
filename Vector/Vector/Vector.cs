@@ -90,7 +90,10 @@ namespace Vector
 
         public IEnumerator<T> GetEnumerator()
         {
-            return (IEnumerator<T>)content.GetEnumerator();
+            for(int i = 0; i < content.Length; i++)
+            {
+                yield return content[i];
+            }
         }
 
         public int IndexOf(T item)

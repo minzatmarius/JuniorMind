@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Vector
 {
@@ -100,6 +101,18 @@ namespace Vector
             int[] array = { 7, 8, 9 };
             obj.CopyTo(array, 1);
             CollectionAssert.AreEqual(new int[] { 7, 1, 2 }, array);
+
+        }
+
+        [TestMethod]
+        public void TestEnumerator()
+        {
+            Vector<int> obj = new Vector<int>() { 1, 2, 3, 4, 5};
+            IEnumerator<int> index = obj.GetEnumerator();
+            index.MoveNext();
+            index.MoveNext();
+            index.MoveNext();
+            Assert.AreEqual(3, index.Current);
 
         }
 
