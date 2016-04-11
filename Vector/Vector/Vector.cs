@@ -124,9 +124,10 @@ namespace Vector
 
         public bool Remove(T item)
         {
-            if (Contains(item))
+            int index = IndexOf(item);
+            if (index != -1) 
             {
-                RemoveAt(IndexOf(item));
+                RemoveAt(index);
                 return true;
 
             }
