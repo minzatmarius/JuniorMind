@@ -83,10 +83,11 @@ namespace Vector
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            int j = arrayIndex;
-            for (int i = 0; i < count; i++)
+            int j = 0;
+            int end = Math.Min(array.Length, count + arrayIndex);
+            for (int i = arrayIndex; i < end; i++)
             {
-                array.SetValue(content[i], j);
+                array.SetValue(content[j], i);
                 j++;
             }
         }
