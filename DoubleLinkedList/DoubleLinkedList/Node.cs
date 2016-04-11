@@ -8,8 +8,8 @@ namespace DoubleLinkedList
 {
     class Node
     {
-        private object data;
-        Node next;
+        public object data;
+        public Node next;
 
         public Node(object data)
         {
