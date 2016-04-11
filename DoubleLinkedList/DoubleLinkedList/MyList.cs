@@ -63,7 +63,17 @@ namespace DoubleLinkedList
             }
         }
 
+        public new bool Contains(T value)
+        {
+            var node = headNode;
+            while (node != null)
+            {
+                if (node.data.Equals(value))
+                    return true;
+                node = node.next;
+            }
+            return false;
+        }
 
-        
     }
 }

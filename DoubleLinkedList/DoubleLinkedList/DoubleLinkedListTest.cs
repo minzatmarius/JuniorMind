@@ -46,5 +46,19 @@ namespace DoubleLinkedList
 
             Assert.AreEqual(5,count);
         }
+
+        [TestMethod]
+        public void TestContains()
+        {
+            MyList<int> list = new MyList<int>();
+            list.AddLast(1);
+            list.AddLast(2);
+            list.AddLast(3);
+            list.AddLast(4);
+            list.AddLast(5);
+
+            Assert.IsTrue(list.Contains(5));
+            Assert.IsFalse(list.Contains(11));
+        }
     }
 }
