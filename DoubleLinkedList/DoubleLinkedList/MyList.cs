@@ -9,20 +9,33 @@ namespace DoubleLinkedList
     class MyList<T> :LinkedList<T>
     {
         private Node headNode;
+        private int count;
         public MyList()
         {
             headNode = null;
-        }      
-        
-        public void AddToEnd(object data)
+       
+        }
+
+        public new int Count
         {
-            if(headNode == null)
+            get
+            {
+                return count;
+            }
+        }
+
+        public new void AddLast(T data)
+        {
+            if (headNode == null)
             {
                 headNode = new Node(data);
+                count++;
+
             }
             else
             {
-                AddToEnd
+                headNode.AddAfter(data);
+                count++;
             }
         }
     }

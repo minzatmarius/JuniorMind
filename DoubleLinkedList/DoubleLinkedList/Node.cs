@@ -16,5 +16,18 @@ namespace DoubleLinkedList
             this.data = data;
             next = null;
         }
+
+
+        public void AddAfter(object data)
+        {
+            if(next == null)
+            {
+                next = new Node(data);
+            }
+            else
+            {
+                next.AddAfter(data);
+            }
+        }
     }
 }
