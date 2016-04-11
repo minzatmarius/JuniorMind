@@ -74,7 +74,7 @@ namespace Vector
 
         public bool Contains(T item)
         {
-            for (int i = 0; i < content.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (content[i].Equals(item)) return true;
             }
@@ -94,7 +94,7 @@ namespace Vector
 
         public IEnumerator<T> GetEnumerator()
         {
-            for(int i = 0; i < content.Length; i++)
+            for(int i = 0; i < count; i++)
             {
                 yield return content[i];
             }
@@ -102,7 +102,7 @@ namespace Vector
 
         public int IndexOf(T item)
         {
-            for (int i = 0; i < content.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (content[i].Equals(item))
                 {
@@ -114,8 +114,7 @@ namespace Vector
 
         public void Insert(int index, T item)
         {
-            Array.Resize<T>(ref content, content.Length + 1);
-            for (int i = content.Length - 1; i > index; i--)
+            for (int i = count - 1; i > index; i--)
             {
                 content[i] = content[i - 1];
             }
@@ -137,7 +136,7 @@ namespace Vector
 
         public void RemoveAt(int index)
         {
-            for (int i = index; i < content.Length - 1; i++)
+            for (int i = index; i < count -1; i++)
             {
                 content[i] = content[i + 1];
             }

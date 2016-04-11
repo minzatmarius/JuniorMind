@@ -72,7 +72,6 @@ namespace Vector
             obj.Insert(0, 5);
             Assert.AreEqual(0, obj.IndexOf(5));
             Assert.AreEqual(1, obj.IndexOf(1));
-            Assert.AreEqual(3, obj.IndexOf(3));
         }
 
         [TestMethod]
