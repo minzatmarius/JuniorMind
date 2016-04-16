@@ -71,6 +71,17 @@ namespace DoubleLinkedList
             return false;
         }
 
+        public int IndexOf(T data)
+        {
+            var current = guard.next;
+            for(int i = 0; i < count; i++)
+            {
+                if (current.data.Equals(data))
+                    return i;
+                current = current.next;
+            }
+            return -1;
+        }
 
     }
 }
