@@ -64,6 +64,16 @@ namespace DoubleLinkedList
             return (IndexOf(value) != -1);
         }
 
+        public Node GetAt(int index)
+        {
+            var current = guard.next;
+            for(int i = 0; i < index; i++)
+            {
+                current = current.next;
+            }
+            return current;
+        }
+
         public int IndexOf(T data)
         {
             var current = guard.next;
@@ -74,6 +84,16 @@ namespace DoubleLinkedList
                 current = current.next;
             }
             return -1;
+        }
+
+        public void RemoveAt(int index)
+        {
+            var current = GetAt(index);
+            var previous = current.previous;
+            var next = current.next;
+            previous.next = next;
+            next.previous = previous;
+            count--;
         }
 
     }

@@ -77,5 +77,21 @@ namespace DoubleLinkedList
             Assert.AreEqual(3, list.IndexOf(4));
             Assert.AreEqual(4, list.IndexOf(5));
         }
+
+        [TestMethod]
+        public void TestRemoveAt()
+        {
+            MyList<int> list = new MyList<int>();
+            list.AddLast(1);
+            list.AddLast(2);
+            list.AddLast(3);
+            list.AddLast(4);
+            list.AddLast(5);
+
+            Assert.AreEqual(5, list.Count);
+            list.RemoveAt(4);
+            Assert.IsFalse(list.Contains(5));
+            Assert.AreEqual(4, list.Count);
+        }
     }
 }
