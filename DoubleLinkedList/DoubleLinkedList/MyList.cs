@@ -61,14 +61,7 @@ namespace DoubleLinkedList
 
         public new bool Contains(T value)
         {
-            var node = guard.next;
-            while (node != guard)
-            {
-                if (node.data.Equals(value))
-                    return true;
-                node = node.next;
-            }
-            return false;
+            return (IndexOf(value) != -1);
         }
 
         public int IndexOf(T data)
