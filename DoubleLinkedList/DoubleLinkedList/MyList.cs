@@ -8,11 +8,13 @@ namespace DoubleLinkedList
 {
     class MyList<T> : LinkedList<T>
     {
-        private Node headNode;
+        private Node guard;
         private int count;
         public MyList()
         {
-            headNode = null;      
+            guard = new Node(default(T));
+            guard.next = guard;
+            guard.previous = guard;
         }
 
         public new int Count
@@ -25,38 +27,32 @@ namespace DoubleLinkedList
 
         public new void AddLast(T data)
         {
-            if (headNode == null)
-            {
-                headNode = new Node(data);
-                count++;
-            }
-            else
-            {
-                headNode.AddAfter(data);
-                count++;
-            }
+            Node last = guard.previous;
+            Node current = new Node(data);
+            last.next = current;
+            guard.previous = current;
+            count++;
+            current.previous = last;
+            current.next = guard;
+
         }
 
         public new void AddFirst(T data)
         {
-            if (headNode == null)
-            {
-                headNode = new Node(data);
-                count++;
-            }
-            else
-            {
-                Node temp = new Node(data);
-                temp.next = headNode;
-                headNode = temp;
-                count++;
-            }
+            Node second = guard.next;
+            Node current = new Node(data);
+            second.previous = current;
+            guard.next = current;
+            current.previous = guard;
+            current.next = second;
+            count++;
+
         }
 
         public new IEnumerator<Node> GetEnumerator()
         {
-            var node = headNode;
-            while (node != null)
+            var node = guard.next;
+            while (node != guard)
             {
                 yield return node;
                 node = node.next;
@@ -65,8 +61,8 @@ namespace DoubleLinkedList
 
         public new bool Contains(T value)
         {
-            var node = headNode;
-            while (node != null)
+            var node = guard.next;
+            while (node != guard)
             {
                 if (node.data.Equals(value))
                     return true;
@@ -74,6 +70,7 @@ namespace DoubleLinkedList
             }
             return false;
         }
+
 
     }
 }

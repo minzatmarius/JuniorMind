@@ -5,16 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DoubleLinkedList
-{
+{ 
     class Node
     {
         public object data;
         public Node next;
+        public Node previous;
 
         public Node(object data)
         {
             this.data = data;
             next = null;
+            previous = null;
         }
 
 
