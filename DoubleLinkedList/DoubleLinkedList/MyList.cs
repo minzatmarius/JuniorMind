@@ -96,5 +96,12 @@ namespace DoubleLinkedList
             count--;
         }
 
+        public new bool Remove(T data)
+        {
+            int index = IndexOf(data);
+            if (IndexOf(data) == -1) return false; 
+            RemoveAt(index);
+            return true;
+        }
     }
 }
