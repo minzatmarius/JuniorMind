@@ -126,8 +126,12 @@ namespace DoubleLinkedList
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
-
+            var node = guard.next;
+            while (!node.data.Equals(guard.data))
+            {
+                yield return node.data;
+                node = node.next;
+            }
         }
 
         public void Clear()
