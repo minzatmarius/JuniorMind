@@ -88,12 +88,7 @@ namespace DoubleLinkedList
 
         public void RemoveAt(int index)
         {
-            var current = GetAt(index);
-            var previous = current.previous;
-            var next = current.next;
-            previous.next = next;
-            next.previous = previous;
-            count--;
+            RemoveNode(GetAt(index));
         }
 
         public void Remove(T data)
@@ -103,15 +98,20 @@ namespace DoubleLinkedList
             {
                 if (current.data.Equals(data))
                 {
-                    var previousNode = current.previous;
-                    var nextNode = current.next;
-                    previousNode.next = nextNode;
-                    nextNode.previous = previousNode;
-                    count--;
+                    RemoveNode(current);
                     break;
                 }
                 current = current.next;
             }
+        }
+
+        private void RemoveNode(Node<T> current)
+        {
+            var previousNode = current.previous;
+            var nextNode = current.next;
+            previousNode.next = nextNode;
+            nextNode.previous = previousNode;
+            count--;
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
