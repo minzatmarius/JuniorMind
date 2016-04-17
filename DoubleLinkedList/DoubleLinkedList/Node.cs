@@ -6,30 +6,18 @@ using System.Threading.Tasks;
 
 namespace DoubleLinkedList
 { 
-    class Node
+    class Node<T>
     {
-        public object data;
-        public Node next;
-        public Node previous;
+        public T data;
+        public Node<T> next;
+        public Node<T> previous;
 
-        public Node(object data)
+        public Node(T data)
         {
             this.data = data;
             next = null;
             previous = null;
         }
 
-
-        public void AddAfter(object data)
-        {
-            if(next == null)
-            {
-                next = new Node(data);
-            }
-            else
-            {
-                next.AddAfter(data);
-            }
-        }
     }
 }

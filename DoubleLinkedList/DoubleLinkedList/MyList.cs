@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace DoubleLinkedList
 {
-    class MyList<T> : LinkedList<T>
+    class MyList<T> : IEnumerable<T> 
     {
-        private Node guard;
+        public Node<T> guard;
         private int count;
         public MyList()
         {
-            guard = new Node(default(T));
+            guard = new Node<T>(default(T));
             guard.next = guard;
             guard.previous = guard;
         }
@@ -25,10 +26,15 @@ namespace DoubleLinkedList
             }
         }
 
+        public void Add(T data)
+        {
+            AddLast(data);
+        }
+
         public new void AddLast(T data)
         {
-            Node last = guard.previous;
-            Node current = new Node(data);
+            Node<T> last = guard.previous;
+            Node<T> current = new Node<T>(data);
             last.next = current;
             guard.previous = current;
             count++;
@@ -39,8 +45,8 @@ namespace DoubleLinkedList
 
         public new void AddFirst(T data)
         {
-            Node second = guard.next;
-            Node current = new Node(data);
+            Node<T> second = guard.next;
+            Node<T> current = new Node<T>(data);
             second.previous = current;
             guard.next = current;
             current.previous = guard;
@@ -49,22 +55,14 @@ namespace DoubleLinkedList
 
         }
 
-        public new IEnumerator<Node> GetEnumerator()
-        {
-            var node = guard.next;
-            while (node != guard)
-            {
-                yield return node;
-                node = node.next;
-            }
-        }
+      
 
         public new bool Contains(T value)
         {
             return (IndexOf(value) != -1);
         }
 
-        public Node GetAt(int index)
+        public Node<T> GetAt(int index)
         {
             var current = guard.next;
             for(int i = 0; i < index; i++)
@@ -102,6 +100,22 @@ namespace DoubleLinkedList
             if (IndexOf(data) == -1) return false; 
             RemoveAt(index);
             return true;
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            var node = guard.next;
+            while (!node.data.Equals(guard.data))
+            {
+                yield return node.data;
+                node = node.next;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+           throw new NotImplementedException();
+          
         }
     }
 }
