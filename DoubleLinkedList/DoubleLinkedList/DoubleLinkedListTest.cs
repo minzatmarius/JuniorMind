@@ -79,7 +79,7 @@ namespace DoubleLinkedList
         {
             var list = new MyList<int> { 1, 2, 3, 4, 5 };
 
-            Assert.IsTrue(list.Remove(2));
+            list.Remove(2);
             Assert.IsFalse(list.Contains(2));
         }
       
