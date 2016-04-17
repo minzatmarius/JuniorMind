@@ -17,7 +17,7 @@ namespace DoubleLinkedList
             list.AddLast(4);
             list.AddLast(5);
 
-            Assert.AreEqual(5,list.Count);           
+            Assert.AreEqual(5, list.Count);
         }
 
         [TestMethod]
@@ -40,9 +40,9 @@ namespace DoubleLinkedList
                 count++;
             }
 
-            Assert.AreEqual(5,count);
-      
-    }
+            Assert.AreEqual(5, count);
+
+        }
 
         [TestMethod]
         public void TestContains()
@@ -83,7 +83,15 @@ namespace DoubleLinkedList
             Assert.IsFalse(list.Contains(2));
         }
 
-        
-      
+        [TestMethod]
+        public void TestCopyTo()
+        {
+            var list = new MyList<int> { 1, 2 };
+
+            int[] array = { 7, 8, 9 };
+            list.CopyTo(array, 1);
+            CollectionAssert.AreEqual(new int[] { 7, 1, 2 }, array);
+        }
+
     }
 }

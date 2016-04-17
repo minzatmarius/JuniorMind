@@ -9,7 +9,7 @@ namespace DoubleLinkedList
 {
     class MyList<T> : IEnumerable<T>, ICollection<T>
     {
-        public Node<T> guard;
+        private Node<T> guard;
         private int count;
         public MyList()
         {
@@ -141,7 +141,14 @@ namespace DoubleLinkedList
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            var j = guard.next;
+            int end = Math.Min(array.Length, count + arrayIndex);
+            for (int i = arrayIndex; i < end; i++)
+            {
+                array.SetValue(j.data, i);
+                j=j.next;
+            }
+    
         }
 
         bool ICollection<T>.Remove(T item)
