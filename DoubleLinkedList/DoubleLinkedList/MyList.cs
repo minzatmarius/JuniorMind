@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DoubleLinkedList
 {
-    class MyList<T> : IEnumerable<T>
+    class MyList<T> : IEnumerable<T>, ICollection<T>
     {
         public Node<T> guard;
         private int count;
@@ -23,6 +23,14 @@ namespace DoubleLinkedList
             get
             {
                 return count;
+            }
+        }
+
+        public bool IsReadOnly
+        {
+            get
+            {
+                return false;
             }
         }
 
@@ -124,6 +132,21 @@ namespace DoubleLinkedList
         {
             throw new NotImplementedException();
 
+        }
+
+        public void Clear()
+        {
+            count = 0;
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            return !Contains(item);
         }
     }
 }

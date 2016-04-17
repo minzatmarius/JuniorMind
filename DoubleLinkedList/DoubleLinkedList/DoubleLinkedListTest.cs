@@ -82,6 +82,8 @@ namespace DoubleLinkedList
             list.Remove(2);
             Assert.IsFalse(list.Contains(2));
         }
+
+        
       
     }
 }
