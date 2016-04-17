@@ -41,24 +41,20 @@ namespace DoubleLinkedList
 
         public void AddLast(T data)
         {
-            Node<T> last = guard.previous;
-            Node<T> current = new Node<T>(data);
+            var last = guard.previous;
+            var current = new Node<T>(data) { previous = last, next = guard };
             last.next = current;
             guard.previous = current;
             count++;
-            current.previous = last;
-            current.next = guard;
 
         }
 
         public void AddFirst(T data)
         {
-            Node<T> second = guard.next;
-            Node<T> current = new Node<T>(data);
+            var second = guard.next;
+            var current = new Node<T>(data) { previous = guard, next = second };
             second.previous = current;
             guard.next = current;
-            current.previous = guard;
-            current.next = second;
             count++;
 
         }
