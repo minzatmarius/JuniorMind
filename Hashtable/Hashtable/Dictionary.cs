@@ -21,7 +21,11 @@ namespace Dictionary
             }
         }
         public Table[] items = new Table[8]; 
+        private int countBuckets;
+        private int countItems;
        
+
+
         public TValue this[TKey key]
         {
 
@@ -41,7 +45,7 @@ namespace Dictionary
         {
             get
             {
-                throw new NotImplementedException();
+                return countItems;
             }
         }
 
@@ -74,6 +78,8 @@ namespace Dictionary
             throw new NotImplementedException();
         }
 
+
+
         public void Add(TKey key, TValue value)
         {
             throw new NotImplementedException();
@@ -91,7 +97,12 @@ namespace Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < countBuckets; i++)
+            {
+                if (buckets[i].GetHashCode() == key.GetHashCode())
+                    return true;
+            }
+            return false;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
@@ -122,6 +133,15 @@ namespace Dictionary
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        private void Resize()
+        {
+            if (items.Length == countItems)
+                Array.Resize(ref items, items.Length * 2);
+            if (buckets.Length == countBuckets)
+                Array.Resize(ref buckets, buckets.Length * 2);
+
         }
     }
 }
