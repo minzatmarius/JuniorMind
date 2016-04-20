@@ -26,6 +26,7 @@ namespace Dictionary
         public Entry[] entries = new Entry[8]; 
         private int countBuckets;
         private int countEntries;
+
        
         public TValue this[TKey key]
         {
@@ -112,6 +113,7 @@ namespace Dictionary
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
+
             throw new NotImplementedException();
         }
 
@@ -122,13 +124,25 @@ namespace Dictionary
 
         public bool Remove(TKey key)
         {
+            RemoveEntries(key);
             buckets[GetIndex(key)] = 0;
             return buckets[GetIndex(key)] == 0;
         }
 
         public bool TryGetValue(TKey key, out TValue value)
         {
+
+            int previous = entries[buckets[GetIndex(key)]].previous;
+            TValue currentValue = entries[buckets[GetIndex(key)]].value;
+            /*    while (previous != 0)
+                {
+                    value = entries[buckets[GetIndex(key)]].value;
+                }
+                if (buckets[GetIndex(key)] == 0) return false;
+                return true;
+            */
             throw new NotImplementedException();
+
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -143,6 +157,17 @@ namespace Dictionary
             if (buckets.Length == countBuckets)
                 Array.Resize(ref buckets, buckets.Length * 2);
 
+        }
+
+        private void RemoveEntries(TKey key)
+        {
+            int currentPosition = buckets[GetIndex(key)];
+            while (currentPosition != 0)
+            {
+                int previousPosition = entries[currentPosition].previous;
+                entries[currentPosition] = default(Entry);
+                currentPosition = previousPosition;                
+            }
         }
 
         private int GetIndex(TKey key)

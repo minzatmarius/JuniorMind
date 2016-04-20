@@ -79,10 +79,25 @@ namespace Dictionary
         {
             Hashtable<int, string> table = new Hashtable<int, string>();
             table.Add(1, "abc");
-
-            Assert.IsTrue(table.ContainsKey(1));
+            table.Add(2, "xyz");
+            table.Add(1, "def");
             table.Remove(1);
             Assert.IsFalse(table.ContainsKey(1));
         }
+
+      /*  [TestMethod]
+        public void TestTryGetValue()
+        {
+            Hashtable<int, string> table = new Hashtable<int, string>();
+            table.Add(1, "abc");//position 1
+            table.Add(2, "xyz");//2
+            table.Add(1, "def");//3
+            table.Add(1, "ghi");//4
+            table.Add(2, "XYZ");//5
+            table.Add(3, "something");//6
+            string value = "def";
+            Assert.IsTrue(table.TryGetValue(1, out value));
+        }
+        */
     }
 }
