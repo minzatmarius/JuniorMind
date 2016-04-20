@@ -113,8 +113,15 @@ namespace Dictionary
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-
-            throw new NotImplementedException();
+            for (int i = 0; i < countEntries + 1; i++)
+            {
+                TKey key = entries[i].key;
+                TValue value = entries[i].value;
+                if (!entries[i].Equals(default(Entry)))
+                {
+                    yield return new KeyValuePair<TKey, TValue>(key, value);
+                }
+            }
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
@@ -147,7 +154,7 @@ namespace Dictionary
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         private void Resize()

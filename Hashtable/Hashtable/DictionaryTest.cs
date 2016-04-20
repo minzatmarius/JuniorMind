@@ -85,6 +85,22 @@ namespace Dictionary
             Assert.IsFalse(table.ContainsKey(1));
         }
 
+        [TestMethod]
+        public void TestEnumerator()
+        {
+            Hashtable<int, string> table = new Hashtable<int, string>();
+            table.Add(1, "abc");
+            table.Add(2, "xyz");
+            table.Add(1, "def");
+
+            int count = 0;
+            foreach (KeyValuePair<int, string> pair in table)
+            {
+                count++;
+            }
+            Assert.AreEqual(3, count);
+        }
+
       /*  [TestMethod]
         public void TestTryGetValue()
         {
