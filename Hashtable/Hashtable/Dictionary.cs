@@ -89,7 +89,10 @@ namespace Dictionary
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            buckets = new int[8];
+            entries = new Entry[8];
+            countBuckets = 0;
+            countEntries = 0;
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
