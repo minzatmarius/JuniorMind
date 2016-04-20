@@ -62,7 +62,12 @@ namespace Dictionary
         {
             get
             {
-                throw new NotImplementedException();
+                TKey[] keys = new TKey[countEntries];
+                for (int i = 1; i <= countEntries; i++)
+                {
+                    keys[i] = entries[i].key;
+                }
+                return keys;
             }
         }
 
@@ -70,7 +75,12 @@ namespace Dictionary
         {
             get
             {
-                throw new NotImplementedException();
+                TValue[] values = new TValue[countEntries];
+                for(int i = 1; i <= countEntries; i++)
+                {
+                    values[i] = entries[i].value;
+                }
+                return values;
             }
         }
 
@@ -151,6 +161,7 @@ namespace Dictionary
                             currentPosition = entries[currentPosition].previous;
                         }
             */
+
 
             throw new NotImplementedException();
 
