@@ -117,12 +117,13 @@ namespace Dictionary
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            return Remove(item.Key);
         }
 
         public bool Remove(TKey key)
         {
-            throw new NotImplementedException();
+            buckets[GetIndex(key)] = 0;
+            return buckets[GetIndex(key)] == 0;
         }
 
         public bool TryGetValue(TKey key, out TValue value)

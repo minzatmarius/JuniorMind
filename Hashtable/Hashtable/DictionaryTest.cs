@@ -20,6 +20,7 @@ namespace Dictionary
             Hashtable<int, string> table = new Hashtable<int, string>();         
             Assert.IsFalse(table.ContainsKey(1));
         }
+
         [TestMethod]
         public void TestAdd()
         {
@@ -34,6 +35,7 @@ namespace Dictionary
             Assert.IsTrue(table.ContainsKey(2));
             Assert.IsTrue(table.ContainsKey(3));
         }
+
         [TestMethod]
         public void TestContains()
         {
@@ -42,6 +44,7 @@ namespace Dictionary
             KeyValuePair<int, string> pair = new KeyValuePair<int, string>(1, "abc");
             Assert.IsTrue(table.Contains(pair));
         }
+
         [TestMethod]
         public void TestClear()
         {
@@ -52,6 +55,7 @@ namespace Dictionary
             table.Clear();
             Assert.IsFalse(table.ContainsKey(1));
         }
+
         [TestMethod]
         public void AddKeyValuePair()
         {
@@ -68,6 +72,17 @@ namespace Dictionary
             Assert.IsTrue(table.Contains(pair2));
             Assert.IsTrue(table.Contains(pair3));
 
+        }
+
+        [TestMethod]
+        public void TestRemove()
+        {
+            Hashtable<int, string> table = new Hashtable<int, string>();
+            table.Add(1, "abc");
+
+            Assert.IsTrue(table.ContainsKey(1));
+            table.Remove(1);
+            Assert.IsFalse(table.ContainsKey(1));
         }
     }
 }
