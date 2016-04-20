@@ -10,25 +10,25 @@ namespace Dictionary
     class Hashtable<TKey, TValue> : IDictionary<TKey, TValue>
     {
         public int[] buckets = new int[8];
-        public struct Table
+        public struct Entry
         {
             public TKey key;
             public TValue value;
-            public Table(TKey key, TValue value)
+            public int previous;
+            public Entry(TKey key, TValue value, int previous)
             {
                 this.key = key;
                 this.value = value;
+                this.previous = previous;
             }
         }
-        public Table[] items = new Table[8]; 
+
+        public Entry[] entries = new Entry[8]; 
         private int countBuckets;
-        private int countItems;
+        private int countEntries;
        
-
-
         public TValue this[TKey key]
         {
-
 
             get
             {
@@ -45,7 +45,7 @@ namespace Dictionary
         {
             get
             {
-                return countItems;
+                return countEntries;
             }
         }
 
@@ -75,14 +75,16 @@ namespace Dictionary
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+
         }
-
-
 
         public void Add(TKey key, TValue value)
         {
-            throw new NotImplementedException();
+            Resize();
+            int index = GetIndex(key);
+            int previous = buckets[index];
+            entries[countEntries + 1] = new Entry(key, value, previous);
+            buckets[index] = ++countEntries;
         }
 
         public void Clear()
@@ -97,12 +99,7 @@ namespace Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            for (int i = 0; i < countBuckets; i++)
-            {
-                if (buckets[i].GetHashCode() == key.GetHashCode())
-                    return true;
-            }
-            return false;
+            return buckets[GetIndex(key)] != 0;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
@@ -137,11 +134,16 @@ namespace Dictionary
 
         private void Resize()
         {
-            if (items.Length == countItems)
-                Array.Resize(ref items, items.Length * 2);
+            if (entries.Length == countEntries)
+                Array.Resize(ref entries, entries.Length * 2);
             if (buckets.Length == countBuckets)
                 Array.Resize(ref buckets, buckets.Length * 2);
 
+        }
+
+        private int GetIndex(TKey key)
+        {
+            return key.GetHashCode() % buckets.Length;
         }
     }
 }
