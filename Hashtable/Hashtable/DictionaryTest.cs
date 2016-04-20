@@ -10,14 +10,14 @@ namespace Dictionary
         [TestMethod]
         public void TestCount()
         {
-            Hashtable < int, string> table = new Hashtable<int, string>();
+            Hashtable<int, string> table = new Hashtable<int, string>();
             Assert.AreEqual(0, table.Count);
         }
 
         [TestMethod]
         public void TestContainsKey()
         {
-            Hashtable<int, string> table = new Hashtable<int, string>();         
+            Hashtable<int, string> table = new Hashtable<int, string>();
             Assert.IsFalse(table.ContainsKey(1));
         }
 
@@ -101,7 +101,7 @@ namespace Dictionary
             Assert.AreEqual(3, count);
         }
 
-      /*  [TestMethod]
+        [TestMethod]
         public void TestTryGetValue()
         {
             Hashtable<int, string> table = new Hashtable<int, string>();
@@ -111,9 +111,30 @@ namespace Dictionary
             table.Add(1, "ghi");//4
             table.Add(2, "XYZ");//5
             table.Add(3, "something");//6
-            string value = "def";
+            string value = "";
             Assert.IsTrue(table.TryGetValue(1, out value));
         }
-        */
+
+        [TestMethod]
+        public void TestCopyTo()
+        {
+            Hashtable<int, string> table = new Hashtable<int, string>();
+
+            KeyValuePair<int, string> pair1 = new KeyValuePair<int, string>(1, "FIRST");
+            KeyValuePair<int, string> pair2 = new KeyValuePair<int, string>(2, "SECOND");
+            table.Add(pair1);
+            table.Add(pair2);
+
+            KeyValuePair<int, string> pair3 = new KeyValuePair<int, string>(3, "333");
+            KeyValuePair<int, string> pair4 = new KeyValuePair<int, string>(4, "444");
+            KeyValuePair<int, string> pair5 = new KeyValuePair<int, string>(5, "555");
+
+            KeyValuePair<int, string>[] array = { pair3, pair4, pair5 };
+            KeyValuePair<int, string>[] expected = { pair3, pair1, pair2 };
+            table.CopyTo(array, 1);
+
+            CollectionAssert.AreEqual(expected, array);
+
+        }
     }
 }

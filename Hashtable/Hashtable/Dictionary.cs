@@ -23,22 +23,22 @@ namespace Dictionary
             }
         }
 
-        public Entry[] entries = new Entry[8]; 
+        public Entry[] entries = new Entry[8];
         private int countBuckets;
         private int countEntries;
 
-       
+
         public TValue this[TKey key]
         {
 
             get
             {
-                throw new NotImplementedException();
+                return entries[buckets[GetIndex(key)]].value;
             }
 
             set
             {
-                throw new NotImplementedException();
+                entries[buckets[GetIndex(key)]].value = value;
             }
         }
 
@@ -108,7 +108,13 @@ namespace Dictionary
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            int j = 1;
+            int end = Math.Min(array.Length, countEntries + arrayIndex + 1);
+            for (int i = arrayIndex; i < end; i++)
+            {
+                array[i] = new KeyValuePair<TKey, TValue>(entries[j].key, entries[j].value);
+                j++;
+            }
         }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
@@ -138,17 +144,16 @@ namespace Dictionary
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-
-            int previous = entries[buckets[GetIndex(key)]].previous;
-            TValue currentValue = entries[buckets[GetIndex(key)]].value;
-            /*    while (previous != 0)
-                {
-                    value = entries[buckets[GetIndex(key)]].value;
-                }
-                if (buckets[GetIndex(key)] == 0) return false;
-                return true;
+            /*
+                        while (currentPosition != 0)
+                        {
+                            if (entries[currentPosition].Equals(value)) return true;
+                            currentPosition = entries[currentPosition].previous;
+                        }
             */
+
             throw new NotImplementedException();
+
 
         }
 
@@ -173,7 +178,7 @@ namespace Dictionary
             {
                 int previousPosition = entries[currentPosition].previous;
                 entries[currentPosition] = default(Entry);
-                currentPosition = previousPosition;                
+                currentPosition = previousPosition;
             }
         }
 
