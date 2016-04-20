@@ -94,7 +94,7 @@ namespace Dictionary
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            return ContainsKey(item.Key);
         }
 
         public bool ContainsKey(TKey key)

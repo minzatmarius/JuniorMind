@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Dictionary
 {
@@ -32,6 +33,14 @@ namespace Dictionary
             Assert.IsTrue(table.ContainsKey(1));
             Assert.IsTrue(table.ContainsKey(2));
             Assert.IsTrue(table.ContainsKey(3));
+        }
+        [TestMethod]
+        public void TestContains()
+        {
+            Hashtable<int, string> table = new Hashtable<int, string>();
+            table.Add(1, "abc");
+            KeyValuePair<int, string> pair = new KeyValuePair<int, string>(1, "abc");
+            Assert.IsTrue(table.Contains(pair));
         }
     }
 }
