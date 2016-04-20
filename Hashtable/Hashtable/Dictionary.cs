@@ -75,7 +75,7 @@ namespace Dictionary
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-
+            Add(item.Key, item.Value);
         }
 
         public void Add(TKey key, TValue value)

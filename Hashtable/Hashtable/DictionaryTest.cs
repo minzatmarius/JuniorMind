@@ -52,5 +52,22 @@ namespace Dictionary
             table.Clear();
             Assert.IsFalse(table.ContainsKey(1));
         }
+        [TestMethod]
+        public void AddKeyValuePair()
+        {
+            Hashtable<int, string> table = new Hashtable<int, string>();
+            KeyValuePair<int, string> pair1 = new KeyValuePair<int, string>(1, "abc");
+            KeyValuePair<int, string> pair2 = new KeyValuePair<int, string>(2, "xyz");
+            KeyValuePair<int, string> pair3 = new KeyValuePair<int, string>(1, "x");
+
+            table.Add(pair1);
+            table.Add(pair2);
+            table.Add(pair3);
+
+            Assert.IsTrue(table.Contains(pair1));
+            Assert.IsTrue(table.Contains(pair2));
+            Assert.IsTrue(table.Contains(pair3));
+
+        }
     }
 }
