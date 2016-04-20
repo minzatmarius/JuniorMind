@@ -84,7 +84,7 @@ namespace Dictionary
             Resize();
             int index = GetIndex(key);
             int previous = buckets[index];
-            entries[countEntries + 1] = new Entry(key, value, previous);
+            entries[FirstEmptySlot()] = new Entry(key, value, previous);
             buckets[index] = ++countEntries;
         }
 
@@ -168,6 +168,15 @@ namespace Dictionary
                 entries[currentPosition] = default(Entry);
                 currentPosition = previousPosition;                
             }
+        }
+
+        private int FirstEmptySlot()
+        {
+            for (int i = 1; i < entries.Length; i++)
+            {
+                if (entries[i].Equals(default(Entry))) return i;
+            }
+            return entries.Length + 1;
         }
 
         private int GetIndex(TKey key)
